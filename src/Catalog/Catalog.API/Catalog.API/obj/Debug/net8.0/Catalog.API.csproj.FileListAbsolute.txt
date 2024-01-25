@@ -104,3 +104,4 @@ D:\dev\eShop\src\Catalog\Catalog.API\Catalog.API\obj\Debug\net8.0\refint\Catalog
 D:\dev\eShop\src\Catalog\Catalog.API\Catalog.API\obj\Debug\net8.0\Catalog.API.pdb
 D:\dev\eShop\src\Catalog\Catalog.API\Catalog.API\obj\Debug\net8.0\Catalog.API.genruntimeconfig.cache
 D:\dev\eShop\src\Catalog\Catalog.API\Catalog.API\obj\Debug\net8.0\ref\Catalog.API.dll
+D:\dev\eShop\src\Catalog\Catalog.API\Catalog.API\bin\Debug\net8.0\AutoMapper.dll
