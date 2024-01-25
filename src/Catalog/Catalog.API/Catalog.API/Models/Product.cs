@@ -9,7 +9,7 @@ public class Product
     [Required]
     public string Name { get; set; }
     [Range(0, Double.MaxValue)]
-    public decimal Price { get; set; }
+    public double Price { get; set; }
     
     public string CategoryName { get; set; }
     public string? Description { get; set; }
