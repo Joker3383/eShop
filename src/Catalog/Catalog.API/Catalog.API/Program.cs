@@ -1,14 +1,23 @@
 using Catalog.API.Data;
+using Catalog.API.Mapping;
+using Catalog.API.Repositories;
+using Catalog.API.Repositories.Interfaces;
+using Catalog.API.Services;
+using Catalog.API.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var configuration = GetConfiguration();
 
 var builder = WebApplication.CreateBuilder(args);
 
-
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddTransient<IBaseRepository, BaseRepository>();
+builder.Services.AddTransient<IProductService, ProductService>();
+
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 builder.Services.AddDbContextFactory<AppDbContext>(opts => opts.UseNpgsql(configuration["ConnectionString"]));
 
@@ -22,7 +31,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.MapControllers();
 
 CreateDbIfNotExists(app);
 

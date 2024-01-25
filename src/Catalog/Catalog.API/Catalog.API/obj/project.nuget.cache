@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "wDFgP8gHtKhpbT9AT3kBc51lnd/3bk3NuYASYW5bO8R7BA+/K2imc/hyL6EAhNb5byFwo7oYBpz0djDmo21yjw==",
+  "dgSpecHash": "/HksIxNBu+kgzjmTGmiSWUvxhNmWKwTSBkQ6qSpGKsGEZK1HPFLQIJWOoeucRtKPqvXnTvXDQHMCgtZa4J8omQ==",
   "success": true,
   "projectFilePath": "D:\\dev\\eShop\\src\\Catalog\\Catalog.API\\Catalog.API\\Catalog.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\vovko\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
+    "C:\\Users\\vovko\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "C:\\Users\\vovko\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\vovko\\.nuget\\packages\\microsoft.aspnetcore.openapi\\8.0.0\\microsoft.aspnetcore.openapi.8.0.0.nupkg.sha512",
     "C:\\Users\\vovko\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
