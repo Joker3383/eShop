@@ -25,6 +25,7 @@ public class ProductController : ControllerBase
     }
 
     [HttpGet]
+    [AllowAnonymous]
     public async Task<ResponseDto> GetProducts()
     {
         try
@@ -44,6 +45,7 @@ public class ProductController : ControllerBase
     }
     
     [HttpGet]
+    [AllowAnonymous]
     [Route("{productId:int}")]
     public async Task<ResponseDto> GetProductById(int productId)
     {

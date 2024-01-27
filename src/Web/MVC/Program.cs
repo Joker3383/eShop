@@ -1,7 +1,19 @@
+using MVC.Models;
+using MVC.Services;
+using MVC.Services.Interfaces;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddHttpClient();
+builder.Services.AddHttpClient<IProductService, ProductService>();
+builder.Services.AddHttpClient<IBaseService, BaseService>();
 builder.Services.AddControllersWithViews();
+SD.ProductAPIBase = builder.Configuration["ServiceUrls:ProductAPI"];
+builder.Services.AddScoped<IBaseService, BaseService>();
+builder.Services.AddScoped<IProductService, ProductService>();
+
 
 var app = builder.Build();
 

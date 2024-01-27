@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "doKpdGRoQexl0pRGwgnukY7xtwN9cEfUS/vCAuWr+7vs/AC7+QYeY+duZKahpAKUE6RiEbt4lNgyKdoZqfLvqg==",
+  "dgSpecHash": "W3fqzzdtUakmI3iGfA9L16rumoI+1zfZ33ZEuYgI2OFDjc+VouAkyf+LtFPyA0FPZ97K5SxTthbbO4J3mFuH2g==",
   "success": true,
   "projectFilePath": "D:\\dev\\eShop\\src\\Web\\MVC\\MVC.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\vovko\\.nuget\\packages\\identitymodel\\4.3.0\\identitymodel.4.3.0.nupkg.sha512",
+    "C:\\Users\\vovko\\.nuget\\packages\\newtonsoft.json\\11.0.2\\newtonsoft.json.11.0.2.nupkg.sha512",
+    "C:\\Users\\vovko\\.nuget\\packages\\system.text.encodings.web\\4.7.0\\system.text.encodings.web.4.7.0.nupkg.sha512"
+  ],
   "logs": []
 }
