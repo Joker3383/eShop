@@ -1,8 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\src"
+    "\\src",
+    "\\src\\Catalog",
+    "\\src\\Catalog\\Catalog.API",
+    "\\src\\Catalog\\Catalog.API\\Catalog.API"
   ],
-  "SelectedNode": "\\src",
   "PreviewInSolutionExplorer": false
 }
