@@ -1,12 +1,14 @@
 ﻿using AutoMapper;
 using Catalog.API.Models.Dto;
 using Catalog.API.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Catalog.API.Controllers;
 
 
 [ApiController]
+[Authorize(Policy = "AuthenteficatedUser")]
 [Route("/api/bff")]
 public class BffController : ControllerBase
 {

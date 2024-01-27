@@ -106,3 +106,11 @@ D:\dev\eShop\src\Catalog\Catalog.API\Catalog.API\obj\Debug\net8.0\Catalog.API.ge
 D:\dev\eShop\src\Catalog\Catalog.API\Catalog.API\obj\Debug\net8.0\ref\Catalog.API.dll
 D:\dev\eShop\src\Catalog\Catalog.API\Catalog.API\bin\Debug\net8.0\AutoMapper.dll
 D:\dev\eShop\src\Catalog\Catalog.API\Catalog.API\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+D:\dev\eShop\src\Catalog\Catalog.API\Catalog.API\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\dev\eShop\src\Catalog\Catalog.API\Catalog.API\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+D:\dev\eShop\src\Catalog\Catalog.API\Catalog.API\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\dev\eShop\src\Catalog\Catalog.API\Catalog.API\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+D:\dev\eShop\src\Catalog\Catalog.API\Catalog.API\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+D:\dev\eShop\src\Catalog\Catalog.API\Catalog.API\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\dev\eShop\src\Catalog\Catalog.API\Catalog.API\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+D:\dev\eShop\src\Catalog\Catalog.API\Catalog.API\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
