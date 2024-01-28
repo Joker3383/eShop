@@ -14,7 +14,7 @@ public class HomeController : Controller
     {
         _productService = productService;
     }
-
+    
     public async Task<IActionResult> Index()
     {
         List<ProductDto>? list = new();
