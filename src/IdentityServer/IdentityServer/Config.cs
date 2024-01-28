@@ -28,6 +28,23 @@ namespace IdentityServer
             {
                 new Client
                 {
+                    ClientId = "mvc-client",
+                    ClientName = "MVC Client",
+                    ClientSecrets = { new Secret("mvc-client-secret".Sha256()) },
+                    AllowedGrantTypes = GrantTypes.Code,
+                    RedirectUris = { "https://localhost:7070/signin-oidc" },
+                    PostLogoutRedirectUris = { "https://localhost:7070/signout-callback-oidc" },
+                    AllowedScopes = new List<string>
+                    {
+                        "openid",
+                        "profile",
+                        "product"
+                    },
+                    RequirePkce = true,
+                    AllowOfflineAccess = true 
+                },
+                new Client
+                {
                     ClientId = "swaggerui",
                     ClientName = "Swagger UI",
                     AllowedGrantTypes = GrantTypes.Implicit,
@@ -40,7 +57,8 @@ namespace IdentityServer
                     {
                         "catalog", "product"
                     }
-                }
+                },
+               
             };
     }
 }

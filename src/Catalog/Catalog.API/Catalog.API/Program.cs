@@ -29,6 +29,7 @@ builder.Services.AddAuthentication("Bearer")
     .AddJwtBearer("Bearer", options =>
     {
         options.Authority = authority;
+        options.Audience = "product";
         options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateAudience = false

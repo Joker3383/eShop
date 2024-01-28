@@ -33,3 +33,11 @@ D:\dev\eShop\src\Web\MVC\obj\Debug\net8.0\refint\MVC.dll
 D:\dev\eShop\src\Web\MVC\obj\Debug\net8.0\MVC.pdb
 D:\dev\eShop\src\Web\MVC\obj\Debug\net8.0\MVC.genruntimeconfig.cache
 D:\dev\eShop\src\Web\MVC\obj\Debug\net8.0\ref\MVC.dll
+D:\dev\eShop\src\Web\MVC\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.OpenIdConnect.dll
+D:\dev\eShop\src\Web\MVC\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+D:\dev\eShop\src\Web\MVC\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\dev\eShop\src\Web\MVC\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+D:\dev\eShop\src\Web\MVC\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+D:\dev\eShop\src\Web\MVC\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\dev\eShop\src\Web\MVC\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+D:\dev\eShop\src\Web\MVC\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
