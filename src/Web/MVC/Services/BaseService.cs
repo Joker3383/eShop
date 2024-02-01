@@ -26,7 +26,7 @@ public class BaseService : IBaseService
         try
         {
             var client = _clientFactory.CreateClient();
-            var discoveryDocument = await client.GetDiscoveryDocumentAsync(SD.AuthAPIBase);
+            /*var discoveryDocument = await client.GetDiscoveryDocumentAsync(SD.AuthAPIBase);
         
             var tokenResponse = await client.RequestAuthorizationCodeTokenAsync(new AuthorizationCodeTokenRequest
             {
@@ -42,7 +42,7 @@ public class BaseService : IBaseService
             if (!string.IsNullOrEmpty(token))
             {
                 client.SetBearerToken(token);
-            }
+            }*/
 
             var httpMessage = new HttpRequestMessage();
 

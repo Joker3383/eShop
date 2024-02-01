@@ -8,5 +8,5 @@ public interface IBaseRepository
     Task<Product> Update(Product entity);
     Task<Product> Delete(Product entity);
     IQueryable<Product> FindAll();
-    Task<Product?> FindById(int Id);
+    Task<Product?> FindById(int id);
 }

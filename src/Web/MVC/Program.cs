@@ -19,6 +19,7 @@ builder.Services.AddAuthentication(options =>
     {
         options.DefaultScheme = "Cookies";
         options.DefaultChallengeScheme = "oidc";
+        
     })
     .AddCookie("Cookies")
     .AddOpenIdConnect("oidc", options =>
@@ -32,6 +33,7 @@ builder.Services.AddAuthentication(options =>
         options.Scope.Add("openid");
         options.Scope.Add("profile");
         options.Scope.Add("product");
+        options.RequireHttpsMetadata = false;
     });
 
 var app = builder.Build();
@@ -44,12 +46,12 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthorization();
+//app.UseAuthorization();
 
 
 app.MapControllerRoute(

@@ -1,20 +1,52 @@
 
+
+using Basket.API.Data;
+using Basket.API.Mapping;
+using Basket.API.Repositories;
+using Basket.API.Repositories.Interfaces;
+using Basket.API.Services;
+using Basket.API.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
+
 var configuration = GetConfiguration();
 
 var builder = WebApplication.CreateBuilder(args);
 
-
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddHttpClient();
+builder.Services.AddTransient<IBasketRepository, BasketRepository>();
+builder.Services.AddTransient<IProductRepository, ProductRepository>();
+builder.Services.AddTransient<IBasketService, BasketService>();
+builder.Services.AddAutoMapper(typeof(MappingProfile));
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(
+        "Cors",
+        builder => builder
+            .SetIsOriginAllowed((host) => true)
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials());
+});
+
+builder.Services.AddDbContextFactory<AppDbContext>(opts => opts.UseNpgsql(configuration["ConnectionString"]));
 
 var app = builder.Build();
 
 
+
+app.UseCors("Cors");
+
 app.UseSwagger();
 app.UseSwaggerUI();
 
-
+app.MapControllers();
 app.UseHttpsRedirection();
+CreateDbIfNotExists(app);
 
 app.Run();
 

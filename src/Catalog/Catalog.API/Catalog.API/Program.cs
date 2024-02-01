@@ -34,10 +34,12 @@ builder.Services.AddAuthentication("Bearer")
         {
             ValidateAudience = false
         };
+        options.RequireHttpsMetadata = false;
     });
 
 builder.Services.AddAuthorization(options =>
 {
+    
     options.AddPolicy("AuthenteficatedUser", policy =>
     {
         policy.RequireAuthenticatedUser();

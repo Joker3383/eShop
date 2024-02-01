@@ -32,8 +32,8 @@ namespace IdentityServer
                     ClientName = "MVC Client",
                     ClientSecrets = { new Secret("mvc-client-secret".Sha256()) },
                     AllowedGrantTypes = GrantTypes.Code,
-                    RedirectUris = { "https://localhost:7070/signin-oidc" },
-                    PostLogoutRedirectUris = { "https://localhost:7070/signout-callback-oidc" },
+                    RedirectUris = { "http://localhost:5050/signin-oidc" },
+                    PostLogoutRedirectUris = { "http://localhost:5050/signout-callback-oidc" },
                     AllowedScopes = new List<string>
                     {
                         "openid",
@@ -50,8 +50,8 @@ namespace IdentityServer
                     AllowedGrantTypes = GrantTypes.Implicit,
                     AllowAccessTokensViaBrowser = true,
 
-                    RedirectUris = { "https://localhost:7000/swagger/oauth2-redirect.html" },
-                    PostLogoutRedirectUris = { "https://localhost:7000/swagger/" },
+                    RedirectUris = { "http://localhost:5000/swagger/oauth2-redirect.html" },
+                    PostLogoutRedirectUris = { "http://localhost:5000/swagger/" },
 
                     AllowedScopes =
                     {
