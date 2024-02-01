@@ -1,5 +1,6 @@
 ﻿using Basket.API.Models.Dto;
 using Basket.API.Repositories.Interfaces;
+using Basket.API.Utilities;
 using Newtonsoft.Json;
 
 namespace Basket.API.Repositories;
@@ -15,7 +16,7 @@ public class ProductRepository : IProductRepository
     public async Task<IEnumerable<ProductDto>> GetProducts()
     {
         var client = _httpClientFactory.CreateClient("Product");
-        var response = await client.GetAsync($"http://localhost:5000/api/product");
+        var response = await client.GetAsync($"{SD.CatalogApiBase}/api/product");
         var apiContet = await response.Content.ReadAsStringAsync();
         var resp = JsonConvert.DeserializeObject<ResponseDto>(apiContet);
         if (resp.IsSuccess)

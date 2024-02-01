@@ -28,7 +28,7 @@ public class BasketController : ControllerBase
     {
         try
         {
-            var shoppingCartsByLogin = await _basketService.GetProductsIntoBasket(login);
+            var shoppingCartsByLogin = await _basketService.GetShoppingCartsIntoBasket(login);
             if (shoppingCartsByLogin == null)
                 throw new NullReferenceException($"By Login:{login} there aren`t products into basket");
             _response.Result = shoppingCartsByLogin;
@@ -43,7 +43,7 @@ public class BasketController : ControllerBase
     }
     
     [HttpPost]
-    public async Task<ResponseDto> AddProductIntoShoppingCartByLogin([FromQuery]string login,[FromQuery] int productId)
+    public async Task<ResponseDto> AddProductIntoShoppingCartByLogin([FromQuery]string login, [FromQuery]int productId)
     {
         try
         {

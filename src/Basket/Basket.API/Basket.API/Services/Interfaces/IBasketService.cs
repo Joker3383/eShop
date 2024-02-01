@@ -6,7 +6,7 @@ namespace Basket.API.Services.Interfaces;
 public interface IBasketService
 {
     Task<ShoppingCartDto> CreateShoppingCart(string login, int productId);
-    Task<IEnumerable<ShoppingCartDto>> GetProductsIntoBasket(string login);
+    Task<IEnumerable<ShoppingCartDto>> GetShoppingCartsIntoBasket(string login);
     
     
 }

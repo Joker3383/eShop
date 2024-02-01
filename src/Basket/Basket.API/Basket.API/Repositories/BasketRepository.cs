@@ -38,7 +38,7 @@ public class BasketRepository : IBasketRepository
 
     public IQueryable<ShoppingCart> FindAll()
     {
-        var result = _appDbContext.Set<ShoppingCart>().AsQueryable().AsNoTracking();
+        var result = _appDbContext.Set<ShoppingCart>().AsQueryable().AsNoTracking().Include(p => p.Product);
         if (result == null)
         {
             throw new RepositoryException("There are no Products");

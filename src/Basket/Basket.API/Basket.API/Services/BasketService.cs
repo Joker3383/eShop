@@ -21,29 +21,43 @@ public class BasketService : IBasketService
     
     public async  Task<ShoppingCartDto> CreateShoppingCart(string login, int productId)
     {
-        var products = await _productRepository.GetProducts();
-
-        var productById = products.FirstOrDefault(p => p.ProductId == productId);
+        var allProducts = await _productRepository.GetProducts();
+        if (allProducts == null)
+        {
+            throw new NullReferenceException("No avaible products to add");
+        }
         
+        var productById = allProducts.FirstOrDefault(p => p.ProductId == productId);
+        if (productById == null)
+        {
+            throw new NullReferenceException($"Don`t find product by id: {productId}");
+        }
         
-        var cart = new ShoppingCart()
+        var addedCart = await _basketRepository.Create(new ShoppingCart()
         {
             Login = login,
             Product = productById!,
             ProductId = productId
 
-        };
-        
-        var addedCart = await _basketRepository.Create(cart);
+        });
         
         return _mapper.Map<ShoppingCartDto>(addedCart);
     }
 
-    public async Task<IEnumerable<ShoppingCartDto>> GetProductsIntoBasket(string login)
+    public async Task<IEnumerable<ShoppingCartDto>> GetShoppingCartsIntoBasket(string login)
     {
-        var allProducts =  _basketRepository.FindAll();
+        var allShoppingCarts =  _basketRepository.FindAll();
+
+        if (allShoppingCarts == null)
+        {
+            throw new NullReferenceException("Basket is empty");
+        }
         
-        var selectedProducts = allProducts.Where(p => p.Login == login);
+        var selectedProducts = allShoppingCarts.Where(p => p.Login == login);
+        if (selectedProducts == null)
+        {
+            throw new NullReferenceException($"There are no entries in your cart by login:{login}");
+        }
         
         return _mapper.Map<IEnumerable<ShoppingCartDto>>(selectedProducts.ToList());
     }

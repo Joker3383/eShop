@@ -6,16 +6,20 @@ using Basket.API.Repositories;
 using Basket.API.Repositories.Interfaces;
 using Basket.API.Services;
 using Basket.API.Services.Interfaces;
+using Basket.API.Utilities;
 using Microsoft.EntityFrameworkCore;
 
 var configuration = GetConfiguration();
 
 var builder = WebApplication.CreateBuilder(args);
 
+
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+SD.CatalogApiBase = builder.Configuration["Urls:Catalog.API"];
+SD.AuthApiBase = builder.Configuration["Urls:Auth.API"];
 builder.Services.AddHttpClient();
 builder.Services.AddTransient<IBasketRepository, BasketRepository>();
 builder.Services.AddTransient<IProductRepository, ProductRepository>();
