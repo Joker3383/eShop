@@ -20,13 +20,22 @@ public class OrderRepository : IOrderRepository
             var existingProduct =  _appDbContext.Products
                 .FirstOrDefault(p => p.ProductId == shoppingCart.ProductId);
 
-           
-            _appDbContext.Entry(existingProduct).State = EntityState.Detached;
-
-            // Set the existing product in the shopping cart
+            if (existingProduct == null)
+            {
+                _appDbContext.Orders.Add(order);
+                var res = await _appDbContext.SaveChangesAsync();
+                if (res == 0)
+                {
+                    throw new RepositoryException("Order didn`t save changes!");
+                }
+                return order;
+            }
+            
+            _appDbContext.Attach(existingProduct);
+            
             shoppingCart.Product = existingProduct;
         }
-         _appDbContext.Orders.Add(order);
+        _appDbContext.Orders.Add(order);
         var result = await _appDbContext.SaveChangesAsync();
         if (result == 0)
         {
