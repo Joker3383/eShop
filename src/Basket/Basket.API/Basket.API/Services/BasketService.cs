@@ -36,10 +36,11 @@ public class BasketService : IBasketService
         var addedCart = await _basketRepository.Create(new ShoppingCart()
         {
             Login = login,
-            Product = productById!,
+            Product = productById,
             ProductId = productId
 
         });
+        
         
         return _mapper.Map<ShoppingCartDto>(addedCart);
     }

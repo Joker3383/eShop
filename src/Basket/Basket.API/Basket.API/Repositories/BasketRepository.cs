@@ -16,6 +16,24 @@ public class BasketRepository : IBasketRepository
     }
     public async Task<ShoppingCart> Create(ShoppingCart cart)
     {
+        var existingProduct =   _appDbContext.Products
+            .FirstOrDefault(p => p.ProductId == cart.ProductId);
+
+        if (existingProduct == null)
+        {
+            await _appDbContext.Set<ShoppingCart>().AddAsync(cart);
+            var resultWithoutAttach = await _appDbContext.SaveChangesAsync();
+            if (resultWithoutAttach == 0)
+            {
+                throw new RepositoryException("Entity didn`t save changes!");
+            }
+            return cart;
+        }
+        
+        _appDbContext.Attach(existingProduct);
+        
+        cart.Product = existingProduct;
+        
         await _appDbContext.Set<ShoppingCart>().AddAsync(cart);
         var result = await _appDbContext.SaveChangesAsync();
         if (result == 0)

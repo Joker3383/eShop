@@ -32,7 +32,6 @@ public class OrderService : IOrderService
 
         var order = new Models.Order
         {
-            Id = 1,
             Login = login,
             ShoppingCarts = allShoppingCarts,
             DateOfOrder = DateTime.Now,

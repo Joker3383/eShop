@@ -14,7 +14,18 @@ public class OrderRepository : IOrderRepository
     }
     public async Task<Models.Order> CreateOrder(Models.Order order)
     {
-        
+        foreach (var shoppingCart in order.ShoppingCarts)
+        {
+
+            var existingProduct =  _appDbContext.Products
+                .FirstOrDefault(p => p.ProductId == shoppingCart.ProductId);
+
+           
+            _appDbContext.Entry(existingProduct).State = EntityState.Detached;
+
+            // Set the existing product in the shopping cart
+            shoppingCart.Product = existingProduct;
+        }
          _appDbContext.Orders.Add(order);
         var result = await _appDbContext.SaveChangesAsync();
         if (result == 0)
