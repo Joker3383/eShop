@@ -12,13 +12,11 @@ namespace Basket.API.Controllers;
 public class BasketController : ControllerBase
 {
     private  ResponseDto _response;
-    private readonly IMapper _mapper;
 
     private readonly IBasketService _basketService;
 
     public BasketController(IMapper mapper, IBasketService basketService)
     {
-        _mapper = mapper;
         _basketService = basketService;
         _response = new ResponseDto();
     }

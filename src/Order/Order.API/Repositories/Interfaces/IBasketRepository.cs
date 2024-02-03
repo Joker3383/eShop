@@ -4,5 +4,5 @@ namespace Order.API.Repositories.Interfaces;
 
 public interface IBasketRepository
 {
-    Task<IEnumerable<ShoppingCartDto>> GetShoppingCarts(string login);
+    Task<ICollection<ShoppingCartDto>> GetShoppingCarts(string login);
 }

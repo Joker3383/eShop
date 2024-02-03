@@ -2,6 +2,10 @@
 using Microsoft.EntityFrameworkCore;
 using Order.API.Data;
 using Order.API.Mapping;
+using Order.API.Repositories;
+using Order.API.Repositories.Interfaces;
+using Order.API.Services;
+using Order.API.Services.Interfaces;
 using Order.API.Utilities;
 
 var configuration = GetConfiguration();
@@ -19,6 +23,10 @@ SD.CatalogApiBase = builder.Configuration["Urls:CatalogAPI"];
 SD.AuthApiBase = builder.Configuration["Urls:AuthAPI"];
 SD.BasketApiBase = builder.Configuration["Urls:BasketAPI"];
 builder.Services.AddHttpClient();
+
+builder.Services.AddTransient<IOrderService, OrderService>();
+builder.Services.AddTransient<IBasketRepository, BasketRepository>();
+builder.Services.AddTransient<IOrderRepository, OrderRepository>();
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
@@ -69,7 +77,7 @@ void CreateDbIfNotExists(IHost host)
         {
             var context = services.GetRequiredService<AppDbContext>();
 
-            //DbInitializer.Initialize(context).Wait();
+            DbInitializer.Initialize(context).Wait();
         }
         catch (Exception ex)
         {

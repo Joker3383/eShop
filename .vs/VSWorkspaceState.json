@@ -2,9 +2,11 @@
   "ExpandedNodes": [
     "",
     "\\src",
-    "\\src\\Catalog",
     "\\src\\Catalog\\Catalog.API",
-    "\\src\\Catalog\\Catalog.API\\Catalog.API"
+    "\\src\\Catalog\\Catalog.API\\Catalog.API",
+    "\\src\\Order",
+    "\\src\\Order\\Order.API"
   ],
+  "SelectedNode": "\\src\\eShop.sln",
   "PreviewInSolutionExplorer": false
 }
