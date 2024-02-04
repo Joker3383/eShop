@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Order.API.Data;
+using Order.API.Models.Dto;
 using Order.API.Repositories.Interfaces;
 
 namespace Order.API.Repositories;
@@ -12,11 +13,33 @@ public class OrderRepository : IOrderRepository
     {
         _appDbContext = appDbContext;
     }
+    
+    
+    
     public async Task<Models.Order> CreateOrder(Models.Order order)
     {
+        
         foreach (var shoppingCart in order.ShoppingCarts)
         {
+            // Check if the shopping cart already exists in the database
+            var isShoppingCartExist = _appDbContext.ShoppingCarts
+                .Any(sc => sc.Id == shoppingCart.Id);
 
+            if (!isShoppingCartExist)
+            {
+                // Shopping cart does not exist, so add it to the context
+                _appDbContext.ShoppingCarts.Add(shoppingCart);
+            }
+            else
+            {
+                // Shopping cart already exists, attach it to the context
+                _appDbContext.Attach(shoppingCart);
+                _appDbContext.Entry(shoppingCart).State = EntityState.Modified;
+            }
+        }
+        
+        /*foreach (var shoppingCart in order.ShoppingCarts)
+        {
             var existingProduct =  _appDbContext.Products
                 .FirstOrDefault(p => p.ProductId == shoppingCart.ProductId);
 
@@ -34,8 +57,11 @@ public class OrderRepository : IOrderRepository
             _appDbContext.Attach(existingProduct);
             
             shoppingCart.Product = existingProduct;
-        }
-        _appDbContext.Orders.Add(order);
+        }*/
+        
+        
+        
+        await _appDbContext.Orders.AddAsync(order);
         var result = await _appDbContext.SaveChangesAsync();
         if (result == 0)
         {

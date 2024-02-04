@@ -12,6 +12,9 @@ builder.Services.AddHttpClient<IBaseService, BaseService>();
 builder.Services.AddControllersWithViews();
 SD.ProductAPIBase = builder.Configuration["ServiceUrls:ProductAPI"];
 SD.AuthAPIBase = builder.Configuration["ServiceUrls:AuthAPI"];
+SD.OrderAPIBase = builder.Configuration["ServiceUrls:OrderAPI"];
+SD.BasketAPIBase = builder.Configuration["ServiceUrls:BasketAPI"];
+
 builder.Services.AddScoped<IBaseService, BaseService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 

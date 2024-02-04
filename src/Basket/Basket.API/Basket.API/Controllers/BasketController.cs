@@ -40,8 +40,8 @@ public class BasketController : ControllerBase
         return _response;
     }
     
-    [HttpPost]
-    public async Task<ResponseDto> AddProductIntoShoppingCartByLogin([FromQuery]string login, [FromQuery]int productId)
+    [HttpPost("/{login}/{productId}")]
+    public async Task<ResponseDto> AddProductIntoShoppingCartByLogin(string login, int productId)
     {
         try
         {

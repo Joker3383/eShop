@@ -19,7 +19,7 @@ public class OrderController : ControllerBase
         _response = new ResponseDto();
     }
 
-    [HttpGet]
+    [HttpGet("/{login}")]
     public async  Task<ResponseDto> GetOrders(string login)
     {
         
@@ -39,7 +39,7 @@ public class OrderController : ControllerBase
         return _response;
     }
 
-    [HttpPost]
+    [HttpPost("/{login}")]
     public async Task<ResponseDto> AddOrder(string login)
     {
         try
