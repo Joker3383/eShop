@@ -19,7 +19,7 @@ public class OrderRepository : IOrderRepository
     public async Task<Models.Order> CreateOrder(Models.Order order)
     {
         
-        foreach (var shoppingCart in order.ShoppingCarts)
+       /* foreach (var shoppingCart in order.ShoppingCarts)
         {
             // Check if the shopping cart already exists in the database
             var isShoppingCartExist = _appDbContext.ShoppingCarts
@@ -36,9 +36,9 @@ public class OrderRepository : IOrderRepository
                 _appDbContext.Attach(shoppingCart);
                 _appDbContext.Entry(shoppingCart).State = EntityState.Modified;
             }
-        }
+        }*/
         
-        /*foreach (var shoppingCart in order.ShoppingCarts)
+        foreach (var shoppingCart in order.ShoppingCarts)
         {
             var existingProduct =  _appDbContext.Products
                 .FirstOrDefault(p => p.ProductId == shoppingCart.ProductId);
@@ -57,7 +57,7 @@ public class OrderRepository : IOrderRepository
             _appDbContext.Attach(existingProduct);
             
             shoppingCart.Product = existingProduct;
-        }*/
+        }
         
         
         

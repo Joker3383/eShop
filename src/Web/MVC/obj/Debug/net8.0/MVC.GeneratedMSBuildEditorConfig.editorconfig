@@ -18,6 +18,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = D:\dev\eShop\src\Web\MVC
 build_property._RazorSourceGeneratorDebug = 
 
+[D:/dev/eShop/src/Web/MVC/Views/Basket/BasketIndex.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmFza2V0XEJhc2tldEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/dev/eShop/src/Web/MVC/Views/Basket/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmFza2V0XEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -32,6 +36,14 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/dev/eShop/src/Web/MVC/Views/Home/ProductDetails.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcm9kdWN0RGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/dev/eShop/src/Web/MVC/Views/Order/OrderDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcT3JkZXJEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/dev/eShop/src/Web/MVC/Views/Order/OrderIndex.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcT3JkZXJJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/dev/eShop/src/Web/MVC/Views/Shared/Error.cshtml]

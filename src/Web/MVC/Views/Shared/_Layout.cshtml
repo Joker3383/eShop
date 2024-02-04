@@ -27,6 +27,7 @@
                             <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         
+                        
                         @*@if (User.IsInRole(SD.RoleAdmin))
                         {
                             <li class="nav-item dropdown">
@@ -40,16 +41,16 @@
                                 </ul>
                             </li>
                         }*@
-                        @*<li class="nav-item">
+                        <li class="nav-item">
                             <a class="nav-link " asp-area="" asp-controller="Order" asp-action="OrderIndex">
                                Manage Order
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link " asp-area="" asp-controller="Cart" asp-action="CartIndex">
+                            <a class="nav-link " asp-area="" asp-controller="Basket" asp-action="BasketIndex">
                                 &nbsp; <i class="bi bi-cart"></i>&nbsp;
                             </a>
-                        </li>*@
+                        </li>
                     </ul>
                     @*<ul class="navbar-nav">
                         @#1#if (!User.Identity.IsAuthenticated)

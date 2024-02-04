@@ -16,7 +16,7 @@ public class BasketService : IBasketService
         return await _baseService.SendAsync(new RequestDto()
         {
             Sd = SD.ApiType.GET,
-            Url = SD.ProductAPIBase + $"/{subjectId}"
+            Url = SD.BasketAPIBase + $"/{subjectId}"
         });
     }
 
@@ -25,7 +25,7 @@ public class BasketService : IBasketService
         return await _baseService.SendAsync(new RequestDto()
         {
             Sd = SD.ApiType.POST,
-            Url = SD.ProductAPIBase + $"/{subjectId}/{productId}"
+            Url = SD.BasketAPIBase + $"/{subjectId}/{productId}"
         });
     }
 }

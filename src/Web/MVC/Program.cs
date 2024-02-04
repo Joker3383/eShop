@@ -9,6 +9,8 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddHttpClient();
 builder.Services.AddHttpClient<IProductService, ProductService>();
 builder.Services.AddHttpClient<IBaseService, BaseService>();
+builder.Services.AddHttpClient<IBasketService,BasketService>();
+builder.Services.AddHttpClient<IOrderService,OrderService>();
 builder.Services.AddControllersWithViews();
 SD.ProductAPIBase = builder.Configuration["ServiceUrls:ProductAPI"];
 SD.AuthAPIBase = builder.Configuration["ServiceUrls:AuthAPI"];
@@ -17,6 +19,8 @@ SD.BasketAPIBase = builder.Configuration["ServiceUrls:BasketAPI"];
 
 builder.Services.AddScoped<IBaseService, BaseService>();
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IBasketService,BasketService>();
+builder.Services.AddScoped<IOrderService,OrderService>();
 
 builder.Services.AddAuthentication(options =>
     {

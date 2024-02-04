@@ -1,0 +1,43 @@
+﻿@model List<ProductDto>
+
+<h1>Shopping Carts</h1>
+
+<table class="table table-striped-columns" width="100%">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th> </th>
+        <th> </th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var product in Model)
+    {
+        <tr>
+            <td>@product.ProductId</td>
+            <td>@product.Name</td>
+            <td>@product.Description</td>
+            <td>@product.CategoryName</td>
+            <td>@product.Price</td>
+            
+            @*<td>
+                <form asp-controller="Product" asp-action="Delete" asp-route-id="@product.ID">
+                    <div>
+                        <button type="submit" class="btn btn-outline-danger"
+                                onclick="return confirm('Are you sure to delete this record ?')">
+                            Delete
+                        </button>
+
+                    </div>
+                </form>
+            </td>*@
+
+        </tr>
+    }
+    <a asp-controller="Order" asp-action="CreateIndex" class="btn btn-outline-primary">Make an Order</a>
+    </tbody>
+</table>

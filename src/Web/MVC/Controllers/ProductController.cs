@@ -1,6 +1,8 @@
-﻿namespace MVC.Controllers;
+﻿using Microsoft.AspNetCore.Mvc;
 
-public class ProductController
+namespace MVC.Controllers;
+
+public class ProductController: Controller
 {
     
 }
