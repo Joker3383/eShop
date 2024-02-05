@@ -28,15 +28,15 @@ public class BaseService : IBaseService
             var client = _clientFactory.CreateClient();
             var discoveryDocument = await client.GetDiscoveryDocumentAsync(SD.AuthAPIBase);
         
-            var tokenResponse = await client.RequestAuthorizationCodeTokenAsync(new AuthorizationCodeTokenRequest
-            {
-                Address = discoveryDocument.TokenEndpoint,
-                ClientId = "mvc-client",
-                ClientSecret = "mvc-client-secret",
-                //Code = "code",
-                RedirectUri = "https://localhost:7070/signin-oidc",
-                //CodeVerifier = "code_verifier_used_for_pkce"
-            });
+            // var tokenResponse = await client.RequestAuthorizationCodeTokenAsync(new AuthorizationCodeTokenRequest
+            // {
+            //     Address = discoveryDocument.TokenEndpoint,
+            //     ClientId = "mvc-client",
+            //     ClientSecret = "mvc-client-secret",
+            //     //Code = "code",
+            //     RedirectUri = "https://localhost:7070/signin-oidc",
+            //     //CodeVerifier = "code_verifier_used_for_pkce"
+            // });
 
             var token = await _httpContextAccessor.HttpContext.GetTokenAsync("access_token");
             if (!string.IsNullOrEmpty(token))

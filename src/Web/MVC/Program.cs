@@ -1,7 +1,7 @@
+using System.IdentityModel.Tokens.Jwt;
 using MVC.Models;
 using MVC.Services;
 using MVC.Services.Interfaces;
-using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -15,19 +15,20 @@ SD.AuthAPIBase = builder.Configuration["ServiceUrls:AuthAPI"];
 builder.Services.AddScoped<IBaseService, BaseService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 
+JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
+
 builder.Services.AddAuthentication(options =>
     {
         options.DefaultScheme = "Cookies";
         options.DefaultChallengeScheme = "oidc";
     })
     .AddCookie("Cookies")
-    .AddOpenIdConnect("oidc", options =>
+    .AddOpenIdConnect("oidc",options =>
     {
         options.Authority = SD.AuthAPIBase;
         options.ClientId = "mvc-client";
         options.ClientSecret = "mvc-client-secret";
         options.ResponseType = "code";
-        options.UsePkce = true;
         options.SaveTokens = true;
         options.Scope.Add("openid");
         options.Scope.Add("profile");
@@ -47,13 +48,16 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+app.UseCookiePolicy(new CookiePolicyOptions { MinimumSameSitePolicy = SameSiteMode.Lax });
+
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}").RequireAuthorization();
 
 app.Run();
