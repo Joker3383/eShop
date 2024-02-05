@@ -1,3 +1,4 @@
+using System.IdentityModel.Tokens.Jwt;
 using MVC.Models;
 using MVC.Services;
 using MVC.Services.Interfaces;
@@ -22,10 +23,13 @@ builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IBasketService,BasketService>();
 builder.Services.AddScoped<IOrderService,OrderService>();
 
+JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
+
 builder.Services.AddAuthentication(options =>
     {
         options.DefaultScheme = "Cookies";
         options.DefaultChallengeScheme = "oidc";
+        
         
     })
     .AddCookie("Cookies")
@@ -35,11 +39,9 @@ builder.Services.AddAuthentication(options =>
         options.ClientId = "mvc-client";
         options.ClientSecret = "mvc-client-secret";
         options.ResponseType = "code";
-        options.UsePkce = true;
         options.SaveTokens = true;
         options.Scope.Add("openid");
         options.Scope.Add("profile");
-        options.Scope.Add("product");
         options.RequireHttpsMetadata = false;
     });
 
@@ -58,11 +60,13 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-//app.UseAuthorization();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}").RequireAuthorization();
 
 app.Run();

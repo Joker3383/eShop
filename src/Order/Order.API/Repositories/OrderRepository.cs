@@ -18,57 +18,48 @@ public class OrderRepository : IOrderRepository
     
     public async Task<Models.Order> CreateOrder(Models.Order order)
     {
-        
-       /* foreach (var shoppingCart in order.ShoppingCarts)
+        foreach (var shoppingCart in order.ShoppingCarts)
         {
-            // Check if the shopping cart already exists in the database
-            var isShoppingCartExist = _appDbContext.ShoppingCarts
-                .Any(sc => sc.Id == shoppingCart.Id);
+            var existingShoppingCart = _appDbContext.ShoppingCarts
+                .Include(sh => sh.Product)
+                .FirstOrDefault(sh => sh.Id == shoppingCart.Id);
 
-            if (!isShoppingCartExist)
+            if (existingShoppingCart == null)
             {
-                // Shopping cart does not exist, so add it to the context
                 _appDbContext.ShoppingCarts.Add(shoppingCart);
             }
             else
             {
-                // Shopping cart already exists, attach it to the context
-                _appDbContext.Attach(shoppingCart);
-                _appDbContext.Entry(shoppingCart).State = EntityState.Modified;
+                // Update existingShoppingCart properties
+                _appDbContext.Entry(existingShoppingCart).CurrentValues.SetValues(shoppingCart);
+                shoppingCart.Product = existingShoppingCart.Product; // Set the relationship
             }
-        }*/
-        
-        foreach (var shoppingCart in order.ShoppingCarts)
-        {
-            var existingProduct =  _appDbContext.Products
-                .FirstOrDefault(p => p.ProductId == shoppingCart.ProductId);
+
+            var existingProduct = _appDbContext.Products
+                .FirstOrDefault(p => p.ProductId == shoppingCart.Product.ProductId);
 
             if (existingProduct == null)
             {
-                _appDbContext.Orders.Add(order);
-                var res = await _appDbContext.SaveChangesAsync();
-                if (res == 0)
-                {
-                    throw new RepositoryException("Order didn`t save changes!");
-                }
-                return order;
+                _appDbContext.Products.Add(shoppingCart.Product);
             }
-            
-            _appDbContext.Attach(existingProduct);
-            
-            shoppingCart.Product = existingProduct;
+            else
+            {
+                // Update existingProduct properties
+                _appDbContext.Entry(existingProduct).CurrentValues.SetValues(shoppingCart.Product);
+                shoppingCart.Product = existingProduct; // Set the relationship
+            }
         }
-        
-        
-        
-        await _appDbContext.Orders.AddAsync(order);
+
+        _appDbContext.Orders.Add(order);
+
         var result = await _appDbContext.SaveChangesAsync();
+
         if (result == 0)
         {
-            throw new RepositoryException("Order didn`t save changes!");
+            throw new RepositoryException("Order didn't save changes!");
         }
+
         return order;
-    
     }
 
     public IQueryable<Models.Order> FindAll()
