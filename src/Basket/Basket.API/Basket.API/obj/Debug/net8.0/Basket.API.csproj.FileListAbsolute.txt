@@ -115,3 +115,4 @@ D:\dev\eShop\src\Basket\Basket.API\Basket.API\obj\Debug\net8.0\Basket.API.genrun
 D:\dev\eShop\src\Basket\Basket.API\Basket.API\obj\Debug\net8.0\ref\Basket.API.dll
 D:\dev\eShop\src\Basket\Basket.API\Basket.API\bin\Debug\net8.0\Newtonsoft.Json.dll
 D:\dev\eShop\src\Basket\Basket.API\Basket.API\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+D:\dev\eShop\src\Basket\Basket.API\Basket.API\bin\Debug\net8.0\IdentityModel.dll

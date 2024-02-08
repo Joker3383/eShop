@@ -42,6 +42,7 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("AuthenteficatedUser", policy =>
     {
         policy.RequireAuthenticatedUser();
+        policy.RequireClaim("scope", "product");
     });
 });
 

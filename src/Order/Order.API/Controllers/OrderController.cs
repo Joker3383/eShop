@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Order.API.Models.Dto;
 using Order.API.Services.Interfaces;
 
 namespace Order.API.Controllers;
 
-
+[Authorize(Policy = "AuthenteficatedUser")]
 [ApiController]
 [Route("/api/order")]
 public class OrderController : ControllerBase

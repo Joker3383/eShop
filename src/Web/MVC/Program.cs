@@ -42,6 +42,9 @@ builder.Services.AddAuthentication(options =>
         options.SaveTokens = true;
         options.Scope.Add("openid");
         options.Scope.Add("profile");
+        options.Scope.Add("product");
+        options.Scope.Add("basket");
+        options.Scope.Add("order");
         options.RequireHttpsMetadata = false;
     });
 
@@ -67,6 +70,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}").RequireAuthorization();
+    pattern: "{controller=Home}/{action=Index}/{id?}");//.RequireAuthorization();
 
 app.Run();

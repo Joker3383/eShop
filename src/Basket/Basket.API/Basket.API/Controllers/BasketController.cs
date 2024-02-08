@@ -1,12 +1,14 @@
 ﻿using AutoMapper;
 using Basket.API.Models.Dto;
 using Basket.API.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Basket.API.Controllers;
 
 
 
+[Authorize(Policy = "AuthenteficatedUser")]
 [ApiController]
 [Route("/api/basket")]
 public class BasketController : ControllerBase
@@ -22,6 +24,7 @@ public class BasketController : ControllerBase
     }
 
     [HttpGet("/{login}")]
+    [AllowAnonymous]
     public async Task<ResponseDto> GetShoppingCartByLogin(string login)
     {
         try
@@ -41,6 +44,7 @@ public class BasketController : ControllerBase
     }
     
     [HttpPost("/{login}/{productId}")]
+    [AllowAnonymous]
     public async Task<ResponseDto> AddProductIntoShoppingCartByLogin(string login, int productId)
     {
         try

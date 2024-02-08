@@ -115,3 +115,4 @@ D:\dev\eShop\src\Order\Order.API\obj\Debug\net8.0\refint\Order.API.dll
 D:\dev\eShop\src\Order\Order.API\obj\Debug\net8.0\Order.API.pdb
 D:\dev\eShop\src\Order\Order.API\obj\Debug\net8.0\Order.API.genruntimeconfig.cache
 D:\dev\eShop\src\Order\Order.API\obj\Debug\net8.0\ref\Order.API.dll
+D:\dev\eShop\src\Order\Order.API\bin\Debug\net8.0\IdentityModel.dll

@@ -36,12 +36,10 @@ public class ProductService : IProductService
         return await _baseService.SendAsync(new RequestDto()
         {
             Sd = SD.ApiType.GET,
-            Url = SD.ProductAPIBase + "/api/product"
+            Url = SD.ProductAPIBase + "/api/bff"
         });
     }
-
-      
-
+    
     public async Task<ResponseDto?> GetProductByIdAsync(int id)
     {
         return await _baseService.SendAsync(new RequestDto()
@@ -57,7 +55,7 @@ public class ProductService : IProductService
         {
             Sd = SD.ApiType.PUT,
             Data = productDto,
-            Url = SD.ProductAPIBase + "/api/bff",
+            Url = SD.ProductAPIBase + "/api/product",
         });
     }
 }

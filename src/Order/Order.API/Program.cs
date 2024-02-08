@@ -1,5 +1,7 @@
 
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using Order.API.Data;
 using Order.API.Mapping;
 using Order.API.Repositories;
@@ -30,6 +32,65 @@ builder.Services.AddTransient<IOrderRepository, OrderRepository>();
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
+
+builder.Services.AddAuthentication("Bearer")
+    .AddJwtBearer("Bearer", options =>
+    {
+        options.Authority = SD.AuthApiBase;
+
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateAudience = false
+        };
+    });
+
+builder.Services.AddAuthorization(options =>
+{
+    
+    options.AddPolicy("AuthenteficatedUser", policy =>
+    {
+        policy.RequireAuthenticatedUser();
+        policy.RequireClaim("scope", "order");
+    });
+});
+
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Order API", Version = "v1" });
+
+    c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+    {
+        Type = SecuritySchemeType.OAuth2,
+        Flows = new OpenApiOAuthFlows
+        {
+            Implicit = new OpenApiOAuthFlow
+            {
+                AuthorizationUrl = new Uri($"{SD.AuthApiBase}/connect/authorize"),
+                TokenUrl = new Uri($"{SD.AuthApiBase}/connect/token"),
+                Scopes = new Dictionary<string, string>
+                {
+                    { "order", "OrderAPI" }
+                }
+            }
+        }
+    });
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "oauth2"
+                }
+            },
+            new[] { "order" }
+        }
+    });
+});
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(
@@ -50,10 +111,18 @@ var app = builder.Build();
 app.UseCors("Cors");
 
 app.UseSwagger();
-app.UseSwaggerUI();
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Order API V1");
+    c.OAuthClientId("order_swaggerui");
+    c.OAuthAppName("Order Swagger UI");
+});
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllers();
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 CreateDbIfNotExists(app);
 
 app.Run();

@@ -30,6 +30,7 @@ namespace IdentityServer
                 options.EmitStaticAudienceClaim = true;
             })
                 .AddInMemoryIdentityResources(Config.IdentityResources)
+                .AddDeveloperSigningCredential()  
                 .AddInMemoryApiScopes(Config.ApiScopes)
                 .AddInMemoryClients(Config.Clients)
                 .AddTestUsers(TestUsers.Users);
@@ -51,7 +52,7 @@ namespace IdentityServer
 
             app.UseAuthentication();
             app.UseAuthorization();
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             //app.MapRazorPages().RequireAuthorization();
 
             app.UseEndpoints(endpoints => endpoints.MapDefaultControllerRoute());

@@ -20,12 +20,70 @@ namespace IdentityServer
             new []
             {
                 new ApiScope("catalog", "BffController"),
-                new ApiScope("product", "ProductController")
+                new ApiScope("product", "ProductController"),
+                new ApiScope("basket","BasketAPI"),
+                new ApiScope("order", "OrderAPI")
             };
 
         public static IEnumerable<Client> Clients =>
             new []
             {
+                new Client
+                {
+                    ClientId = "basket",
+                    
+                    AllowedGrantTypes = GrantTypes.ClientCredentials,
+                    
+                    ClientSecrets =
+                    {
+                        new Secret("basketAPI".Sha256())
+                    },
+                    
+                    AllowedScopes = { "product" }
+                },
+                new Client
+                {
+                    ClientId = "order",
+                    
+                    AllowedGrantTypes = GrantTypes.ClientCredentials,
+                    
+                    ClientSecrets =
+                    {
+                        new Secret("order".Sha256())
+                    },
+                    
+                    AllowedScopes = { "basket" }
+                },
+                new Client()
+                {
+                    ClientId = "order_swaggerui",
+                    ClientName = "Order Swagger UI",
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowAccessTokensViaBrowser = true,
+
+                    RedirectUris = { "http://localhost:5003/swagger/oauth2-redirect.html" },
+                    PostLogoutRedirectUris = { "http://localhost:5003/swagger/" },
+
+                    AllowedScopes =
+                    {
+                        "order"
+                    }
+                },
+                new Client()
+                {
+                    ClientId = "basket_swaggerui",
+                    ClientName = "Basket Swagger UI",
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowAccessTokensViaBrowser = true,
+
+                    RedirectUris = { "http://localhost:5002/swagger/oauth2-redirect.html" },
+                    PostLogoutRedirectUris = { "http://localhost:5002/swagger/" },
+
+                    AllowedScopes =
+                    {
+                        "basket"
+                    }
+                },
                 new Client
                 {
                     ClientId = "swaggerui",
@@ -53,7 +111,9 @@ namespace IdentityServer
                     {
                         "openid",
                         "profile",
-                        "product"
+                        "product",
+                        "basket",
+                        "order"
                     },
                 }
             };

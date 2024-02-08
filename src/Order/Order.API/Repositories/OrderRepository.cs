@@ -21,31 +21,34 @@ public class OrderRepository : IOrderRepository
         foreach (var shoppingCart in order.ShoppingCarts)
         {
             var existingShoppingCart = _appDbContext.ShoppingCarts
-                .Include(sh => sh.Product)
+                .Include(sh => sh.Product).AsNoTracking()
                 .FirstOrDefault(sh => sh.Id == shoppingCart.Id);
 
             if (existingShoppingCart == null)
             {
                 _appDbContext.ShoppingCarts.Add(shoppingCart);
+                await _appDbContext.SaveChangesAsync();
             }
             else
             {
+                
                 // Update existingShoppingCart properties
-                _appDbContext.Entry(existingShoppingCart).CurrentValues.SetValues(shoppingCart);
+               // _appDbContext.Attach(existingShoppingCart);
                 shoppingCart.Product = existingShoppingCart.Product; // Set the relationship
             }
 
-            var existingProduct = _appDbContext.Products
+            var existingProduct = _appDbContext.Products.
+                AsNoTracking()
                 .FirstOrDefault(p => p.ProductId == shoppingCart.Product.ProductId);
 
             if (existingProduct == null)
             {
                 _appDbContext.Products.Add(shoppingCart.Product);
+                await _appDbContext.SaveChangesAsync();
             }
             else
             {
-                // Update existingProduct properties
-                _appDbContext.Entry(existingProduct).CurrentValues.SetValues(shoppingCart.Product);
+               // _appDbContext.Attach(existingProduct);
                 shoppingCart.Product = existingProduct; // Set the relationship
             }
         }

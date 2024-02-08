@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "XQzC23iJ7xuk4eNF565vtonY0LM2+glRgIsqmKdF67ifmJq44HBTWq/pbMxJjb9EwW6iBaU1x9AF+OYCPxuE+A==",
+  "dgSpecHash": "O7Ja1nTv+DoCvVRJS44Zey/WtfMsM6/tuQ9QRs91AI6//IqTFJIPoGLBgmm3o81WyCy09RZlp0IdTOGGCBwkWg==",
   "success": true,
   "projectFilePath": "D:\\dev\\eShop\\src\\Basket\\Basket.API\\Basket.API\\Basket.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\vovko\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\vovko\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "C:\\Users\\vovko\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\vovko\\.nuget\\packages\\identitymodel\\6.2.0\\identitymodel.6.2.0.nupkg.sha512",
     "C:\\Users\\vovko\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\8.0.1\\microsoft.aspnetcore.authentication.jwtbearer.8.0.1.nupkg.sha512",
     "C:\\Users\\vovko\\.nuget\\packages\\microsoft.aspnetcore.openapi\\8.0.0\\microsoft.aspnetcore.openapi.8.0.0.nupkg.sha512",
     "C:\\Users\\vovko\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
