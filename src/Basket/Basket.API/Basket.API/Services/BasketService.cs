@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
+using Basket.API.Data;
 using Basket.API.Models;
 using Basket.API.Models.Dto;
 using Basket.API.Repositories.Interfaces;
 using Basket.API.Services.Interfaces;
+using MediatR;
+using Shared.CrudOperations;
 
 namespace Basket.API.Services;
 
@@ -10,13 +13,15 @@ public class BasketService : IBasketService
 {
     private readonly IProductRepository _productRepository;
     private readonly IBasketRepository _basketRepository;
-    private IMapper _mapper;
+    private readonly IMapper _mapper;
+    private readonly ISender _sender;
 
-    public BasketService(IProductRepository productRepository, IBasketRepository basketRepository, IMapper mapper)
+    public BasketService(IProductRepository productRepository, IBasketRepository basketRepository, IMapper mapper, ISender sender)
     {
         _productRepository = productRepository;
         _basketRepository = basketRepository;
         _mapper = mapper;
+        _sender = sender;
     }
     
     public async  Task<ShoppingCartDto> CreateShoppingCart(string login, int productId)
@@ -26,9 +31,10 @@ public class BasketService : IBasketService
         {
             throw new NullReferenceException("No avaible products to add");
         }
-        
-        var productById = allProducts.FirstOrDefault(p => p.ProductId == productId);
-        if (productById == null)
+
+        var product = await _sender.Send(new GetEntityByIdQuery<Product, AppDbContext>(productId)); // usage
+
+        if (product == null)
         {
             throw new NullReferenceException($"Don`t find product by id: {productId}");
         }

@@ -16,7 +16,7 @@ public class BasketController : Controller
 
     public async Task<IActionResult>  BasketIndex()
     {
-        var subId = "1";//User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
+        var subId = User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
         var response = await _basketService.GetShoppingCartsAsync(subId);
         var shoppingCarts = new List<ShoppingCartDto>();
         if (response != null && response.IsSuccess)
@@ -32,7 +32,7 @@ public class BasketController : Controller
 
     public async Task<IActionResult> AddShoppingCartAsync(int productId)
     {
-        var subId = "1";//User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
+        var subId = User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
         var addedShoppingCart = await _basketService.AddShoppingCartAsync(subId, productId);
         return RedirectToAction("BasketIndex");
     }

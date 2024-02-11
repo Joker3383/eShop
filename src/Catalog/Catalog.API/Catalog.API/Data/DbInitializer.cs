@@ -20,7 +20,7 @@ public class DbInitializer
         {
             new Product
             {
-                ProductId = 1,
+                Id = 1,
                 Name = "Product 1",
                 Price = 19.99d,
                 CategoryName = "Electronics",
@@ -29,7 +29,7 @@ public class DbInitializer
             },
             new Product
             {
-                ProductId = 2,
+                Id = 2,
                 Name = "Product 2",
                 Price = 29.99d,
                 CategoryName = "Clothing",
@@ -38,7 +38,7 @@ public class DbInitializer
             },
             new Product
             {
-                ProductId = 3,
+                Id = 3,
                 Name = "Product 3",
                 Price = 9.99d,
                 CategoryName = "Books",

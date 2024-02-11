@@ -3,19 +3,21 @@ using Catalog.API.Data;
 using Catalog.API.Models.Dto;
 using Catalog.API.Repositories.Interfaces;
 using Catalog.API.Services.Interfaces;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Shared.CrudOperations;
 
 namespace Catalog.API.Services;
 
 public class ProductService : IProductService
 {
-    private readonly IBaseRepository _baseRepository;
     private readonly IMapper _mapper;
+    private readonly IMediator _mediator;
     
-    public ProductService(IMapper mapper, IBaseRepository baseRepository) 
+    public ProductService(IMapper mapper, IMediator mediator) 
     {
         _mapper = mapper;
-        _baseRepository = baseRepository;
+        _mediator = mediator;
     }
 
     public async Task<Product> CreateProduct(ProductDto carDto)
@@ -33,7 +35,7 @@ public class ProductService : IProductService
         }
         try
         {
-            await _baseRepository.Create(car);
+            await _mediator.Send(new CreateEntityCommand<Product,AppDbContext>(car));
         }
         catch (Exception ex)
         {
@@ -50,17 +52,17 @@ public class ProductService : IProductService
             throw new ArgumentNullException(nameof(productDto), "ProductDto cannot be null");
         }
 
-        var existingProduct = await _baseRepository.FindById(productDto.ProductId);
+        var existingProduct = await _mediator.Send(new GetEntityByIdQuery<Product,AppDbContext>(productDto.Id));
         if (existingProduct == null)
         {
-            throw new InvalidOperationException($"Product with ID {productDto.ProductId} not found");
+            throw new InvalidOperationException($"Product with ID {productDto.Id} not found");
         }
         
         _mapper.Map(productDto, existingProduct);
         
         try
         {
-            await _baseRepository.Update(existingProduct);
+            await _mediator.Send(new UpdateEntityCommand<Product, AppDbContext>(existingProduct));
         }
         catch (Exception ex)
         {
@@ -81,7 +83,7 @@ public class ProductService : IProductService
 
         try
         {
-            await _baseRepository.Delete(product);
+            await _mediator.Send(new DeleteEntityCommand<Product,AppDbContext>(product));
         }
         catch (Exception ex)
         {
@@ -93,12 +95,12 @@ public class ProductService : IProductService
 
     public async Task<IQueryable<Product>> GetProducts()
     {
-        var products = await _baseRepository.FindAll().AsNoTracking().ToListAsync();
+        var products = await _mediator.Send(new GetEntitiesQuery<Product,AppDbContext>());
         return products.AsQueryable();
     }
 
     public async Task<Product?> GetProductById(int id)
     {
-        return await _baseRepository.FindById(id);
+        return await _mediator.Send(new GetEntityByIdQuery<Product,AppDbContext>(id));
     }
 }

@@ -8,7 +8,6 @@ namespace Catalog.API.Controllers;
 
 
 [ApiController]
-[Authorize(Policy = "AuthenteficatedUser")]
 [Route("/api/bff")]
 public class BffController : ControllerBase
 {

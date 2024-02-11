@@ -24,7 +24,7 @@ public class ProductRepository : IProductRepository
             Address = discoveryDocument.TokenEndpoint,
 
             ClientId = "basket",
-            ClientSecret = "basket",
+            ClientSecret = "basketAPI",
             Scope = "product"
         });
         if (tokenResponse.IsError)

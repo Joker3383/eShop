@@ -91,7 +91,7 @@ public class ProductController : ControllerBase
         {
             var updatedProduct = await _productService.UpdateProduct(productDto);
             if (updatedProduct == null)
-                throw new NullReferenceException($"Product by id: {productDto.ProductId} not updated");
+                throw new NullReferenceException($"Product by id: {productDto.Id} not updated");
             _response.Result = _mapper.Map<ProductDto>(updatedProduct);
         }
         catch (Exception ex)

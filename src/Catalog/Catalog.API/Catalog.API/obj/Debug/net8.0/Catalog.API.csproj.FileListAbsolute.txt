@@ -114,3 +114,10 @@ D:\dev\eShop\src\Catalog\Catalog.API\Catalog.API\bin\Debug\net8.0\Microsoft.Iden
 D:\dev\eShop\src\Catalog\Catalog.API\Catalog.API\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 D:\dev\eShop\src\Catalog\Catalog.API\Catalog.API\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
 D:\dev\eShop\src\Catalog\Catalog.API\Catalog.API\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+D:\dev\eShop\src\Catalog\Catalog.API\Catalog.API\bin\Debug\net8.0\MediatR.dll
+D:\dev\eShop\src\Catalog\Catalog.API\Catalog.API\bin\Debug\net8.0\MediatR.Contracts.dll
+D:\dev\eShop\src\Catalog\Catalog.API\Catalog.API\bin\Debug\net8.0\Shared.dll
+D:\dev\eShop\src\Catalog\Catalog.API\Catalog.API\bin\Debug\net8.0\Shared.pdb
+D:\dev\eShop\src\Catalog\Catalog.API\Catalog.API\bin\Debug\net8.0\MediatR.Extensions.Microsoft.DependencyInjection.dll
+D:\dev\eShop\src\Catalog\Catalog.API\Catalog.API\bin\Debug\net8.0\Autofac.dll
+D:\dev\eShop\src\Catalog\Catalog.API\Catalog.API\bin\Debug\net8.0\Autofac.Extensions.DependencyInjection.dll

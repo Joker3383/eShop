@@ -6,15 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Basket.API.Controllers;
 
-
-
 [Authorize(Policy = "AuthenteficatedUser")]
 [ApiController]
 [Route("/api/basket")]
 public class BasketController : ControllerBase
 {
-    private  ResponseDto _response;
-
+    private ResponseDto _response;
     private readonly IBasketService _basketService;
 
     public BasketController(IMapper mapper, IBasketService basketService)
@@ -25,7 +22,7 @@ public class BasketController : ControllerBase
 
     [HttpGet("/{login}")]
     [AllowAnonymous]
-    public async Task<ResponseDto> GetShoppingCartByLogin(string login)
+    public async Task<ResponseDto> GetByLogin(string login)
     {
         try
         {
@@ -62,6 +59,4 @@ public class BasketController : ControllerBase
 
         return _response;
     }
-    
-    
 }

@@ -14,7 +14,7 @@ public class OrderController : Controller
     }
     public async Task<IActionResult> OrderIndex()
     {
-        var subId = "bob";//User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
+        var subId = User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
         var response = await _orderService.GetOrdersAsync(subId);
         var orders = new List<OrderDto>();
         if (response != null && response.IsSuccess)
@@ -31,14 +31,14 @@ public class OrderController : Controller
     
     public async Task<IActionResult> CreateIndex()
     {
-        var subId = "bob";//User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
+        var subId = User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
         var response = await _orderService.CreateOrderAsync(subId);
         return RedirectToAction("OrderIndex");
     }
 
     public async Task<IActionResult> OrderDetails(int orderId)
     {
-        var subId = "bob";//User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
+        var subId = User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
         var response = await _orderService.GetOrdersAsync(subId);
         var orders = new List<OrderDto>();
         if (response != null && response.IsSuccess)

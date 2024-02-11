@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MVC.Models;
 using MVC.Services.Interfaces;
@@ -6,6 +7,7 @@ using Newtonsoft.Json;
 
 namespace MVC.Controllers;
 
+[AllowAnonymous]
 public class HomeController : Controller
 {
     private readonly IProductService _productService;
@@ -43,6 +45,7 @@ public class HomeController : Controller
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
+    
     
     public async Task<IActionResult> ProductDetails(int productId)
     {

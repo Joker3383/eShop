@@ -1,9 +1,13 @@
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using Catalog.API;
 using Catalog.API.Data;
 using Catalog.API.Mapping;
 using Catalog.API.Repositories;
 using Catalog.API.Repositories.Interfaces;
 using Catalog.API.Services;
 using Catalog.API.Services.Interfaces;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -19,6 +23,11 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IBaseRepository, BaseRepository>();
 builder.Services.AddTransient<IProductService, ProductService>();
 
+
+foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+{
+    builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(assembly));
+}
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 builder.Services.AddDbContextFactory<AppDbContext>(opts => opts.UseNpgsql(configuration["ConnectionString"]));
@@ -95,6 +104,10 @@ builder.Services.AddCors(options =>
             .AllowAnyHeader()
             .AllowCredentials());
 });
+
+
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
+    .ConfigureContainer<ContainerBuilder>(containerBuilder => containerBuilder.RegisterModule<MediatorModule>());
 
 
 var app = builder.Build();
