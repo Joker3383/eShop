@@ -4,5 +4,5 @@ namespace Basket.API.Repositories.Interfaces;
 
 public interface IProductRepository
 {
-    Task<IEnumerable<ProductDto>> GetProducts();
+    Task<ProductDto?> GetProductById(int productId);
 }

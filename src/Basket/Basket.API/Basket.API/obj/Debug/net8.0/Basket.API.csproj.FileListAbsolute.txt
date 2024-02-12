@@ -116,3 +116,10 @@ D:\dev\eShop\src\Basket\Basket.API\Basket.API\obj\Debug\net8.0\ref\Basket.API.dl
 D:\dev\eShop\src\Basket\Basket.API\Basket.API\bin\Debug\net8.0\Newtonsoft.Json.dll
 D:\dev\eShop\src\Basket\Basket.API\Basket.API\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 D:\dev\eShop\src\Basket\Basket.API\Basket.API\bin\Debug\net8.0\IdentityModel.dll
+D:\dev\eShop\src\Basket\Basket.API\Basket.API\bin\Debug\net8.0\Autofac.dll
+D:\dev\eShop\src\Basket\Basket.API\Basket.API\bin\Debug\net8.0\Autofac.Extensions.DependencyInjection.dll
+D:\dev\eShop\src\Basket\Basket.API\Basket.API\bin\Debug\net8.0\MediatR.dll
+D:\dev\eShop\src\Basket\Basket.API\Basket.API\bin\Debug\net8.0\MediatR.Contracts.dll
+D:\dev\eShop\src\Basket\Basket.API\Basket.API\bin\Debug\net8.0\MediatR.Extensions.Microsoft.DependencyInjection.dll
+D:\dev\eShop\src\Basket\Basket.API\Basket.API\bin\Debug\net8.0\Shared.dll
+D:\dev\eShop\src\Basket\Basket.API\Basket.API\bin\Debug\net8.0\Shared.pdb

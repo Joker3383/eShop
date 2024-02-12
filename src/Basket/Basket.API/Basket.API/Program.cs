@@ -1,5 +1,8 @@
 
 
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using Basket.API;
 using Basket.API.Data;
 using Basket.API.Mapping;
 using Basket.API.Repositories;
@@ -44,9 +47,15 @@ builder.Services.AddAuthorization(options =>
     });
 });
 builder.Services.AddHttpClient();
+
 builder.Services.AddTransient<IBasketRepository, BasketRepository>();
 builder.Services.AddTransient<IProductRepository, ProductRepository>();
 builder.Services.AddTransient<IBasketService, BasketService>();
+
+foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+{
+    builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(assembly));
+}
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 
@@ -103,6 +112,11 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddDbContextFactory<AppDbContext>(opts => opts.UseNpgsql(configuration["ConnectionString"]));
 
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
+    .ConfigureContainer<ContainerBuilder>(containerBuilder => containerBuilder.RegisterModule<MediatorModule>());
+
+
+
 var app = builder.Build();
 
 
@@ -122,7 +136,7 @@ app.UseAuthorization();
 
 app.MapControllers();
 //app.UseHttpsRedirection();
-CreateDbIfNotExists(app);
+//CreateDbIfNotExists(app);
 
 app.Run();
 
@@ -138,7 +152,7 @@ IConfiguration GetConfiguration()
     return builder.Build();
 }
 
-void CreateDbIfNotExists(IHost host)
+/*void CreateDbIfNotExists(IHost host)
 {
     using (var scope = host.Services.CreateScope())
     {
@@ -155,4 +169,4 @@ void CreateDbIfNotExists(IHost host)
             logger.LogError(ex, "An error occurred creating the DB.");
         }
     }
-}
+}*/

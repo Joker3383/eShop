@@ -14,54 +14,53 @@ public class BasketRepository : IBasketRepository
     {
         _appDbContext = appDbContext;
     }
-    public async Task<ShoppingCart> Create(ShoppingCart cart)
-    {
-        var existingProduct =   _appDbContext.Products
-            .FirstOrDefault(p => p.ProductId == cart.ProductId);
 
-        if (existingProduct == null)
-        {
-            await _appDbContext.Set<ShoppingCart>().AddAsync(cart);
-            var resultWithoutAttach = await _appDbContext.SaveChangesAsync();
-            if (resultWithoutAttach == 0)
-            {
-                throw new RepositoryException("Entity didn`t save changes!");
-            }
-            return cart;
-        }
-        
-        _appDbContext.Attach(existingProduct);
-        
-        cart.Product = existingProduct;
-        
-        await _appDbContext.Set<ShoppingCart>().AddAsync(cart);
+
+    public async Task<Models.Basket> CreateBasketAsync(Models.Basket basket)
+    {
+        var addedBasket = await _appDbContext.Baskets.AddAsync(basket);
+
         var result = await _appDbContext.SaveChangesAsync();
+
         if (result == 0)
         {
-            throw new RepositoryException("Entity didn`t save changes!");
+            throw new RepositoryException("Basket didn`t add");
         }
-        return cart;
+
+        return addedBasket.Entity;
     }
 
-    public async Task<ShoppingCart> Delete(ShoppingCart cart)
+    public async Task<Models.Basket> DeleteBasketAsync(Models.Basket basket)
     {
-        _appDbContext.Set<ShoppingCart>().Remove(cart);
+        var addedBasket =  _appDbContext.Baskets.Remove(basket);
+
         var result = await _appDbContext.SaveChangesAsync();
+
         if (result == 0)
         {
-            throw new RepositoryException("Product didn`t save changes!");
+            throw new RepositoryException("Basket didn`t delete");
         }
-        return cart;
+
+        return addedBasket.Entity;
     }
 
-    public IQueryable<ShoppingCart> FindAll()
+    public async Task<Models.Basket> UpdateBasketAsync(Models.Basket basket)
     {
-        var result = _appDbContext.Set<ShoppingCart>().AsQueryable().AsNoTracking().Include(p => p.Product);
-        if (result == null)
+        var addedBasket =  _appDbContext.Baskets.Update(basket);
+
+        var result = await _appDbContext.SaveChangesAsync();
+
+        if (result == 0)
         {
-            throw new RepositoryException("There are no Products");
+            throw new RepositoryException("Basket didn`t change");
         }
 
-        return result;
+        return addedBasket.Entity;
+    }
+
+
+    public async Task<Models.Basket?> GetBasket(int userId)
+    {
+        return await _appDbContext.Set<Models.Basket>().FirstOrDefaultAsync(b => b.SubId == userId);
     }
 }

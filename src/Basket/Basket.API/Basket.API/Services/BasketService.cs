@@ -5,6 +5,7 @@ using Basket.API.Models.Dto;
 using Basket.API.Repositories.Interfaces;
 using Basket.API.Services.Interfaces;
 using MediatR;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Shared.CrudOperations;
 
 namespace Basket.API.Services;
@@ -14,59 +15,91 @@ public class BasketService : IBasketService
     private readonly IProductRepository _productRepository;
     private readonly IBasketRepository _basketRepository;
     private readonly IMapper _mapper;
-    private readonly ISender _sender;
+    private readonly IMediator _mediator;
 
-    public BasketService(IProductRepository productRepository, IBasketRepository basketRepository, IMapper mapper, ISender sender)
+    public BasketService(IProductRepository productRepository, IBasketRepository basketRepository, IMapper mapper, IMediator mediator)
     {
         _productRepository = productRepository;
         _basketRepository = basketRepository;
         _mapper = mapper;
-        _sender = sender;
+        _mediator = mediator;
     }
-    
-    public async  Task<ShoppingCartDto> CreateShoppingCart(string login, int productId)
+
+
+    public async Task<Models.Basket> CreateBasket(int subId)
     {
-        var allProducts = await _productRepository.GetProducts();
-        if (allProducts == null)
+
+        var basket = await _basketRepository.GetBasket(subId);
+        if (basket == null)
         {
-            throw new NullReferenceException("No avaible products to add");
+            return await _basketRepository.CreateBasketAsync(new Models.Basket
+            {
+                SubId = subId
+
+            });
         }
 
-        var product = await _sender.Send(new GetEntityByIdQuery<Product, AppDbContext>(productId)); // usage
+        return basket!;
+    }
+
+    public async Task<int> DeleteBasket(int subId)
+    {
+        var basket = await _basketRepository.GetBasket(subId);
+        if (basket != null)
+        {
+            var deleteBasket = await _basketRepository.DeleteBasketAsync(basket);
+            return subId;
+        }
+        else
+        {
+            return subId;
+        }
+    }
+
+    public async Task<Models.Basket> RemoveItemFromBasketAsync(int subId, int productId, int quantity)
+    {
+        var basket = await _basketRepository.GetBasket(subId);
+        if (basket != null)
+        {
+            if (basket.Products != null && basket.Products.ContainsKey(productId))
+            {
+                basket.Products[productId] -= quantity;
+                if (basket.Products[productId] <= 0)
+                    basket.Products.Remove(productId);
+            
+                await _basketRepository.UpdateBasketAsync(basket);
+            }
+        }
+        return basket;
+    }
+
+    public async Task<Models.Basket> AddItemIntoBasketAsync(int subId, int productId, int quantity)
+    {
+        var product = await _productRepository.GetProductById(productId);
 
         if (product == null)
         {
-            throw new NullReferenceException($"Don`t find product by id: {productId}");
+            throw new NullReferenceException("This product doesn`t exist");
         }
         
-        var addedCart = await _basketRepository.Create(new ShoppingCart()
+        var basket = await _basketRepository.GetBasket(subId);
+        if (basket != null)
         {
-            Login = login,
-            Product = productById,
-            ProductId = productId
+            if (basket.Products == null)
+                basket.Products = new Dictionary<int, int>();
 
-        });
-        
-        
-        return _mapper.Map<ShoppingCartDto>(addedCart);
+            if (basket.Products.ContainsKey(productId))
+                basket.Products[productId] += quantity;
+            else
+                basket.Products[productId] = quantity;
+
+            await _basketRepository.UpdateBasketAsync(basket);
+        }
+        return basket;
     }
 
-    public async Task<IEnumerable<ShoppingCartDto>> GetShoppingCartsIntoBasket(string login)
+    public async Task<Models.Basket?> GetBasket(int subId)
     {
-        var allShoppingCarts =  _basketRepository.FindAll();
-
-        if (allShoppingCarts == null)
-        {
-            throw new NullReferenceException("Basket is empty");
-        }
-        
-        var selectedProducts = allShoppingCarts.Where(p => p.Login == login);
-        if (selectedProducts == null)
-        {
-            throw new NullReferenceException($"There are no entries in your cart by login:{login}");
-        }
-        
-        return _mapper.Map<IEnumerable<ShoppingCartDto>>(selectedProducts.ToList());
+        return await _basketRepository.GetBasket(subId);
     }
-    
 }

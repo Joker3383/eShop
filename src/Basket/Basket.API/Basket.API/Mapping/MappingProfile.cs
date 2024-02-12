@@ -9,7 +9,7 @@ public class MappingProfile : Profile
 {
     public MappingProfile()
     {
-        CreateMap<ShoppingCart, ShoppingCartDto>();
-        CreateMap<ShoppingCartDto, ShoppingCart>();
+        CreateMap<Models.Basket, BasketDto>();
+        CreateMap<BasketDto, Models.Basket>();
     }
 }

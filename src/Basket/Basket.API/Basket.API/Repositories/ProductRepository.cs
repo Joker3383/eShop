@@ -14,7 +14,7 @@ public class ProductRepository : IProductRepository
     {
         _httpClientFactory = clientFactory;
     }
-    public async Task<IEnumerable<ProductDto>> GetProducts()
+    public async Task<ProductDto?> GetProductById(int productId)
     {
         var client = _httpClientFactory.CreateClient();
         var discoveryDocument = await client.GetDiscoveryDocumentAsync(SD.AuthApiBase);
@@ -33,13 +33,13 @@ public class ProductRepository : IProductRepository
         }
         
         client.SetBearerToken(tokenResponse.AccessToken);
-        var response = await client.GetAsync($"{SD.CatalogApiBase}/api/product");
+        var response = await client.GetAsync($"{SD.CatalogApiBase}/api/product/{productId}");
         var apiContet = await response.Content.ReadAsStringAsync();
         var resp = JsonConvert.DeserializeObject<ResponseDto>(apiContet);
         if (resp.IsSuccess)
         {
-            return JsonConvert.DeserializeObject<IEnumerable<ProductDto>>(Convert.ToString(resp.Result));
+            return JsonConvert.DeserializeObject<ProductDto>(Convert.ToString(resp.Result));
         }
-        return new List<ProductDto>();
+        return null!;
     }
 }

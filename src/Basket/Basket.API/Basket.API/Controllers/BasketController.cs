@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Basket.API.Controllers;
 
-[Authorize(Policy = "AuthenteficatedUser")]
+
 [ApiController]
 [Route("/api/basket")]
 public class BasketController : ControllerBase
@@ -20,15 +20,14 @@ public class BasketController : ControllerBase
         _response = new ResponseDto();
     }
 
-    [HttpGet("/{login}")]
-    [AllowAnonymous]
-    public async Task<ResponseDto> GetByLogin(string login)
+    [HttpGet("/{subId}")]
+    public async Task<ResponseDto> GetByLogin(int subId)
     {
         try
         {
-            var shoppingCartsByLogin = await _basketService.GetShoppingCartsIntoBasket(login);
+            var shoppingCartsByLogin = await _basketService.GetBasket(subId);
             if (shoppingCartsByLogin == null)
-                throw new NullReferenceException($"By Login:{login} there aren`t products into basket");
+                throw new NullReferenceException($"By Login:{subId} there aren`t products into basket");
             _response.Result = shoppingCartsByLogin;
         }
         catch (Exception ex)
@@ -40,13 +39,12 @@ public class BasketController : ControllerBase
         return _response;
     }
     
-    [HttpPost("/{login}/{productId}")]
-    [AllowAnonymous]
-    public async Task<ResponseDto> AddProductIntoShoppingCartByLogin(string login, int productId)
+    [HttpPost("/{subId}/{productId}/{quantity}")]
+    public async Task<ResponseDto> AddProductIntoShoppingCartByLogin(int subId, int productId, int quantity)
     {
         try
         {
-            var addedProduct = await _basketService.CreateShoppingCart(login, productId);
+            var addedProduct = await _basketService.AddItemIntoBasketAsync(subId, productId, quantity);
             if (addedProduct == null)
                 throw new NullReferenceException("Product not added into basket");
             _response.Result = addedProduct;
@@ -59,4 +57,61 @@ public class BasketController : ControllerBase
 
         return _response;
     }
+    
+    [HttpDelete("/{subId}/{productId}/{quantity}")]
+    public async Task<ResponseDto> RemoveProductFromBasketAsync(int subId, int productId, int quantity)
+    {
+        try
+        {
+            var addedProduct = await _basketService.RemoveItemFromBasketAsync(subId, productId, quantity);
+            if (addedProduct == null)
+                throw new NullReferenceException("Product not deleted into basket");
+            _response.Result = addedProduct;
+        }
+        catch (Exception ex)
+        {
+            _response.IsSuccess = false;
+            _response.Message = ex.Message;
+        }
+
+        return _response;
+    }
+    [HttpPost("/{subId}")]
+    public async Task<ResponseDto> CreateBasket(int subId)
+    {
+        try
+        {
+            var addedProduct = await _basketService.CreateBasket(subId);
+            if (addedProduct == null)
+                throw new NullReferenceException("Product not added into basket");
+            _response.Result = addedProduct;
+        }
+        catch (Exception ex)
+        {
+            _response.IsSuccess = false;
+            _response.Message = ex.Message;
+        }
+
+        return _response;
+    }
+    
+    [HttpDelete("/{subId}")]
+    public async Task<ResponseDto> DeleteBasket(int subId)
+    {
+        try
+        {
+            var addedProduct = await _basketService.DeleteBasket(subId);
+            if (addedProduct == null)
+                throw new NullReferenceException("Product not deleted into basket");
+            _response.Result = addedProduct;
+        }
+        catch (Exception ex)
+        {
+            _response.IsSuccess = false;
+            _response.Message = ex.Message;
+        }
+
+        return _response;
+    }
+    
 }

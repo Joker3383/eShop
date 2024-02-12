@@ -3,9 +3,9 @@ using Basket.API.Models.Dto;
 
 namespace Basket.API.Data;
 
-public class DbInitializer
-{
-    // public async static  Task Initialize(AppDbContext context)
+/*public class DbInitializer
+{*/
+    /*// public async static  Task Initialize(AppDbContext context)
     // {
     //     await context.Database.EnsureCreatedAsync();
     //
@@ -49,4 +49,4 @@ public class DbInitializer
     //     return mockProducts;
     // }
 
-}
+}*/
