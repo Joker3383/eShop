@@ -3,7 +3,7 @@ using Order.API.Models.Dto;
 
 public static class DbInitializer
 {
-    public async static  Task Initialize(AppDbContext context)
+    /*public async static  Task Initialize(AppDbContext context)
     {
         await context.Database.EnsureCreatedAsync();
 
@@ -14,8 +14,9 @@ public static class DbInitializer
             await context.SaveChangesAsync();
         }
     }
+    */
 
-    private static IEnumerable<Order.API.Models.Order> GetMockCarts()
+    /*private static IEnumerable<Order.API.Models.Order> GetMockCarts()
     {
         List<Order.API.Models.Order> mockProducts = new List<Order.API.Models.Order>
         {
@@ -44,6 +45,6 @@ public static class DbInitializer
             }
         };
         return mockProducts;
-    }
+    }*/
 
 }

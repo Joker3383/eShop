@@ -10,14 +10,11 @@ public class OrderConfiguration : IEntityTypeConfiguration<Models.Order>
     {
         builder.HasKey(o => o.Id);
 
-        builder.Property(o => o.Login).IsRequired();
+        builder.Property(o => o.SubId);
         builder.Property(o => o.TotalSum);
         builder.Property(o => o.DateOfOrder)
             .HasColumnType("timestamp with time zone")
             .HasConversion(v => v.ToUniversalTime(), v => DateTime.SpecifyKind(v, DateTimeKind.Utc));
-        
-        builder.HasMany(o => o.ShoppingCarts)
-            .WithOne()
-            .HasForeignKey(sc => sc.OrderId);
+        builder.Property(o => o.BasketId);
     }
 }

@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Order.API.Data;
 using Order.API.Models.Dto;
 using Order.API.Repositories.Interfaces;
 using Order.API.Services.Interfaces;
+using Shared.CrudOperations;
 
 namespace Order.API.Services;
 
@@ -11,47 +14,53 @@ public class OrderService : IOrderService
     private IMapper _mapper;
     private IBasketRepository _basketRepository;
     private IOrderRepository _orderRepository;
+    private IMediator _mediator;
 
-    public OrderService(IBasketRepository basketRepository, IMapper mapper, IOrderRepository orderRepository)
+    public OrderService(IBasketRepository basketRepository, IMapper mapper, IOrderRepository orderRepository, IMediator mediator)
     {
         _mapper = mapper;
         _basketRepository = basketRepository;
         _orderRepository = orderRepository;
+        _mediator = mediator;
     }
-    public async Task<OrderDto> CreateOrder(string login)
+    public async Task<OrderDto> CreateOrder(int subId)
     {
-        var allShoppingCarts = await _basketRepository.GetShoppingCarts(login);
+        var basket = await _basketRepository.GetBasketsAsync(subId);
 
-        double sum = 0;
-        foreach (var shoppingCart in allShoppingCarts)
+        if (basket == null)
         {
-           var totalSum = shoppingCart.Product;
-           sum += totalSum.Price;
-
+            throw new NullReferenceException($"By id: {subId} no basket");
         }
-
+        
         var order = new Models.Order
         {
-            Login = login,
-            ShoppingCarts = allShoppingCarts,
+            SubId = subId,
+            BasketId = basket.Id,
             DateOfOrder = DateTime.Now,
-            TotalSum = sum,
+            TotalSum = basket.TotalCount
 
         };
-        var addedOrder = await _orderRepository.CreateOrder(order);
+        await _mediator.Send(new CreateEntityCommand<Models.Order, AppDbContext>(order));
 
-        return _mapper.Map<OrderDto>(addedOrder);
+        return _mapper.Map<OrderDto>(order);
     }
 
-    public async Task<IEnumerable<OrderDto>> GetOrders(string login)
+    public async Task<IEnumerable<OrderDto>> GetOrders(int subId)
     {
-        var orders = _orderRepository.FindAll().AsNoTracking();
+        var orders = _orderRepository.FindAll(subId);
+        
+        var mappedOrders = _mapper.Map<IEnumerable<OrderDto>>(orders.ToList());
+        return mappedOrders;
+        
+    }
+    
+    public async Task<OrderDto> DeleteOrder(int Id)
+    {
+        var order = await _mediator.Send(new GetEntityByIdQuery<Models.Order, AppDbContext>(Id));
 
-        var filteredOrders = orders.Where(o => o.Login == login);
-       var ppp = _mapper.Map<IEnumerable<OrderDto>>(filteredOrders.ToList());
-       return ppp;
 
+        await _mediator.Send(new DeleteEntityCommand<Models.Order, AppDbContext>(order));
 
-
+        return _mapper.Map<OrderDto>(order);
     }
 }

@@ -15,7 +15,7 @@ public class BasketRepository : IBasketRepository
     {
         _httpClientFactory = clientFactory;
     }
-    public async Task<ICollection<ShoppingCartDto>> GetShoppingCarts(string login)
+    public async Task<BasketDto?> GetBasketsAsync(int subId)
     {
         var client = _httpClientFactory.CreateClient();
         var discoveryDocument = await client.GetDiscoveryDocumentAsync(SD.AuthApiBase);
@@ -34,13 +34,15 @@ public class BasketRepository : IBasketRepository
         }
         client.SetBearerToken(tokenResponse.AccessToken);
         
-        var response = await client.GetAsync($"{SD.BasketApiBase}/{login}");
+        var response = await client.GetAsync($"{SD.BasketApiBase}/{subId}");
         var apiContet = await response.Content.ReadAsStringAsync();
         var resp = JsonConvert.DeserializeObject<ResponseDto>(apiContet);
         if (resp.IsSuccess)
         {
-            return JsonConvert.DeserializeObject<ICollection<ShoppingCartDto>>(Convert.ToString(resp.Result)).AsQueryable().AsNoTracking().ToList();
+            var basket =  JsonConvert.DeserializeObject<BasketDto>(Convert.ToString(resp.Result));
+            return basket;
         }
-        return new List<ShoppingCartDto>();
+        return null!;
     }
 }
+

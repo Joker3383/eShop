@@ -12,4 +12,6 @@ public class Basket : IEntity<int>
     // product id - quantity
     public Dictionary<int, int>? Products { get; set; }
     
+    public double TotalCount { get; set; }
+    
 }

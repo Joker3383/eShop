@@ -1,7 +1,10 @@
 
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Order.API;
 using Order.API.Data;
 using Order.API.Mapping;
 using Order.API.Repositories;
@@ -104,6 +107,12 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddDbContextFactory<AppDbContext>(opts => opts.UseNpgsql(configuration["ConnectionString"]));
 
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
+    .ConfigureContainer<ContainerBuilder>(containerBuilder => containerBuilder.RegisterModule<MediatorModule>());
+
+
+
+
 var app = builder.Build();
 
 
@@ -123,7 +132,7 @@ app.UseAuthorization();
 
 app.MapControllers();
 //app.UseHttpsRedirection();
-CreateDbIfNotExists(app);
+//CreateDbIfNotExists(app);
 
 app.Run();
 
@@ -137,6 +146,7 @@ IConfiguration GetConfiguration()
     return builder.Build();
 }
 
+/*
 void CreateDbIfNotExists(IHost host)
 {
     using (var scope = host.Services.CreateScope())
@@ -154,4 +164,4 @@ void CreateDbIfNotExists(IHost host)
             logger.LogError(ex, "An error occurred creating the DB.");
         }
     }
-}
+}*/

@@ -35,6 +35,9 @@ namespace Basket.API.Migrations
                     b.Property<int>("SubId")
                         .HasColumnType("integer");
 
+                    b.Property<double>("TotalCount")
+                        .HasColumnType("double precision");
+
                     b.HasKey("Id");
 
                     b.ToTable("Baskets");

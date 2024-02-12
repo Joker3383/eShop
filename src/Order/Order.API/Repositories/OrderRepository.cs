@@ -15,54 +15,9 @@ public class OrderRepository : IOrderRepository
         _appDbContext = appDbContext;
     }
     
-    public async Task<Models.Order> CreateOrder(Models.Order order)
+    public  IQueryable<Models.Order> FindAll(int subId)
     {
-         _appDbContext.Set<Models.Order>().Add(order);
-   
-        var result = await _appDbContext.SaveChangesAsync();
-
-        if (result == 0)
-        {
-            throw new RepositoryException("Order didn't save changes!");
-        }
-
-        return order;
-    }
-
-    
-    public async Task<ShoppingCartDto> CreateShoppingCart(ShoppingCartDto cart)
-    {
-        var existingProduct =   _appDbContext.Products
-            .FirstOrDefault(p => p.ProductId == cart.ProductId);
-
-        if (existingProduct == null)
-        {
-            await _appDbContext.Set<ShoppingCartDto>().AddAsync(cart);
-            var resultWithoutAttach = await _appDbContext.SaveChangesAsync();
-            if (resultWithoutAttach == 0)
-            {
-                throw new RepositoryException("Entity didn`t save changes!");
-            }
-            return cart;
-        }
-        
-        _appDbContext.Attach(existingProduct);
-        
-        cart.Product = existingProduct;
-        
-        await _appDbContext.Set<ShoppingCartDto>().AddAsync(cart);
-        var result = await _appDbContext.SaveChangesAsync();
-        if (result == 0)
-        {
-            throw new RepositoryException("Entity didn`t save changes!");
-        }
-        return cart;
-    }
-    public IQueryable<Models.Order> FindAll()
-    {
-        var result = _appDbContext.Set<Models.Order>().AsQueryable().AsNoTracking()
-            .Include(p => p.ShoppingCarts)
-            .ThenInclude(sh => sh.Product);
+        var result =  _appDbContext.Set<Models.Order>().Where(o => o.SubId == subId);
         if (result == null)
         {
             throw new RepositoryException("There are no Orders");

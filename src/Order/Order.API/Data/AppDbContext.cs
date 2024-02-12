@@ -13,7 +13,6 @@ public class AppDbContext : DbContext
     }
     
     public DbSet<Models.Order> Orders { get; set; }
-    public DbSet<ShoppingCartDto> ShoppingCarts { get; set; }
     public DbSet<ProductDto> Products { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

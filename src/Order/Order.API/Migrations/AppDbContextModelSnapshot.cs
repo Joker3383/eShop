@@ -72,11 +72,9 @@ namespace Order.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OrderId");
-
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ShoppingCarts");
+                    b.ToTable("ShoppingCartDto");
                 });
 
             modelBuilder.Entity("Order.API.Models.Order", b =>
@@ -87,12 +85,14 @@ namespace Order.API.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("BasketId")
+                        .HasColumnType("integer");
+
                     b.Property<DateTime>("DateOfOrder")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("Login")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("SubId")
+                        .HasColumnType("integer");
 
                     b.Property<double>("TotalSum")
                         .HasColumnType("double precision");
@@ -104,12 +104,6 @@ namespace Order.API.Migrations
 
             modelBuilder.Entity("Order.API.Models.Dto.ShoppingCartDto", b =>
                 {
-                    b.HasOne("Order.API.Models.Order", null)
-                        .WithMany("ShoppingCarts")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Order.API.Models.Dto.ProductDto", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
@@ -117,11 +111,6 @@ namespace Order.API.Migrations
                         .IsRequired();
 
                     b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("Order.API.Models.Order", b =>
-                {
-                    b.Navigation("ShoppingCarts");
                 });
 #pragma warning restore 612, 618
         }

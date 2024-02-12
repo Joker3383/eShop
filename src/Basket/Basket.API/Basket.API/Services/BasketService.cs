@@ -32,11 +32,11 @@ public class BasketService : IBasketService
         var basket = await _basketRepository.GetBasket(subId);
         if (basket == null)
         {
-            return await _basketRepository.CreateBasketAsync(new Models.Basket
+            await _mediator.Send(new CreateEntityCommand<Models.Basket, AppDbContext>(new Models.Basket
             {
                 SubId = subId
 
-            });
+            }));
         }
 
         return basket!;
@@ -47,7 +47,7 @@ public class BasketService : IBasketService
         var basket = await _basketRepository.GetBasket(subId);
         if (basket != null)
         {
-            var deleteBasket = await _basketRepository.DeleteBasketAsync(basket);
+            await _mediator.Send(new DeleteEntityCommand<Models.Basket, AppDbContext>(basket));
             return subId;
         }
         else
@@ -58,16 +58,19 @@ public class BasketService : IBasketService
 
     public async Task<Models.Basket> RemoveItemFromBasketAsync(int subId, int productId, int quantity)
     {
+        var product = await _productRepository.GetProductById(productId);
+        
         var basket = await _basketRepository.GetBasket(subId);
         if (basket != null)
         {
+            basket.TotalCount -= product.Price * quantity;
             if (basket.Products != null && basket.Products.ContainsKey(productId))
             {
                 basket.Products[productId] -= quantity;
                 if (basket.Products[productId] <= 0)
                     basket.Products.Remove(productId);
             
-                await _basketRepository.UpdateBasketAsync(basket);
+                await _mediator.Send(new UpdateEntityCommand<Models.Basket,AppDbContext>(basket));
             }
         }
         return basket;
@@ -85,6 +88,8 @@ public class BasketService : IBasketService
         var basket = await _basketRepository.GetBasket(subId);
         if (basket != null)
         {
+            basket.TotalCount += product.Price * quantity;
+            
             if (basket.Products == null)
                 basket.Products = new Dictionary<int, int>();
 
@@ -93,7 +98,7 @@ public class BasketService : IBasketService
             else
                 basket.Products[productId] = quantity;
 
-            await _basketRepository.UpdateBasketAsync(basket);
+            await _mediator.Send(new UpdateEntityCommand<Models.Basket,AppDbContext>(basket));
         }
         return basket;
     }

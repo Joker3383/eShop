@@ -24,16 +24,16 @@ public class OrderController : ControllerBase
         _repository = repository;
     }
 
-    [HttpGet("/{login}")]
-    public async  Task<ResponseDto> GetOrders(string login)
+    [HttpGet("/{subId}")]
+    public async  Task<ResponseDto> GetOrders(int subId)
     {
         
         try
         {
-            var ordersByLogin = await _orderService.GetOrders(login);
-            if (ordersByLogin == null)
-                throw new NullReferenceException($"By Login:{login} there aren`t orders");
-            _response.Result = ordersByLogin;
+            var orders = await _orderService.GetOrders(subId);
+            if (orders == null)
+                throw new NullReferenceException($"By Login:{subId} there aren`t orders");
+            _response.Result = orders;
         }
         catch (Exception ex)
         {
@@ -44,12 +44,32 @@ public class OrderController : ControllerBase
         return _response;
     }
 
-    [HttpPost("/{login}")]
-    public async Task<ResponseDto> AddOrder(string login)
+    [HttpPost("/{subId}")]
+    public async Task<ResponseDto> MakeAnOrder(int subId)
     {
         try
         {
-            var addedOrder = await _orderService.CreateOrder(login);
+            var addedOrder = await _orderService.CreateOrder(subId);
+            if (addedOrder == null)
+                throw new NullReferenceException("Order is not add");
+            
+            _response.Result = addedOrder;
+        }
+        catch (Exception ex)
+        {
+            _response.IsSuccess = false;
+            _response.Message = ex.Message;
+        }
+
+        return _response;
+    }
+    
+    [HttpDelete("/{Id}")]
+    public async Task<ResponseDto> DeleteAnOrder(int Id)
+    {
+        try
+        {
+            var addedOrder = await _orderService.DeleteOrder(Id);
             if (addedOrder == null)
                 throw new NullReferenceException("Order is not add");
             
@@ -65,36 +85,5 @@ public class OrderController : ControllerBase
     }
 
 
-    [HttpGet]
-
-    public async Task<IActionResult> Get()
-    {
-        var result = await _repository.CreateOrder(new Models.Order
-        {
-            Id = 1,
-            Login = "88421113",
-            DateOfOrder = DateTime.Now,
-            ShoppingCarts = new List<ShoppingCartDto>
-            {
-                new ShoppingCartDto
-                {
-                    Id = 25,
-                    OrderId = 0,
-                    ProductId = 1,
-                    Product = new ProductDto
-                    {
-                        CategoryName = "Electronics",
-                        Description = "A fantastic electronic device.",
-                        ProductId = 1,
-                        Name = "Product 1",
-                        Price = 20,
-                        ImageUrl = "",
-                    }
-                }
-            }
-
-        });
-
-        return Ok(result);
-    }
+    
 }

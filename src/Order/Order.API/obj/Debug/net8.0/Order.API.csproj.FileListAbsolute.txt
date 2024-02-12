@@ -116,3 +116,10 @@ D:\dev\eShop\src\Order\Order.API\obj\Debug\net8.0\Order.API.pdb
 D:\dev\eShop\src\Order\Order.API\obj\Debug\net8.0\Order.API.genruntimeconfig.cache
 D:\dev\eShop\src\Order\Order.API\obj\Debug\net8.0\ref\Order.API.dll
 D:\dev\eShop\src\Order\Order.API\bin\Debug\net8.0\IdentityModel.dll
+D:\dev\eShop\src\Order\Order.API\bin\Debug\net8.0\Autofac.dll
+D:\dev\eShop\src\Order\Order.API\bin\Debug\net8.0\Autofac.Extensions.DependencyInjection.dll
+D:\dev\eShop\src\Order\Order.API\bin\Debug\net8.0\MediatR.dll
+D:\dev\eShop\src\Order\Order.API\bin\Debug\net8.0\MediatR.Contracts.dll
+D:\dev\eShop\src\Order\Order.API\bin\Debug\net8.0\MediatR.Extensions.Microsoft.DependencyInjection.dll
+D:\dev\eShop\src\Order\Order.API\bin\Debug\net8.0\Shared.dll
+D:\dev\eShop\src\Order\Order.API\bin\Debug\net8.0\Shared.pdb
