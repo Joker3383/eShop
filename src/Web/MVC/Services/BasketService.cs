@@ -11,7 +11,7 @@ public class BasketService : IBasketService
     {
         _baseService = baseService;
     }
-    public async Task<ResponseDto?> GetShoppingCartsAsync(string subjectId)
+    public async Task<ResponseDto?> GetBasketAsync(string subjectId)
     {
         return await _baseService.SendAsync(new RequestDto()
         {
@@ -20,12 +20,36 @@ public class BasketService : IBasketService
         });
     }
 
-    public async Task<ResponseDto?> AddShoppingCartAsync(string subjectId, int productId)
+    public async Task<ResponseDto?> AddProductIntoBasketAsync(string subjectId, int productId, int quantity)
     {
         return await _baseService.SendAsync(new RequestDto()
         {
             Sd = SD.ApiType.POST,
-            Url = SD.BasketAPIBase + $"/{subjectId}/{productId}"
+            Url = SD.BasketAPIBase + $"/api/basket?SubId={subjectId}&ProductId={productId}&Quantity={quantity}"
+        });
+    }
+    public async Task<ResponseDto?> DeleteProductFromBasketAsync(string subjectId, int productId, int quantity)
+    {
+        return await _baseService.SendAsync(new RequestDto()
+        {
+            Sd = SD.ApiType.DELETE,
+            Url = SD.BasketAPIBase + $"/api/basket?{subjectId}&{productId}&{quantity}"
+        });
+    }
+    public async Task<ResponseDto?> CreateBasketAsync(string subjectId)
+    {
+        return await _baseService.SendAsync(new RequestDto()
+        {
+            Sd = SD.ApiType.POST,
+            Url = SD.BasketAPIBase + $"/{subjectId}"
+        });
+    }
+    public async Task<ResponseDto?> DeleteBasketAsync(string subjectId)
+    {
+        return await _baseService.SendAsync(new RequestDto()
+        {
+            Sd = SD.ApiType.POST,
+            Url = SD.BasketAPIBase + $"/{subjectId}"
         });
     }
 }

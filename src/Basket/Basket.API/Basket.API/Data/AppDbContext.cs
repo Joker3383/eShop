@@ -14,7 +14,6 @@ public class AppDbContext : DbContext
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options){ }
     
     public DbSet<Models.Basket> Baskets { get; set; }
-    public DbSet<Models.Product> Products { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -27,4 +27,13 @@ public class OrderService : IOrderService
             Url = SD.OrderAPIBase + $"/{subjectId}"
         });
     }
+    
+    public async Task<ResponseDto?> CreateOrderAsync(int Id)
+    {
+        return await _baseService.SendAsync(new RequestDto
+        {
+            Sd = SD.ApiType.DELETE,
+            Url = SD.OrderAPIBase + $"/{Id}"
+        });
+    }
 }

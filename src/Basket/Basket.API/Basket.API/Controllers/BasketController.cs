@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace Basket.API.Controllers;
 
 
+
+//[Authorize(Policy = "AuthenteficatedUser")]
 [ApiController]
 [Route("/api/basket")]
 public class BasketController : ControllerBase
@@ -39,12 +41,12 @@ public class BasketController : ControllerBase
         return _response;
     }
     
-    [HttpPost("/{subId}/{productId}/{quantity}")]
-    public async Task<ResponseDto> AddProductIntoShoppingCartByLogin(int subId, int productId, int quantity)
+    [HttpPost]
+    public async Task<ResponseDto> AddProductIntoShoppingCartByLogin([FromQuery]RequestDto requestDto)
     {
         try
         {
-            var addedProduct = await _basketService.AddItemIntoBasketAsync(subId, productId, quantity);
+            var addedProduct = await _basketService.AddItemIntoBasketAsync(requestDto.SubId, requestDto.ProductId, requestDto.Quantity);
             if (addedProduct == null)
                 throw new NullReferenceException("Product not added into basket");
             _response.Result = addedProduct;
@@ -58,14 +60,14 @@ public class BasketController : ControllerBase
         return _response;
     }
     
-    [HttpDelete("/{subId}/{productId}/{quantity}")]
-    public async Task<ResponseDto> RemoveProductFromBasketAsync(int subId, int productId, int quantity)
+    [HttpDelete]
+    public async Task<ResponseDto> RemoveProductFromBasketAsync([FromQuery]RequestDto requestDto)
     {
         try
         {
-            var addedProduct = await _basketService.RemoveItemFromBasketAsync(subId, productId, quantity);
+            var addedProduct = await _basketService.RemoveItemFromBasketAsync(requestDto.SubId, requestDto.ProductId, requestDto.Quantity);
             if (addedProduct == null)
-                throw new NullReferenceException("Product not deleted into basket");
+                throw new NullReferenceException("Product not deleted from basket");
             _response.Result = addedProduct;
         }
         catch (Exception ex)
@@ -76,6 +78,8 @@ public class BasketController : ControllerBase
 
         return _response;
     }
+    
+    
     [HttpPost("/{subId}")]
     public async Task<ResponseDto> CreateBasket(int subId)
     {

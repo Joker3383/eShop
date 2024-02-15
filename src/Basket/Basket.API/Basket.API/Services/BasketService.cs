@@ -32,11 +32,15 @@ public class BasketService : IBasketService
         var basket = await _basketRepository.GetBasket(subId);
         if (basket == null)
         {
-            await _mediator.Send(new CreateEntityCommand<Models.Basket, AppDbContext>(new Models.Basket
+
+            basket = new Models.Basket
             {
                 SubId = subId
 
-            }));
+            };
+            await _mediator.Send(new CreateEntityCommand<Models.Basket, AppDbContext>(basket));
+
+            return basket;
         }
 
         return basket!;

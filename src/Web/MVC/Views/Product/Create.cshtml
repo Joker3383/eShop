@@ -1,0 +1,29 @@
+﻿@model MVC.Controllers.ProductRequest
+
+<h1>Create a Product</h1>
+
+
+<form method="post" action="Create">
+    <div class="mb-3">
+        <label for="Name" class="form-label">Name</label>
+        <input type="text" class="form-control" asp-for="Name">
+    </div>
+    <div class="mb-3">
+        <label for="Description" class="form-label">Description</label>
+        <input type="text" class="form-control" asp-for="Description">
+    </div>
+    <div class="mb-3">
+        <label for="Price" class="form-label">Price</label>
+        <input type="number" class="form-control" asp-for="Price">
+    </div>
+    <div class="mb-3">
+        <label for="ImageUrl" class="form-label">ImageURL</label>
+        <input type="text" class="form-control" asp-for="ImageUrl">
+    </div>
+    <div class="mb-3">
+        <label for="CategoryName" class="form-label">CategoryName</label>
+        <input type="text" class="form-control" asp-for="CategoryName">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

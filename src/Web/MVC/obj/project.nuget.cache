@@ -1,11 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "5WfPbw8wDFYYe9uMujb3ftG0+un3EPsNOiD6EmsvH8eTyNaLPL7rHjtCGd4Cyz/ZN4Trc0OShkjpb33NVfnwSg==",
+  "dgSpecHash": "8hS7xeIJOs4bEY184zVYNl7SvQDvWXeS6QRJiVDNlX26U6s1rnfJqSF6OJO/E07ifZ69Xh3lF9KYTrIU11RrWg==",
   "success": true,
   "projectFilePath": "D:\\dev\\eShop\\src\\Web\\MVC\\MVC.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\vovko\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\vovko\\.nuget\\packages\\identitymodel\\4.3.0\\identitymodel.4.3.0.nupkg.sha512",
     "C:\\Users\\vovko\\.nuget\\packages\\microsoft.aspnetcore.authentication.openidconnect\\8.0.1\\microsoft.aspnetcore.authentication.openidconnect.8.0.1.nupkg.sha512",
+    "C:\\Users\\vovko\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\vovko\\.nuget\\packages\\microsoft.extensions.options\\6.0.0\\microsoft.extensions.options.6.0.0.nupkg.sha512",
+    "C:\\Users\\vovko\\.nuget\\packages\\microsoft.extensions.primitives\\6.0.0\\microsoft.extensions.primitives.6.0.0.nupkg.sha512",
     "C:\\Users\\vovko\\.nuget\\packages\\microsoft.identitymodel.abstractions\\7.1.2\\microsoft.identitymodel.abstractions.7.1.2.nupkg.sha512",
     "C:\\Users\\vovko\\.nuget\\packages\\microsoft.identitymodel.jsonwebtokens\\7.1.2\\microsoft.identitymodel.jsonwebtokens.7.1.2.nupkg.sha512",
     "C:\\Users\\vovko\\.nuget\\packages\\microsoft.identitymodel.logging\\7.1.2\\microsoft.identitymodel.logging.7.1.2.nupkg.sha512",
@@ -14,6 +18,7 @@
     "C:\\Users\\vovko\\.nuget\\packages\\microsoft.identitymodel.tokens\\7.1.2\\microsoft.identitymodel.tokens.7.1.2.nupkg.sha512",
     "C:\\Users\\vovko\\.nuget\\packages\\newtonsoft.json\\11.0.2\\newtonsoft.json.11.0.2.nupkg.sha512",
     "C:\\Users\\vovko\\.nuget\\packages\\system.identitymodel.tokens.jwt\\7.1.2\\system.identitymodel.tokens.jwt.7.1.2.nupkg.sha512",
+    "C:\\Users\\vovko\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
     "C:\\Users\\vovko\\.nuget\\packages\\system.text.encodings.web\\4.7.0\\system.text.encodings.web.4.7.0.nupkg.sha512"
   ],
   "logs": []

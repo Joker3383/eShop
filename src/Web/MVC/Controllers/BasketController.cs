@@ -16,26 +16,37 @@ public class BasketController : Controller
 
     public async Task<IActionResult>  BasketIndex()
     {
+        
         var subId = User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
-        var response = await _basketService.GetShoppingCartsAsync(subId);
-        var shoppingCarts = new List<ShoppingCartDto>();
-        if (response != null && response.IsSuccess)
+        var response = await _basketService.GetBasketAsync(subId);
+        if (response == null)
         {
-            shoppingCarts = JsonConvert.DeserializeObject<List<ShoppingCartDto>>(Convert.ToString(response.Result));
+             response = await _basketService.CreateBasketAsync(subId);
+             TempData["error"] = response?.Message;
         }
-        else
-        {
-            TempData["error"] = response?.Message;
-        }
-        return View(shoppingCarts.Select(cart => cart.Product).ToList());
+        
+        var basket  = JsonConvert.DeserializeObject<BasketDto>(Convert.ToString(response.Result));
+       
+        return View(basket);
     }
 
-    public async Task<IActionResult> AddShoppingCartAsync(int productId)
+    public async Task<IActionResult> AddProductIntoBasketAsync(int productId, int quantity)
     {
         var subId = User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
-        var addedShoppingCart = await _basketService.AddShoppingCartAsync(subId, productId);
+        var addedShoppingCart = await _basketService.AddProductIntoBasketAsync(subId, productId, quantity);
         return RedirectToAction("BasketIndex");
     }
+    
+    public async Task<IActionResult> RemoveProductFromBasketAsync(int productId, int quantity)
+    {
+        var subId = User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
+        var addedShoppingCart = await _basketService.DeleteProductFromBasketAsync(subId, productId, quantity);
+        return RedirectToAction("BasketIndex");
+    }
+    
+    
+    
+    
 
     
 }

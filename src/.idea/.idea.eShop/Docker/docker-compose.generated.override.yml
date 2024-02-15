@@ -1,0 +1,94 @@
+# This is a generated file. Not intended for manual editing.
+version: "2.23"
+services:
+  basket.api:
+    build:
+      context: "D:\\dev\\eShop\\src\\Shared"
+      dockerfile: "../Basket/Basket.API/Basket.API/Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net8.0/Basket.API.dll"
+    environment:
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "basket.api:dev"
+    ports: []
+    volumes:
+    - "C:\\Users\\vovko\\.nuget\\packages:/home/app/.nuget/packages"
+    - "D:\\dev\\eShop\\src\\Basket\\Basket.API\\Basket.API:/app:rw"
+    - "D:\\dev\\eShop\\src:/src:rw"
+    working_dir: "/app"
+  catalog.api:
+    build:
+      context: "D:\\dev\\eShop\\src\\Shared"
+      dockerfile: "../Catalog/Catalog.API/Catalog.API/Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net8.0/Catalog.API.dll"
+    environment:
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "catalog.api:dev"
+    ports: []
+    volumes:
+    - "C:\\Users\\vovko\\.nuget\\packages:/home/app/.nuget/packages"
+    - "D:\\dev\\eShop\\src\\Catalog\\Catalog.API\\Catalog.API:/app:rw"
+    - "D:\\dev\\eShop\\src:/src:rw"
+    working_dir: "/app"
+  identityserver:
+    build:
+      context: "D:\\dev\\eShop\\src\\Shared"
+      dockerfile: "../IdentityServer/IdentityServer/Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/netcoreapp3.1/IdentityServer.dll"
+    environment:
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "identityserver:dev"
+    ports: []
+    volumes:
+    - "C:\\Users\\vovko\\.nuget\\packages:/root/.nuget/packages"
+    - "D:\\dev\\eShop\\src\\IdentityServer\\IdentityServer:/app:rw"
+    - "D:\\dev\\eShop\\src:/src:rw"
+    working_dir: "/app"
+  order.api:
+    build:
+      context: "D:\\dev\\eShop\\src\\Shared"
+      dockerfile: "../Order/Order.API/Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net8.0/Order.API.dll"
+    environment:
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "order.api:dev"
+    ports: []
+    volumes:
+    - "C:\\Users\\vovko\\.nuget\\packages:/home/app/.nuget/packages"
+    - "D:\\dev\\eShop\\src\\Order\\Order.API:/app:rw"
+    - "D:\\dev\\eShop\\src:/src:rw"
+    working_dir: "/app"
+  web.mvc:
+    build:
+      context: "D:\\dev\\eShop\\src\\Shared"
+      dockerfile: "../Web/MVC/Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net8.0/MVC.dll"
+    environment:
+      ASPNETCORE_STATICWEBASSETS: "/app/bin/Debug/net8.0/MVC.staticwebassets.runtime.CT.json"
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "mvc:dev"
+    ports: []
+    volumes:
+    - "C:\\Users\\vovko\\.nuget\\packages:/home/app/.nuget/packages"
+    - "D:\\dev\\eShop\\src\\Web\\MVC:/app:rw"
+    - "D:\\dev\\eShop\\src:/src:rw"
+    working_dir: "/app"

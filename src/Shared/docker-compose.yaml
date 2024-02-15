@@ -1,0 +1,112 @@
+﻿version: '2.23'
+
+services:
+  
+  
+  catalog.api:
+    container_name: lde.catalog.api
+    build:
+      context: .
+      dockerfile: ../Catalog/Catalog.API/Catalog.API/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5000
+      - ConnectionString=server=host.docker.internal;port=5432;database=eShop.Catalog;uid=postgres;password=postgres;
+      - Authority=https://host.docker.internal:5001
+    depends_on:
+      - postgres
+    ports:
+      - 5000:5000
+  basket.api:
+    container_name: lde.basket.api
+    build:
+      context: .
+      dockerfile: ../Basket/Basket.API/Basket.API/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5002
+      - ConnectionString=server=host.docker.internal;port=5432;database=eShop.Basket;uid=postgres;password=postgres;
+      - Catalog.API=http://host.docker.internal:5000;
+      - Auth.API=https://host.docker.internal:5001;
+    depends_on:
+      - postgres
+    ports:
+      - 5002:5002
+  order.api:
+    container_name: lde.order.api
+    build:
+      context: .
+      dockerfile: ../Order/Order.API/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5003
+      - ConnectionString=server=host.docker.internal;port=5432;database=eShop.Order;uid=postgres;password=postgres;
+      - ProductAPI=http://host.docker.internal:5000;
+      - AuthAPI=https://host.docker.internal:5001;
+      - BasketAPI=http://host.docker.internal:5002;
+    depends_on:
+      - postgres
+    ports:
+      - 5003:5003
+    
+  identityserver:
+    container_name: lde.identityserver
+    build:
+      context: .
+      dockerfile: ../IdentityServer/IdentityServer/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5001
+    ports:
+      - 5001:5001
+
+  web.mvc:
+    container_name: lde.web.mvc
+    build:
+      context: .
+      dockerfile: ../Web/MVC/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5050
+      - OrderAPI=http://host.docker.internal:5003
+      - BasketAPI=http://host.docker.internal:5002
+      - ProductAPI=http://host.docker.internal:5000
+      - AuthAPI=https://host.docker.internal:5001
+    ports:
+      - 5050:5050
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - 80:80
+    volumes:
+      - ./Proxy/gateway/nginx:/etc/nginx/conf.d
+      - ./Proxy/assets/images:/usr/share/nginx/html/photos
+  pgadmin4:
+    image: dpage/pgadmin4
+    container_name: lde.pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: user@domain.com
+      PGADMIN_DEFAULT_PASSWORD: postgres
+    depends_on:
+      - postgres
+    ports:
+      - 8001:80
+  postgres:
+    image: postgres
+    container_name: lde.postgres
+    environment:
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - 5432:5432 
+    
+    
+networks:
+  default:
+    driver: bridge
+    internal: false
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.0.4/24
+          gateway: 192.168.0.4 

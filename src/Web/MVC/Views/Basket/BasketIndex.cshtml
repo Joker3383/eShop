@@ -1,43 +1,38 @@
-﻿@model List<ProductDto>
+﻿@model BasketDto
 
-<h1>Shopping Carts</h1>
-
-<table class="table table-striped-columns" width="100%">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Category</th>
-        <th>Price</th>
-        <th> </th>
-        <th> </th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var product in Model)
-    {
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Basket</title>
+</head>
+<body>
+<h1>Basket</h1>
+    
+@if (Model != null && Model.Products != null && Model.Products.Count > 0)
+{
+    <table>
+        <thead>
         <tr>
-            <td>@product.ProductId</td>
-            <td>@product.Name</td>
-            <td>@product.Description</td>
-            <td>@product.CategoryName</td>
-            <td>@product.Price</td>
-            
-            @*<td>
-                <form asp-controller="Product" asp-action="Delete" asp-route-id="@product.ID">
-                    <div>
-                        <button type="submit" class="btn btn-outline-danger"
-                                onclick="return confirm('Are you sure to delete this record ?')">
-                            Delete
-                        </button>
-
-                    </div>
-                </form>
-            </td>*@
-
+            <th>Product ID</th>
+            <th>Quantity</th>
         </tr>
-    }
-    <a asp-controller="Order" asp-action="CreateIndex" class="btn btn-outline-primary">Make an Order</a>
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+        @foreach (var product in Model.Products)
+        {
+            <tr>
+                <td>@product.Key</td>
+                <td>@product.Value</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    
+    <a asp-controller="Order" asp-action="CreateIndex" class="btn btn-primary">Create Order</a>
+}
+else
+{
+    <p>No products in the basket</p>
+}
+</body>
+</html>

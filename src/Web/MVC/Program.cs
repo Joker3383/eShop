@@ -3,6 +3,8 @@ using MVC.Models;
 using MVC.Services;
 using MVC.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using MVC.Mapping;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -13,6 +15,8 @@ builder.Services.AddHttpClient<IBaseService, BaseService>();
 builder.Services.AddHttpClient<IBasketService,BasketService>();
 builder.Services.AddHttpClient<IOrderService,OrderService>();
 builder.Services.AddControllersWithViews();
+
+
 SD.ProductAPIBase = builder.Configuration["ServiceUrls:ProductAPI"];
 SD.AuthAPIBase = builder.Configuration["ServiceUrls:AuthAPI"];
 SD.OrderAPIBase = builder.Configuration["ServiceUrls:OrderAPI"];
@@ -47,6 +51,8 @@ builder.Services.AddAuthentication(options =>
         options.Scope.Add("order");
         options.RequireHttpsMetadata = false;
     });
+
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 var app = builder.Build();
 

@@ -1,10 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿namespace MVC.Controllers;
 
-namespace Order.API.Models.Dto;
-
-public class ProductDto
+public class ProductRequest
 {
-    public int ProductId { get; set; }
+    public int Id { get; set; }
     public string Name { get; set; }
     public double Price { get; set; }
     public string CategoryName { get; set; }

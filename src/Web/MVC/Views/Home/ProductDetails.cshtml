@@ -1,7 +1,7 @@
 ﻿@model ProductDto
 
 <form method="post">
-    <input asp-for="ProductId" hidden />
+    <input asp-for="Id" hidden />
     <div class=" pt-4">
         <div class="card container" style="border:1px solid #808080;">
             <div class="card-header bg-dark text-light row" style="border-radius: 0px;">
@@ -9,7 +9,7 @@
                     <h1 class="text-white">@Model.Name</h1>
                 </div>
                 <div class="col-12 col-md-6 text-end">
-                    <h1 class="text-warning"> @string.Format("{0:c}", Model.Price)</h1>
+                    <h1 class="text-warning">@string.Format("{0:c}", Model.Price)</h1>
                 </div>
             </div>
             <div class="card-body">
@@ -26,10 +26,11 @@
                                     <p class="text-secondary pt-3">@Html.Raw(Model.Description)</p>
                                 </div>
                             </div>
-                            @*<div class="row mx-0">
-                                <input asp-for="Count" class="form-control" />
-                                <span asp-validation-for="Count" class="text-danger"></span>
-                            </div>*@
+                            <div class="row mx-0">
+                                
+                                <input name="quantity" class="form-control" placeholder="Quantity"/>
+                                <span class="text-danger" id="quantityValidation"></span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -39,7 +40,7 @@
                     <a asp-action="Index" class="btn btn-success btn-square form-control btn-lg" style="height:50px;">Back to List</a>
                 </div>
                 <div class="col-12 col-md-6 ">
-                    <button asp-controller="Basket" asp-action="AddShoppingCart" asp-route-productId="@Model.ProductId" class="btn btn-primary form-control btn-lg" style="height:50px;">Add to Cart</button>
+                    <button asp-controller="Basket" asp-action="AddProductIntoBasket" asp-route-productId="@Model.Id" type="submit" class="btn btn-primary form-control btn-lg" style="height:50px;">Add to Cart</button>
                 </div>
             </div>
         </div>
