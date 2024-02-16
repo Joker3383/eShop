@@ -8,7 +8,7 @@ namespace Basket.API.Controllers;
 
 
 
-//[Authorize(Policy = "AuthenteficatedUser")]
+[Authorize(Policy = "AuthenteficatedUser")]
 [ApiController]
 [Route("/api/basket")]
 public class BasketController : ControllerBase

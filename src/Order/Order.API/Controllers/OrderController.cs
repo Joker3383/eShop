@@ -7,7 +7,7 @@ using Order.API.Services.Interfaces;
 
 namespace Order.API.Controllers;
 
-//[Authorize(Policy = "AuthenteficatedUser")]
+[Authorize(Policy = "AuthenteficatedUser")]
 [ApiController]
 [Route("/api/order")]
 public class OrderController : ControllerBase
