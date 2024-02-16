@@ -27,22 +27,32 @@ public class DeleteEntityCommandHandler<TEntity, TDbContext> : IRequestHandler<D
 
     public async Task Handle(DeleteEntityCommand<TEntity, TDbContext> request, CancellationToken cancellationToken)
     {
+        using var transaction = await _context.Database.BeginTransactionAsync();
+
         try
         {
             var result = _context.Set<TEntity>().Remove(request.Entity);
             if (result != null)
             {
-            
                 var deletedRes = await _context.SaveChangesAsync(cancellationToken);
-                if(deletedRes == 0)
-                    _logger.LogInformation($"Error: {typeof(TEntity)} wasn`t deleted" );
-                _logger.LogInformation($"Info: {typeof(TEntity)} was deleted and saved" );
+                if (deletedRes == 0)
+                {
+                    _logger.LogInformation($"Error: {typeof(TEntity)} wasn't deleted");
+                    await transaction.RollbackAsync(); 
+                }
+                else
+                {
+                    await transaction.CommitAsync(); 
+                    _logger.LogInformation($"Info: {typeof(TEntity)} was deleted and saved");
+                }
             }
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, $"Error occurred while adding entity of type {typeof(TEntity)}");
+            _logger.LogError(ex, $"Error occurred while deleting entity of type {typeof(TEntity)}");
+            await transaction.RollbackAsync(); 
             throw; 
         }
     }
+
 }

@@ -3,6 +3,7 @@ using Basket.API.Models.Dto;
 using Basket.API.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Basket.API.Controllers;
 
@@ -46,10 +47,14 @@ public class BasketController : ControllerBase
     {
         try
         {
+            if (!ModelState.IsValid)
+                throw new ArgumentException("Model is not valid");
+             
             var addedProduct = await _basketService.AddItemIntoBasketAsync(requestDto.SubId, requestDto.ProductId, requestDto.Quantity);
             if (addedProduct == null)
                 throw new NullReferenceException("Product not added into basket");
             _response.Result = addedProduct;
+        
         }
         catch (Exception ex)
         {

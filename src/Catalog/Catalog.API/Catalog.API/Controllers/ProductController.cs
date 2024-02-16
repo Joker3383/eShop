@@ -70,6 +70,9 @@ public class ProductController : ControllerBase
     {
         try
         {
+            if (!ModelState.IsValid)
+                throw new ArgumentException("Model is not valid");
+
             var product = await _productService.CreateProduct(productDto);
             if (product == null)
                 throw new NullReferenceException($"The product was not added");
@@ -89,6 +92,9 @@ public class ProductController : ControllerBase
     {
         try
         {
+            if (!ModelState.IsValid)
+                throw new ArgumentException("Model is not valid");
+
             var updatedProduct = await _productService.UpdateProduct(productDto);
             if (updatedProduct == null)
                 throw new NullReferenceException($"Product by id: {productDto.Id} not updated");

@@ -29,18 +29,41 @@ public class UpdateEntityCommandHandler<TEntity, TDbContext> : IRequestHandler<U
     
     public async Task<TEntity> Handle(UpdateEntityCommand<TEntity, TDbContext> request, CancellationToken cancellationToken)
     {
+        using var transaction = await _context.Database.BeginTransactionAsync(cancellationToken);
+
         try
         {
             _logger.LogInformation("Updating entity of type {EntityType} with ID {EntityId}", typeof(TEntity).Name, request.Entity.Id);
 
-            var updateResult = _context.Set<TEntity>().Update(request.Entity);
+            var existingEntity = await _context.Set<TEntity>().FindAsync(request.Entity.Id);
+            if (existingEntity == null)
+            {
+                
+                _logger.LogError("Entity with ID {EntityId} not found", request.Entity.Id);
+                
+                throw new NotFoundException($"Entity with ID {request.Entity.Id} not found");
+            }
+
+
+            _context.Entry(existingEntity).CurrentValues.SetValues(request.Entity);
+
             await _context.SaveChangesAsync(cancellationToken);
-            return updateResult.Entity;
+        
+
+            await transaction.CommitAsync(cancellationToken);
+
+            return existingEntity;
         }
         catch (Exception ex)
         {
+
             _logger.LogError(ex, "Error occurred while updating entity of type {EntityType} with ID {EntityId}", typeof(TEntity).Name, request.Entity.Id);
-            throw; 
+        
+
+            await transaction.RollbackAsync(cancellationToken);
+        
+            throw;
         }
     }
+
 }

@@ -29,21 +29,30 @@ public class CreateEntityCommandHandler<TEntity, TDbContext> : IRequestHandler<C
     
     public async Task Handle(CreateEntityCommand<TEntity, TDbContext> request, CancellationToken cancellationToken)
     {
+        using var transaction = await _context.Database.BeginTransactionAsync();
+
         try
         {
             var result = _context.Set<TEntity>().Add(request.Entity);
             if (result != null)
             {
                 var saveRes = await _context.SaveChangesAsync(cancellationToken);
-                if(saveRes == 0)
+                if (saveRes == 0)
+                {
                     _logger.LogInformation($"Error: {typeof(TEntity)} wasn't saved");
+                    await transaction.RollbackAsync(); 
+                }
                 else
+                {
+                    await transaction.CommitAsync(); 
                     _logger.LogInformation($"Info: {typeof(TEntity)} was added and saved");
+                }
             }
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, $"Error occurred while adding entity of type {typeof(TEntity)}");
+            await transaction.RollbackAsync(); 
             throw; 
         }
     }

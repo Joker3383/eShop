@@ -6,19 +6,20 @@ using MVC.Models;
 using MVC.Services.Interfaces;
 using Newtonsoft.Json;
 
-namespace MVC.Services;
-
 public class BaseService : IBaseService
 {
     private readonly IHttpClientFactory _clientFactory;
     private readonly IHttpContextAccessor _httpContextAccessor;
+    private readonly ILogger<BaseService> _logger;
 
     public BaseService(
         IHttpClientFactory clientFactory,
-        IHttpContextAccessor httpContextAccessor)
+        IHttpContextAccessor httpContextAccessor,
+        ILogger<BaseService> logger)
     {
         _clientFactory = clientFactory;
         _httpContextAccessor = httpContextAccessor;
+        _logger = logger;
     }
     
     public async Task<ResponseDto?> SendAsync(RequestDto requestDto, bool withBearer = true)
@@ -32,6 +33,7 @@ public class BaseService : IBaseService
             var token = await _httpContextAccessor.HttpContext.GetTokenAsync("access_token");
             if (!string.IsNullOrEmpty(token))
             {
+                _logger.LogInformation("Toker was taken");
                 client.SetBearerToken(token);
             }
 
@@ -66,12 +68,16 @@ public class BaseService : IBaseService
             switch (apiResponse.StatusCode)
             {
                 case HttpStatusCode.NotFound:
+                    _logger.LogInformation("API call failed: Not Found");
                     return new() { IsSuccess = false, Message = "Not Found" };
                 case HttpStatusCode.Forbidden:
+                    _logger.LogInformation("API call failed: Access Denied");
                     return new() { IsSuccess = false, Message = "Access Denied" };
                 case HttpStatusCode.Unauthorized:
+                    _logger.LogInformation("API call failed: Unauthorized");
                     return new() { IsSuccess = false, Message = "Unauthorized" };
                 case HttpStatusCode.InternalServerError:
+                    _logger.LogInformation("API call failed: Internal Server Error");
                     return new() { IsSuccess = false, Message = "Internal Server Error" };
                 default:
                     var apiContent = await apiResponse.Content.ReadAsStringAsync();
@@ -81,6 +87,7 @@ public class BaseService : IBaseService
         }
         catch (Exception ex)
         {
+            _logger.LogError(ex, "Error occurred while sending API request");
             var dto = new ResponseDto
             {
                 Message = ex.Message.ToString(),
@@ -88,7 +95,5 @@ public class BaseService : IBaseService
             };
             return dto;
         }
-        
-    
     }
 }
