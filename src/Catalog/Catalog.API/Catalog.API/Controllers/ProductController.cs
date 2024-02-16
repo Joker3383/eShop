@@ -9,7 +9,7 @@ namespace Catalog.API.Controllers;
 
 
 [ApiController]
-//[Authorize(Policy = "AuthenteficatedUser")]
+[Authorize(Policy = "AuthenteficatedUser")]
 [Route("/api/product")]
 public class ProductController : ControllerBase
 {

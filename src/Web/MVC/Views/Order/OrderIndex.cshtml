@@ -24,10 +24,9 @@
             {
                 <tr>
                     <td>@order.Id</td>
-                    <td>@order.Login</td>
+                    <td>@order.SubId</td>
                     <td>@order.TotalSum</td>
                     <td>@order.DateOfOrder.ToShortDateString()</td>
-                    <td>@order.ShoppingCarts.Count</td>
                     <td>
                         <a asp-action="OrderDetails" asp-route-orderId="@order.Id" class="btn btn-info btn-sm">Details</a>
                     </td>

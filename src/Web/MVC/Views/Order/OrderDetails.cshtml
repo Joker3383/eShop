@@ -13,10 +13,10 @@
     
     <dl class="row">
         <dt class="col-sm-2">ID</dt>
-        <dd class="col-sm-10">@Model.Id</dd>
+        <dd class="col-sm-10">@Model.Id</dd>s
 
         <dt class="col-sm-2">Login</dt>
-        <dd class="col-sm-10">@Model.Login</dd>
+        <dd class="col-sm-10">@Model.SubId</dd>
 
         <dt class="col-sm-2">Total Sum</dt>
         <dd class="col-sm-10">@Model.TotalSum</dd>
@@ -25,7 +25,7 @@
         <dd class="col-sm-10">@Model.DateOfOrder.ToShortDateString()</dd>
     </dl>
 
-    <h3>Shopping Carts</h3>
+    <h3>Products in your order</h3>
     <table class="table table-bordered">
         <thead>
         <tr>
@@ -36,7 +36,7 @@
         </tr>
         </thead>
         <tbody>
-        @foreach (var shoppingCart in Model.ShoppingCarts)
+        @*@foreach (var shoppingCart in Model.ShoppingCarts)
         {
             <tr>
                 <td>@shoppingCart.Id</td>
@@ -44,7 +44,7 @@
                 <td>@shoppingCart.Product.Name</td>
                 <td>@shoppingCart.Product.Price</td>
             </tr>
-        }
+        }*@
         </tbody>
     </table>
 
