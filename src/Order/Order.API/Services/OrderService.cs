@@ -13,14 +13,12 @@ public class OrderService : IOrderService
 {
     private IMapper _mapper;
     private IBasketRepository _basketRepository;
-    private IOrderRepository _orderRepository;
     private IMediator _mediator;
 
-    public OrderService(IBasketRepository basketRepository, IMapper mapper, IOrderRepository orderRepository, IMediator mediator)
+    public OrderService(IBasketRepository basketRepository, IMapper mapper, IMediator mediator)
     {
         _mapper = mapper;
         _basketRepository = basketRepository;
-        _orderRepository = orderRepository;
         _mediator = mediator;
     }
     public async Task<OrderDto> CreateOrder(int subId)
@@ -47,9 +45,9 @@ public class OrderService : IOrderService
 
     public async Task<IEnumerable<OrderDto>> GetOrders(int subId)
     {
-        var orders = _orderRepository.FindAll(subId);
+        var orders = _mediator.Send(new GetEntitiesBySubIdQuery<Models.Order, AppDbContext>(subId));
         
-        var mappedOrders = _mapper.Map<IEnumerable<OrderDto>>(orders.ToList());
+        var mappedOrders = _mapper.Map<IEnumerable<OrderDto>>(orders.Result.ToList());
         return mappedOrders;
         
     }

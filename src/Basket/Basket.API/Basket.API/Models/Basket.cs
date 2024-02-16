@@ -4,12 +4,11 @@ using Shared;
 
 namespace Basket.API.Models;
 
-public class Basket : IEntity<int>
+public class Basket : IEntityWithSubId<int>
 {
     [Key]
     public int Id { get; set; }
     public int SubId { get; set; }
-    // product id - quantity
     public Dictionary<int, int>? Products { get; set; }
     
     public double TotalCount { get; set; }

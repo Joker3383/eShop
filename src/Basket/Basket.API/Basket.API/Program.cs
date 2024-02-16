@@ -48,7 +48,6 @@ builder.Services.AddAuthorization(options =>
 });
 builder.Services.AddHttpClient();
 
-builder.Services.AddTransient<IBasketRepository, BasketRepository>();
 builder.Services.AddTransient<IProductRepository, ProductRepository>();
 builder.Services.AddTransient<IBasketService, BasketService>();
 

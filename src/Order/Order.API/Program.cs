@@ -31,7 +31,6 @@ builder.Services.AddHttpClient();
 
 builder.Services.AddTransient<IOrderService, OrderService>();
 builder.Services.AddTransient<IBasketRepository, BasketRepository>();
-builder.Services.AddTransient<IOrderRepository, OrderRepository>();
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 

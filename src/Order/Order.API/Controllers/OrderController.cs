@@ -14,14 +14,12 @@ public class OrderController : ControllerBase
 {
     private readonly IOrderService _orderService;
     private  ResponseDto _response;
-    private IOrderRepository _repository;
     
     
-    public OrderController(IOrderService orderService, IOrderRepository repository)
+    public OrderController(IOrderService orderService)
     {
         _orderService = orderService;
         _response = new ResponseDto();
-        _repository = repository;
     }
 
     [HttpGet("/{subId}")]

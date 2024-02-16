@@ -4,7 +4,7 @@ using Shared;
 
 namespace Order.API.Models
 {
-    public class Order : IEntity<int>
+    public class Order : IEntityWithSubId<int>
     {
 
         public int Id { get; set; }

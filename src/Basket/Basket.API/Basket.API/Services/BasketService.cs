@@ -13,14 +13,12 @@ namespace Basket.API.Services;
 public class BasketService : IBasketService
 {
     private readonly IProductRepository _productRepository;
-    private readonly IBasketRepository _basketRepository;
     private readonly IMapper _mapper;
     private readonly IMediator _mediator;
 
-    public BasketService(IProductRepository productRepository, IBasketRepository basketRepository, IMapper mapper, IMediator mediator)
+    public BasketService(IProductRepository productRepository, IMapper mapper, IMediator mediator)
     {
         _productRepository = productRepository;
-        _basketRepository = basketRepository;
         _mapper = mapper;
         _mediator = mediator;
     }
@@ -29,7 +27,7 @@ public class BasketService : IBasketService
     public async Task<Models.Basket> CreateBasket(int subId)
     {
 
-        var basket = await _basketRepository.GetBasket(subId);
+        var basket = await _mediator.Send(new GetEntityBySubIdQuery<Models.Basket, AppDbContext>(subId));
         if (basket == null)
         {
 
@@ -48,7 +46,7 @@ public class BasketService : IBasketService
 
     public async Task<int> DeleteBasket(int subId)
     {
-        var basket = await _basketRepository.GetBasket(subId);
+        var basket = await _mediator.Send(new GetEntityBySubIdQuery<Models.Basket, AppDbContext>(subId));
         if (basket != null)
         {
             await _mediator.Send(new DeleteEntityCommand<Models.Basket, AppDbContext>(basket));
@@ -64,7 +62,7 @@ public class BasketService : IBasketService
     {
         var product = await _productRepository.GetProductById(productId);
         
-        var basket = await _basketRepository.GetBasket(subId);
+        var basket = await _mediator.Send(new GetEntityBySubIdQuery<Models.Basket, AppDbContext>(subId));
         if (basket != null)
         {
             basket.TotalCount -= product.Price * quantity;
@@ -89,7 +87,7 @@ public class BasketService : IBasketService
             throw new NullReferenceException("This product doesn`t exist");
         }
         
-        var basket = await _basketRepository.GetBasket(subId);
+        var basket = await _mediator.Send(new GetEntityBySubIdQuery<Models.Basket, AppDbContext>(subId));
         if (basket != null)
         {
             basket.TotalCount += product.Price * quantity;
@@ -109,6 +107,6 @@ public class BasketService : IBasketService
 
     public async Task<Models.Basket?> GetBasket(int subId)
     {
-        return await _basketRepository.GetBasket(subId);
+        return await _mediator.Send(new GetEntityBySubIdQuery<Models.Basket, AppDbContext>(subId));
     }
 }
