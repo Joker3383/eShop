@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyProductAttribute("IdentityServer")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+89aa1af1b08acf69b97ad15e4e15f17a86a05c56")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2a0ee564c94309705171c25883263b43c80da5fb")]
 [assembly: System.Reflection.AssemblyTitleAttribute("IdentityServer.Views")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 

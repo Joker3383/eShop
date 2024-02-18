@@ -21,7 +21,6 @@ public class AccountController : Controller
         {
             var idTokenHint = User.FindFirst("id_token")?.Value;
 
-            // Вихід з IdentityServer
             return SignOut(new AuthenticationProperties
             {
                 RedirectUri = $"{SD.AuthAPIBase}/connect/endsession?id_token_hint={idTokenHint}&post_logout_redirect_uri={Url.Action("Index", "Home", null, Request.Scheme)}"

@@ -24,6 +24,7 @@ public class BasketController : ControllerBase
     }
 
     [HttpGet("/{subId}")]
+    [ProducesResponseType(typeof(ResponseDto), StatusCodes.Status200OK)]
     public async Task<ResponseDto> GetByLogin(int subId)
     {
         try
@@ -43,6 +44,7 @@ public class BasketController : ControllerBase
     }
     
     [HttpPost]
+    [ProducesResponseType(typeof(ResponseDto), StatusCodes.Status200OK)]
     public async Task<ResponseDto> AddProductIntoShoppingCartByLogin([FromQuery]RequestDto requestDto)
     {
         try
@@ -66,6 +68,7 @@ public class BasketController : ControllerBase
     }
     
     [HttpDelete]
+    [ProducesResponseType(typeof(ResponseDto), StatusCodes.Status200OK)]
     public async Task<ResponseDto> RemoveProductFromBasketAsync([FromQuery]RequestDto requestDto)
     {
         try
@@ -86,6 +89,7 @@ public class BasketController : ControllerBase
     
     
     [HttpPost("/{subId}")]
+    [ProducesResponseType(typeof(ResponseDto), StatusCodes.Status200OK)]
     public async Task<ResponseDto> CreateBasket(int subId)
     {
         try
@@ -105,6 +109,7 @@ public class BasketController : ControllerBase
     }
     
     [HttpDelete("/{subId}")]
+    [ProducesResponseType(typeof(ResponseDto), StatusCodes.Status200OK)]
     public async Task<ResponseDto> DeleteBasket(int subId)
     {
         try

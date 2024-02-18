@@ -25,7 +25,7 @@ public class ProductController : ControllerBase
     }
 
     [HttpGet]
-    
+    [ProducesResponseType(typeof(ResponseDto), StatusCodes.Status200OK)]
     public async Task<ResponseDto> GetProducts()
     {
         try
@@ -45,7 +45,7 @@ public class ProductController : ControllerBase
     }
     
     [HttpGet]
-    
+    [ProducesResponseType(typeof(ResponseDto), StatusCodes.Status200OK)]
     [Route("{productId:int}")]
     public async Task<ResponseDto> GetProductById(int productId)
     {
@@ -66,6 +66,7 @@ public class ProductController : ControllerBase
     }
     
     [HttpPost]
+    [ProducesResponseType(typeof(ResponseDto), StatusCodes.Status200OK)]
     public async Task<ResponseDto> PostProduct(ProductDto productDto)
     {
         try
@@ -88,6 +89,7 @@ public class ProductController : ControllerBase
     }
     
     [HttpPut]
+    [ProducesResponseType(typeof(ResponseDto), StatusCodes.Status200OK)]
     public async Task<ResponseDto> UpdateProduct(ProductDto productDto)
     {
         try
@@ -110,6 +112,7 @@ public class ProductController : ControllerBase
     }
     
     [HttpDelete]
+    [ProducesResponseType(typeof(ResponseDto), StatusCodes.Status200OK)]
     [Route("{productId:int}")]
     public async Task<ResponseDto> DeleteProduct(int productId)
     {

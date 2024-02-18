@@ -2,51 +2,74 @@
 using MVC.Models;
 using MVC.Services.Interfaces;
 using Newtonsoft.Json;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace MVC.Controllers;
-
-public class BasketController : Controller
+namespace MVC.Controllers
 {
-    private readonly IBasketService _basketService;
-
-    public BasketController(IBasketService basketService)
+    public class BasketController : Controller
     {
-        _basketService = basketService;
-    }
+        private readonly IBasketService _basketService;
 
-    public async Task<IActionResult>  BasketIndex()
-    {
-        
-        var subId = User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
-        var response = await _basketService.GetBasketAsync(subId);
-        if (response == null)
+        public BasketController(IBasketService basketService)
         {
-             response = await _basketService.CreateBasketAsync(subId);
-             TempData["error"] = response?.Message;
+            _basketService = basketService ?? throw new ArgumentNullException(nameof(basketService));
         }
-        
-        var basket  = JsonConvert.DeserializeObject<BasketDto>(Convert.ToString(response.Result));
-       
-        return View(basket);
-    }
 
-    public async Task<IActionResult> AddProductIntoBasketAsync(int productId, int quantity)
-    {
-        var subId = User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
-        var addedShoppingCart = await _basketService.AddProductIntoBasketAsync(subId, productId, quantity);
-        return RedirectToAction("BasketIndex");
-    }
-    
-    public async Task<IActionResult> RemoveProductFromBasketAsync(int productId, int quantity)
-    {
-        var subId = User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
-        var addedShoppingCart = await _basketService.DeleteProductFromBasketAsync(subId, productId, quantity);
-        return RedirectToAction("BasketIndex");
-    }
-    
-    
-    
-    
+        public async Task<IActionResult> BasketIndex()
+        {
+            var subId = User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
+            var response = await _basketService.GetBasketAsync(subId);
 
-    
+            if (response == null || !response.IsSuccess)
+            {
+                TempData["error"] = response?.Message ?? "Failed to retrieve or create basket.";
+                return RedirectToAction("Error", "Home"); 
+            }
+
+            var basket = JsonConvert.DeserializeObject<BasketDto>(Convert.ToString(response.Result));
+            return View(basket);
+        }
+
+
+        public async Task<IActionResult> AddProductIntoBasket(int productId, int quantity)
+        {
+            var subId = User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
+            if (subId == null)
+            {
+                TempData["error"] = "User not authenticated.";
+                return RedirectToAction("Error", "Home"); 
+            }
+
+            var result = await _basketService.AddProductIntoBasketAsync(subId, productId, quantity);
+            if (!result.IsSuccess)
+            {
+                TempData["error"] = result.Message;
+                return RedirectToAction("Error", "Home"); 
+            }
+
+            return RedirectToAction("BasketIndex");
+        }
+
+
+        public async Task<IActionResult> RemoveProductFromBasket(int productId, int quantity)
+        {
+            var subId = User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
+            if (subId == null)
+            {
+                TempData["error"] = "User not authenticated.";
+                return RedirectToAction("Error", "Home"); 
+            }
+
+            var result = await _basketService.DeleteProductFromBasketAsync(subId, productId, quantity);
+            if (!result.IsSuccess)
+            {
+                TempData["error"] = result.Message;
+                return RedirectToAction("Error", "Home"); 
+            }
+
+            return RedirectToAction("BasketIndex");
+        }
+    }
 }

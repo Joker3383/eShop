@@ -11,6 +11,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Shared.CrudOperations;
 
 var configuration = GetConfiguration();
 
@@ -103,6 +104,11 @@ builder.Services.AddCors(options =>
             .AllowAnyMethod()
             .AllowAnyHeader()
             .AllowCredentials());
+});
+
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add<ExceptionFilter>();
 });
 
 

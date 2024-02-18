@@ -3400,8 +3400,8 @@
     },
     "Shared/1.0.0": {
       "type": "project",
-      "path": "../../../Shared/Shared.csproj",
-      "msbuildProject": "../../../Shared/Shared.csproj"
+      "path": "../../../Shared/Shared.Applications/Shared.csproj",
+      "msbuildProject": "../../../Shared/Shared.Applications/Shared.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -3454,8 +3454,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\dev\\eShop\\src\\Shared\\Shared.csproj": {
-              "projectPath": "D:\\dev\\eShop\\src\\Shared\\Shared.csproj"
+            "D:\\dev\\eShop\\src\\Shared\\Shared.Applications\\Shared.csproj": {
+              "projectPath": "D:\\dev\\eShop\\src\\Shared\\Shared.Applications\\Shared.csproj"
             }
           }
         }

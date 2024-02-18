@@ -26,39 +26,31 @@ public class BasketService : IBasketService
 
     public async Task<Models.Basket> CreateBasket(int subId)
     {
-
         var basket = await _mediator.Send(new GetEntityBySubIdQuery<Models.Basket, AppDbContext>(subId));
         if (basket == null)
         {
-
             basket = new Models.Basket
             {
                 SubId = subId
-
             };
             await _mediator.Send(new CreateEntityCommand<Models.Basket, AppDbContext>(basket));
-
             return basket;
         }
-
         return basket!;
     }
 
     public async Task<int> DeleteBasket(int subId)
     {
         var basket = await _mediator.Send(new GetEntityBySubIdQuery<Models.Basket, AppDbContext>(subId));
-        if (basket != null)
-        {
-            await _mediator.Send(new DeleteEntityCommand<Models.Basket, AppDbContext>(basket));
-            return subId;
-        }
-        else
+        if (basket == null)
         {
             return subId;
         }
+        await _mediator.Send(new DeleteEntityCommand<Models.Basket, AppDbContext>(basket));
+        return subId;
     }
 
-    public async Task<Models.Basket> RemoveItemFromBasketAsync(int subId, int productId, int quantity)
+    public async Task<Models.Basket?> RemoveItemFromBasketAsync(int subId, int productId, int quantity)
     {
         var product = await _productRepository.GetProductById(productId);
         

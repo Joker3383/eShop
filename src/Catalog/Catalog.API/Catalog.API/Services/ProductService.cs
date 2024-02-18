@@ -5,6 +5,7 @@ using Catalog.API.Repositories.Interfaces;
 using Catalog.API.Services.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Shared;
 using Shared.CrudOperations;
 
 namespace Catalog.API.Services;
@@ -39,7 +40,7 @@ public class ProductService : IProductService
         }
         catch (Exception ex)
         {
-            throw new InvalidOperationException("Failed to create car", ex);
+            throw new MediatorException("Failed to create car");
         }
 
         return car;
@@ -55,7 +56,7 @@ public class ProductService : IProductService
         var existingProduct = await _mediator.Send(new GetEntityByIdQuery<Product,AppDbContext>(productDto.Id));
         if (existingProduct == null)
         {
-            throw new InvalidOperationException($"Product with ID {productDto.Id} not found");
+            throw new MediatorException($"Product with ID {productDto.Id} not found");
         }
         
         _mapper.Map(productDto, existingProduct);
@@ -66,7 +67,7 @@ public class ProductService : IProductService
         }
         catch (Exception ex)
         {
-            throw new InvalidOperationException("Failed to update product", ex);
+            throw new MediatorException("Failed to update product");
         }
         
         return existingProduct;
@@ -78,7 +79,7 @@ public class ProductService : IProductService
 
         if (product == null)
         {
-            throw new InvalidOperationException($"Product with ID {id} not found");
+            throw new MediatorException($"Product with ID {id} not found");
         }
 
         try
@@ -87,7 +88,7 @@ public class ProductService : IProductService
         }
         catch (Exception ex)
         {
-            throw new InvalidOperationException("Failed to delete Product", ex);
+            throw new MediatorException("Failed to delete Product");
         }
 
         return product;

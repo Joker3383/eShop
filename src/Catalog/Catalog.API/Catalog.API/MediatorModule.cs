@@ -16,11 +16,6 @@ public class MediatorModule : Autofac.Module
         builder.RegisterAssemblyTypes(typeof(GetEntitiesQueryHandler<Product,AppDbContext>).GetTypeInfo().Assembly)
             .AsClosedTypesOf(typeof(IRequestHandler<,>));
         
-        // підключення неймспейса кастомних запитів
-        // builder.RegisterAssemblyTypes(typeof(GetButtonByIdQueryHandler).GetTypeInfo().Assembly)
-        //     .AsClosedTypesOf(typeof(IRequestHandler<,>));
-        
-        //HACK: Ругается на регистрацию генерик типов при старте приложения
         try
         {
             builder.RegisterAssemblyOpenGenericTypes(typeof(GetEntityByIdQueryHandler<Product,AppDbContext>).Assembly)

@@ -58,7 +58,7 @@ services:
   order.api:
     build:
       context: "D:\\dev\\eShop\\src\\Shared"
-      dockerfile: "../Order/Order.API/Dockerfile"
+      dockerfile: "../Order/Order.API/Order.API/Dockerfile"
       target: "base"
     command: []
     entrypoint:
@@ -70,7 +70,7 @@ services:
     ports: []
     volumes:
     - "C:\\Users\\vovko\\.nuget\\packages:/home/app/.nuget/packages"
-    - "D:\\dev\\eShop\\src\\Order\\Order.API:/app:rw"
+    - "D:\\dev\\eShop\\src\\Order\\Order.API\\Order.API:/app:rw"
     - "D:\\dev\\eShop\\src:/src:rw"
     working_dir: "/app"
   web.mvc:
