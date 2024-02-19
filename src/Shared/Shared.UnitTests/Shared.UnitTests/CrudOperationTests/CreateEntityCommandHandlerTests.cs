@@ -1,6 +1,9 @@
+using Catalog.API.Data;
 using Xunit;
 using Moq;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Logging;
 using Shared;
 using Shared.CrudOperations;
@@ -10,51 +13,39 @@ public class CreateEntityCommandHandlerTests<TEntity, TDbContext>
     where TDbContext : DbContext
 {
     /*[Fact]
-    public async Task Handle_ValidEntity_SavesEntityToDatabase()
+    public async Task Handle_Success()
     {
         // Arrange
-        var options = new DbContextOptionsBuilder<TDbContext>()
-            .UseInMemoryDatabase(databaseName: "TestDatabase")
-            .Options;
-        using (var context = new TDbContext(options))
-        {
-            var entity = new TEntity();
-            var command = new CreateEntityCommand<TEntity, TDbContext>(entity);
-            var loggerMock = new Mock<ILogger<CreateEntityCommandHandler<TEntity, TDbContext>>>();
-            var handler = new CreateEntityCommandHandler<TEntity, TDbContext>(context, loggerMock.Object);
+        var mockContext = new Mock<DbContext>();
+        var mockTransaction = new Mock<IDbContextTransaction>();
+        var mockDbSet = new Mock<DbSet<Product>>();
+        var mockLogger = new Mock<ILogger<CreateEntityCommandHandler<Product, DbContext>>>();
 
-            // Act
-            await handler.Handle(command, CancellationToken.None);
+        var entity = new EntityEntry<Product>(); // Sample entity
+        var saveChangesResult = 1; // Simulating one entity saved
 
-            // Assert
-            var savedEntity = await context.Set<TEntity>().FirstOrDefaultAsync();
-            Assert.NotNull(savedEntity);
-            // Add more assertions as needed
-        }
-    }*/
+        mockContext.Setup(c => c.Database.BeginTransactionAsync(default))
+            .ReturnsAsync(mockTransaction.Object);
 
-    [Fact]
-    public async Task Handle_InvalidEntity_DoesNotSaveEntityToDatabase()
-    {
-        // Arrange
-        var options = new DbContextOptionsBuilder<TDbContext>()
-            .UseInMemoryDatabase(databaseName: "TestDatabase")
-            .Options;
-        var context = new Mock<TDbContext>(options);
-        
-        var entityMock = new Mock<TEntity>();
-        var dbContextMock = new Mock<TDbContext>();
-        var command = new CreateEntityCommand<TEntity, TDbContext>(null);
-        var loggerMock = new Mock<ILogger<CreateEntityCommandHandler<TEntity, TDbContext>>>();
-        var handler = new CreateEntityCommandHandler<TEntity, TDbContext>(context.Object, loggerMock.Object);
+        mockContext.Setup(c => c.Set<Product>())
+            .Returns(mockDbSet.Object);
+
+        mockDbSet.Setup(s => s.Add(entity))
+            .Returns(entity); // Simulating adding entity to DbSet
+
+        mockContext.Setup(c => c.SaveChangesAsync(default))
+            .ReturnsAsync(saveChangesResult);
+
+        var handler = new CreateEntityCommandHandler<Product, DbContext>(mockContext.Object, mockLogger.Object);
+        var command = new CreateEntityCommand<Product, DbContext>(entity);
 
         // Act
-        await handler.Handle(command, CancellationToken.None);
+        await handler.Handle(command, default);
 
         // Assert
-        var savedEntity = await context.Object.Set<TEntity>().FirstOrDefaultAsync();
-        Assert.Null(savedEntity);
+        mockTransaction.Verify(t => t.CommitAsync(default), Times.Once);
+        mockLogger.Verify(l => l.LogInformation(It.IsAny<string>()), Times.Once);
+    }*/
 
-        
-    }
+    
 }

@@ -64,8 +64,5 @@ public class GetEntitiesQueryHandlerTests<TEntity, TDbContext>
             _loggerMock.Verify(x => x.LogError(It.IsAny<System.Exception>(), It.IsAny<string>(), typeof(TEntity).Name), Times.Once);
         }
 
-        public Task<IQueryable<TEntity>> Handle(GetEntitiesQuery<TEntity, TDbContext> request, CancellationToken cancellationToken)
-        {
-            
-        }
+
     }

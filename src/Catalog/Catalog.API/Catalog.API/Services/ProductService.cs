@@ -21,29 +21,29 @@ public class ProductService : IProductService
         _mediator = mediator;
     }
 
-    public async Task<Product> CreateProduct(ProductDto carDto)
+    public async Task<Product> CreateProduct(ProductDto productDto)
     {
-        if (carDto == null)
+        if (productDto == null)
         {
-            throw new ArgumentNullException(nameof(carDto), "CarDto cannot be null");
+            throw new ArgumentNullException(nameof(productDto), "CarDto cannot be null");
         }
         
-        var car = _mapper.Map<ProductDto, Product>(carDto);
+        var product = _mapper.Map<ProductDto, Product>(productDto);
         
-        if (car == null)
+        if (product == null)
         {
             throw new InvalidOperationException("Mapping from CarDto to Car failed");
         }
         try
         {
-            await _mediator.Send(new CreateEntityCommand<Product,AppDbContext>(car));
+            await _mediator.Send(new CreateEntityCommand<Product,AppDbContext>(product));
         }
-        catch (Exception ex)
+        catch (MediatorException)
         {
             throw new MediatorException("Failed to create car");
         }
 
-        return car;
+        return product;
     }
 
     public async Task<Product> UpdateProduct(ProductDto productDto)
@@ -65,7 +65,7 @@ public class ProductService : IProductService
         {
             await _mediator.Send(new UpdateEntityCommand<Product, AppDbContext>(existingProduct));
         }
-        catch (Exception ex)
+        catch (MediatorException)
         {
             throw new MediatorException("Failed to update product");
         }
@@ -86,7 +86,7 @@ public class ProductService : IProductService
         {
             await _mediator.Send(new DeleteEntityCommand<Product,AppDbContext>(product));
         }
-        catch (Exception ex)
+        catch (MediatorException ex)
         {
             throw new MediatorException("Failed to delete Product");
         }

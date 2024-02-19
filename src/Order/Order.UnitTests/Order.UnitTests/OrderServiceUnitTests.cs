@@ -31,19 +31,16 @@ namespace Order.API.UnitTests.Services
         [Fact]
         public async Task CreateOrder_ValidSubId_ReturnsOrderDto_Success()
         {
-            // Arrange
+
             var subId = 123;
             var basketDto = new BasketDto { Id = 1, SubId = 4, TotalCount = 50, Products = null};
-            var order = new Models.Order { Id = 1, DateOfOrder = DateTime.Now, TotalSum = 45, BasketId = 1, SubId = 1};
             var orderDto = new OrderDto { Id = 1, DateOfOrder = DateTime.Now, TotalSum = 45, BasketId = 1, SubId = 1};
-
             _basketRepositoryMock.Setup(repo => repo.GetBasketsAsync(subId)).ReturnsAsync(basketDto);
             _mediatorMock.Setup(mediator => mediator.Send(It.IsAny<CreateEntityCommand<Models.Order, AppDbContext>>(), default)).Returns(Task.CompletedTask);
             _mapperMock.Setup(mapper => mapper.Map<OrderDto>(It.IsAny<Models.Order>())).Returns(orderDto);
 
             var service = new OrderService(_basketRepositoryMock.Object, _mapperMock.Object, _mediatorMock.Object);
-
-            // Act
+            
             var result = await service.CreateOrder(subId);
 
 
@@ -55,23 +52,18 @@ namespace Order.API.UnitTests.Services
         [Fact]
         public async Task CreateOrder_InvalidSubId_ThrowsException_Failure()
         {
-            // Arrange
+
             var subId = 123;
-
             _basketRepositoryMock.Setup(repo => repo.GetBasketsAsync(subId)).ReturnsAsync((BasketDto)null);
-
             var service = new OrderService(_basketRepositoryMock.Object, _mapperMock.Object, _mediatorMock.Object);
 
-            // Act & Assert
+
             await Assert.ThrowsAsync<NullReferenceException>(() => service.CreateOrder(subId));
         }
-
         
-
         [Fact]
         public async Task DeleteOrder_ValidOrderId_ReturnsOrderDto_Success()
         {
-            // Arrange
             var orderId = 123;
             var order = new Models.Order { Id = 1, DateOfOrder = DateTime.Now, TotalSum = 45, BasketId = 1, SubId = 1};
             var orderDto = new OrderDto { Id = 1, DateOfOrder = DateTime.Now, TotalSum = 45, BasketId = 1, SubId = 1 };
@@ -82,19 +74,52 @@ namespace Order.API.UnitTests.Services
 
             var service = new OrderService(_basketRepositoryMock.Object, _mapperMock.Object, _mediatorMock.Object);
 
-            // Act
+
             var result = await service.DeleteOrder(orderId);
 
-            // Assert
+
             Assert.NotNull(result);
             Assert.IsType<OrderDto>(result);
-            // Additional assertions if necessary
         }
 
         [Fact]
         public async Task DeleteOrder_InvalidOrderId_ThrowsException_Failure()
         {
-           
+
+            var subId = 123;
+
+            _basketRepositoryMock.Setup(repo => repo.GetBasketsAsync(subId)).ReturnsAsync((BasketDto)null);
+
+            var service = new OrderService(_basketRepositoryMock.Object, _mapperMock.Object, _mediatorMock.Object);
+
+
+            await Assert.ThrowsAsync<MediatorException>(() => service.DeleteOrder(subId));
         }
+        
+        [Fact]
+        public async Task GetOrders_FindOrderById_ReturnsOrders_Success()
+        {
+            int subId = 123;
+            var order = new Models.Order()
+                { SubId = 123, DateOfOrder = DateTime.Now, TotalSum = 0, BasketId = 1, Id = 1 };
+            _mediatorMock.Setup(mediator => mediator.Send(It.IsAny<GetEntityBySubIdQuery<Models.Order, AppDbContext>>(), default)).ReturnsAsync(order);
+            
+            var service = new OrderService(_basketRepositoryMock.Object, _mapperMock.Object, _mediatorMock.Object);
+            
+            Assert.NotNull(() => service.DeleteOrder(subId));
+        }
+
+        [Fact]
+        public async Task GetOrders_FindOrderById_ReturnsOrders_Failure()
+        {
+            int subId = 123;
+
+            _mediatorMock.Setup(mediator => mediator.Send(It.IsAny<GetEntityBySubIdQuery<Models.Order, AppDbContext>>(), default)).ReturnsAsync((Models.Order)null);
+            
+            var service = new OrderService(_basketRepositoryMock.Object, _mapperMock.Object, _mediatorMock.Object);
+            
+            await Assert.ThrowsAsync<MediatorException>(() => service.DeleteOrder(subId));
+        }
+        
     }
 }

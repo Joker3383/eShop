@@ -13,18 +13,16 @@ namespace Basket.API.Services;
 public class BasketService : IBasketService
 {
     private readonly IProductRepository _productRepository;
-    private readonly IMapper _mapper;
     private readonly IMediator _mediator;
 
-    public BasketService(IProductRepository productRepository, IMapper mapper, IMediator mediator)
+    public BasketService(IProductRepository productRepository, IMediator mediator)
     {
         _productRepository = productRepository;
-        _mapper = mapper;
         _mediator = mediator;
     }
 
 
-    public async Task<Models.Basket> CreateBasket(int subId)
+    public async Task<Models.Basket> CreateBasket(int subId) 
     {
         var basket = await _mediator.Send(new GetEntityBySubIdQuery<Models.Basket, AppDbContext>(subId));
         if (basket == null)

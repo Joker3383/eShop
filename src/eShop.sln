@@ -39,6 +39,11 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "assets", "assets", "{2B256BB6-9711-433E-8F58-4539AF11A914}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "images", "images", "{00ECC825-8574-4B2B-9FB7-F0DD108CED7F}"
+	ProjectSection(SolutionItems) = preProject
+		Shared\Proxy\assets\images\1.jpg = Shared\Proxy\assets\images\1.jpg
+		Shared\Proxy\assets\images\2.jpg = Shared\Proxy\assets\images\2.jpg
+		Shared\Proxy\assets\images\3.jpg = Shared\Proxy\assets\images\3.jpg
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Catalog.UnitTests", "Catalog.UnitTests", "{78A8310B-5814-4166-8B74-D2E44CA51CE4}"
 EndProject
