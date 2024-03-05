@@ -27,7 +27,6 @@ D:\dev\eShop\src\Web\MVC\obj\Debug\net8.0\staticwebassets.pack.json
 D:\dev\eShop\src\Web\MVC\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 D:\dev\eShop\src\Web\MVC\obj\Debug\net8.0\scopedcss\bundle\MVC.styles.css
 D:\dev\eShop\src\Web\MVC\obj\Debug\net8.0\scopedcss\projectbundle\MVC.bundle.scp.css
-D:\dev\eShop\src\Web\MVC\obj\Debug\net8.0\MVC.csproj.CopyComplete
 D:\dev\eShop\src\Web\MVC\obj\Debug\net8.0\MVC.dll
 D:\dev\eShop\src\Web\MVC\obj\Debug\net8.0\refint\MVC.dll
 D:\dev\eShop\src\Web\MVC\obj\Debug\net8.0\MVC.pdb
@@ -42,3 +41,4 @@ D:\dev\eShop\src\Web\MVC\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.Open
 D:\dev\eShop\src\Web\MVC\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
 D:\dev\eShop\src\Web\MVC\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
 D:\dev\eShop\src\Web\MVC\bin\Debug\net8.0\AutoMapper.dll
+D:\dev\eShop\src\Web\MVC\obj\Debug\net8.0\MVC.csproj.Up2Date

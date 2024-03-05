@@ -70,11 +70,11 @@ public class OrderController : ControllerBase
     {
         try
         {
-            var addedOrder = await _orderService.DeleteOrder(Id);
-            if (addedOrder == null)
+            var deleteOrder = await _orderService.DeleteOrder(Id);
+            if (deleteOrder == null)
                 throw new NullReferenceException("Order is not add");
             
-            _response.Result = addedOrder;
+            _response.Result = deleteOrder;
         }
         catch (Exception ex)
         {

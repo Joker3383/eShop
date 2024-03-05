@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "wN3mWJx/lkNXt3wtFYl3qCNtZorInzlUN4rtNEYtW2E1dsT4kOHIksIIAkltBkYo+po3o5L4M6Bei0CqCZQExw==",
+  "dgSpecHash": "gPQF1peCavwtc6ybPkZYzh23DXgQuaVs0He/l+JkMUJHiWIP++cW+IEkUn8kC8pV3YOqk2Q7qcqsqfhNwhvGWQ==",
   "success": true,
   "projectFilePath": "D:\\dev\\eShop\\src\\Catalog\\Catalog.UnitTests\\Catalog.UnitTests\\Catalog.UnitTests.csproj",
   "expectedPackageFiles": [

@@ -107,7 +107,6 @@ D:\dev\eShop\src\Basket\Basket.API\Basket.API\obj\Debug\net8.0\staticwebassets\m
 D:\dev\eShop\src\Basket\Basket.API\Basket.API\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.Basket.API.props
 D:\dev\eShop\src\Basket\Basket.API\Basket.API\obj\Debug\net8.0\staticwebassets.pack.json
 D:\dev\eShop\src\Basket\Basket.API\Basket.API\obj\Debug\net8.0\scopedcss\bundle\Basket.API.styles.css
-D:\dev\eShop\src\Basket\Basket.API\Basket.API\obj\Debug\net8.0\Basket.API.csproj.CopyComplete
 D:\dev\eShop\src\Basket\Basket.API\Basket.API\obj\Debug\net8.0\Basket.API.dll
 D:\dev\eShop\src\Basket\Basket.API\Basket.API\obj\Debug\net8.0\refint\Basket.API.dll
 D:\dev\eShop\src\Basket\Basket.API\Basket.API\obj\Debug\net8.0\Basket.API.pdb
@@ -123,3 +122,4 @@ D:\dev\eShop\src\Basket\Basket.API\Basket.API\bin\Debug\net8.0\MediatR.Contracts
 D:\dev\eShop\src\Basket\Basket.API\Basket.API\bin\Debug\net8.0\MediatR.Extensions.Microsoft.DependencyInjection.dll
 D:\dev\eShop\src\Basket\Basket.API\Basket.API\bin\Debug\net8.0\Shared.dll
 D:\dev\eShop\src\Basket\Basket.API\Basket.API\bin\Debug\net8.0\Shared.pdb
+D:\dev\eShop\src\Basket\Basket.API\Basket.API\obj\Debug\net8.0\Basket.API.csproj.Up2Date

@@ -94,7 +94,6 @@ D:\dev\eShop\src\Catalog\Catalog.UnitTests\Catalog.UnitTests\obj\Debug\net8.0\Ca
 D:\dev\eShop\src\Catalog\Catalog.UnitTests\Catalog.UnitTests\obj\Debug\net8.0\Catalog.UnitTests.AssemblyInfo.cs
 D:\dev\eShop\src\Catalog\Catalog.UnitTests\Catalog.UnitTests\obj\Debug\net8.0\Catalog.UnitTests.csproj.CoreCompileInputs.cache
 D:\dev\eShop\src\Catalog\Catalog.UnitTests\Catalog.UnitTests\obj\Debug\net8.0\Catalog.UnitTests.sourcelink.json
-D:\dev\eShop\src\Catalog\Catalog.UnitTests\Catalog.UnitTests\obj\Debug\net8.0\Catalog.UnitTests.csproj.CopyComplete
 D:\dev\eShop\src\Catalog\Catalog.UnitTests\Catalog.UnitTests\obj\Debug\net8.0\Catalog.UnitTests.dll
 D:\dev\eShop\src\Catalog\Catalog.UnitTests\Catalog.UnitTests\obj\Debug\net8.0\refint\Catalog.UnitTests.dll
 D:\dev\eShop\src\Catalog\Catalog.UnitTests\Catalog.UnitTests\obj\Debug\net8.0\Catalog.UnitTests.pdb
@@ -135,3 +134,4 @@ D:\dev\eShop\src\Catalog\Catalog.UnitTests\Catalog.UnitTests\bin\Debug\net8.0\Ca
 D:\dev\eShop\src\Catalog\Catalog.UnitTests\Catalog.UnitTests\bin\Debug\net8.0\Shared.dll
 D:\dev\eShop\src\Catalog\Catalog.UnitTests\Catalog.UnitTests\bin\Debug\net8.0\Shared.pdb
 D:\dev\eShop\src\Catalog\Catalog.UnitTests\Catalog.UnitTests\bin\Debug\net8.0\Catalog.API.pdb
+D:\dev\eShop\src\Catalog\Catalog.UnitTests\Catalog.UnitTests\obj\Debug\net8.0\Catalog..B1EC11F1.Up2Date

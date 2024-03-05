@@ -33,7 +33,7 @@ public class ProductController : Controller
 
             return View();
         }
-        
+        [HttpPost]
         public async Task<IActionResult> Create(ProductRequest addProductRequest)
         {
             if (!ModelState.IsValid)
@@ -61,14 +61,14 @@ public class ProductController : Controller
 
             if (product == null)
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("Edit");
             }
 
             var viewProduct = _mapper.Map<ProductRequest>(product);
             return View(viewProduct);
         }
         
-
+        [HttpPost]
         public async Task<IActionResult> Edit(ProductRequest updateProductRequest)
         {
             

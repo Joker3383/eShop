@@ -94,7 +94,6 @@ D:\dev\eShop\src\Basket\Basket.UnitTests\Basket.UnitTests\obj\Debug\net8.0\Baske
 D:\dev\eShop\src\Basket\Basket.UnitTests\Basket.UnitTests\obj\Debug\net8.0\Basket.UnitTests.AssemblyInfo.cs
 D:\dev\eShop\src\Basket\Basket.UnitTests\Basket.UnitTests\obj\Debug\net8.0\Basket.UnitTests.csproj.CoreCompileInputs.cache
 D:\dev\eShop\src\Basket\Basket.UnitTests\Basket.UnitTests\obj\Debug\net8.0\Basket.UnitTests.sourcelink.json
-D:\dev\eShop\src\Basket\Basket.UnitTests\Basket.UnitTests\obj\Debug\net8.0\Basket.UnitTests.csproj.CopyComplete
 D:\dev\eShop\src\Basket\Basket.UnitTests\Basket.UnitTests\obj\Debug\net8.0\Basket.UnitTests.dll
 D:\dev\eShop\src\Basket\Basket.UnitTests\Basket.UnitTests\obj\Debug\net8.0\refint\Basket.UnitTests.dll
 D:\dev\eShop\src\Basket\Basket.UnitTests\Basket.UnitTests\obj\Debug\net8.0\Basket.UnitTests.pdb
@@ -141,3 +140,4 @@ D:\dev\eShop\src\Basket\Basket.UnitTests\Basket.UnitTests\bin\Debug\net8.0\Catal
 D:\dev\eShop\src\Basket\Basket.UnitTests\Basket.UnitTests\bin\Debug\net8.0\Catalog.API.exe
 D:\dev\eShop\src\Basket\Basket.UnitTests\Basket.UnitTests\bin\Debug\net8.0\Catalog.API.dll
 D:\dev\eShop\src\Basket\Basket.UnitTests\Basket.UnitTests\bin\Debug\net8.0\Catalog.API.pdb
+D:\dev\eShop\src\Basket\Basket.UnitTests\Basket.UnitTests\obj\Debug\net8.0\Basket.U.4B888FC8.Up2Date

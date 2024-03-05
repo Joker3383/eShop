@@ -27,7 +27,7 @@ public class OrderController : Controller
         return View(orders);
     }
 
-    [HttpPost]
+    
     public async Task<IActionResult> CreateOrder()
     {
         var subId = User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;

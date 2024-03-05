@@ -45,7 +45,7 @@ public class UpdateEntityCommandHandler<TEntity, TDbContext> : IRequestHandler<U
             }
 
 
-            _context.Entry(existingEntity).CurrentValues.SetValues(request.Entity);
+            _context.Set<TEntity>().Update(request.Entity);
 
             await _context.SaveChangesAsync(cancellationToken);
         
@@ -58,9 +58,8 @@ public class UpdateEntityCommandHandler<TEntity, TDbContext> : IRequestHandler<U
         {
 
             _logger.LogError(ex, "Error occurred while updating entity of type {EntityType} with ID {EntityId}", typeof(TEntity).Name, request.Entity.Id);
-        
 
-            await transaction.RollbackAsync(cancellationToken);
+             await transaction.RollbackAsync(cancellationToken);
         
             throw;
         }

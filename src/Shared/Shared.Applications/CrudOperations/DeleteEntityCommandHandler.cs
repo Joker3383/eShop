@@ -37,7 +37,7 @@ public class DeleteEntityCommandHandler<TEntity, TDbContext> : IRequestHandler<D
                 var deletedRes = await _context.SaveChangesAsync(cancellationToken);
                 if (deletedRes == 0)
                 {
-                    _logger.LogInformation($"Error: {typeof(TEntity)} wasn't deleted");
+                    _logger.LogError($"Error: {typeof(TEntity)} wasn't deleted");
                     await transaction.RollbackAsync(); 
                 }
                 else

@@ -77,4 +77,4 @@ D:\dev\eShop\src\Shared\Shared.Applications\bin\Debug\net8.0\System.Security.Cry
 D:\dev\eShop\src\Shared\Shared.Applications\bin\Debug\net8.0\Microsoft.Extensions.Configuration.dll
 D:\dev\eShop\src\Shared\Shared.Applications\bin\Debug\net8.0\Microsoft.Extensions.Options.ConfigurationExtensions.dll
 D:\dev\eShop\src\Shared\Shared.Applications\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Binder.dll
-D:\dev\eShop\src\Shared\Shared.Applications\obj\Debug\net8.0\Shared.csproj.CopyComplete
+D:\dev\eShop\src\Shared\Shared.Applications\obj\Debug\net8.0\Shared.csproj.Up2Date

@@ -98,7 +98,6 @@ D:\dev\eShop\src\Catalog\Catalog.API\Catalog.API\obj\Debug\net8.0\staticwebasset
 D:\dev\eShop\src\Catalog\Catalog.API\Catalog.API\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.Catalog.API.props
 D:\dev\eShop\src\Catalog\Catalog.API\Catalog.API\obj\Debug\net8.0\staticwebassets.pack.json
 D:\dev\eShop\src\Catalog\Catalog.API\Catalog.API\obj\Debug\net8.0\scopedcss\bundle\Catalog.API.styles.css
-D:\dev\eShop\src\Catalog\Catalog.API\Catalog.API\obj\Debug\net8.0\Catalog.API.csproj.CopyComplete
 D:\dev\eShop\src\Catalog\Catalog.API\Catalog.API\obj\Debug\net8.0\Catalog.API.dll
 D:\dev\eShop\src\Catalog\Catalog.API\Catalog.API\obj\Debug\net8.0\refint\Catalog.API.dll
 D:\dev\eShop\src\Catalog\Catalog.API\Catalog.API\obj\Debug\net8.0\Catalog.API.pdb
@@ -121,3 +120,4 @@ D:\dev\eShop\src\Catalog\Catalog.API\Catalog.API\bin\Debug\net8.0\Shared.pdb
 D:\dev\eShop\src\Catalog\Catalog.API\Catalog.API\bin\Debug\net8.0\MediatR.Extensions.Microsoft.DependencyInjection.dll
 D:\dev\eShop\src\Catalog\Catalog.API\Catalog.API\bin\Debug\net8.0\Autofac.dll
 D:\dev\eShop\src\Catalog\Catalog.API\Catalog.API\bin\Debug\net8.0\Autofac.Extensions.DependencyInjection.dll
+D:\dev\eShop\src\Catalog\Catalog.API\Catalog.API\obj\Debug\net8.0\Catalog..F07FDCDC.Up2Date

@@ -44,13 +44,12 @@ public class BasketServiceUnitTests
     {
         int subId = 123;
         var nullProduct = new API.Models.Basket();
-        
         _mediatorMock.Setup(m => m.Send(It.IsAny<GetEntityByIdQuery<API.Models.Basket, AppDbContext>>(), default))
             .ReturnsAsync(nullProduct);
         _mediatorMock.Setup(m => m.Send(It.IsAny<CreateEntityCommand<API.Models.Basket, AppDbContext>>(), default))
             .ThrowsAsync(new  MediatorException("Failed"));
-
         var basketService = new BasketService( _basketRepositoryMock.Object, _mediatorMock.Object);
+        
         
         await Assert.ThrowsAsync<MediatorException>(async () => await basketService.CreateBasket(subId));
     }

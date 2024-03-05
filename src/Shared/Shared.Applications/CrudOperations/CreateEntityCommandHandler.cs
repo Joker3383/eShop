@@ -39,7 +39,7 @@ public class CreateEntityCommandHandler<TEntity, TDbContext> : IRequestHandler<C
                 var saveRes = await _context.SaveChangesAsync(cancellationToken);
                 if (saveRes == 0)
                 {
-                    _logger.LogInformation($"Error: {typeof(TEntity)} wasn't saved");
+                    _logger.LogError($"Error: {typeof(TEntity)} wasn't saved");
                     await transaction.RollbackAsync(); 
                 }
                 else
