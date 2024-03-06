@@ -63,11 +63,7 @@ public class OrderController : ControllerBase
     {
         try
         {
-            var deleteOrder = await _orderService.DeleteOrder(Id);
-            if (deleteOrder == null)
-                throw new NullReferenceException("Order is not add");
-            
-            _response.Result = deleteOrder;
+            await _orderService.DeleteOrder(Id);
         }
         catch (Exception ex)
         {

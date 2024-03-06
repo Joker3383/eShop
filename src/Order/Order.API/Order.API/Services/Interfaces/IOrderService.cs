@@ -4,5 +4,5 @@ public interface IOrderService
 {
     Task<OrderDto> CreateOrder(int subId);
     Task<IEnumerable<OrderDto>> GetOrders(int subId);
-    Task<OrderDto> DeleteOrder(int Id);
+    Task DeleteOrder(int id);
 }

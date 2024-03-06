@@ -37,26 +37,22 @@ public class OrderService : IOrderService
 
     public async Task<IEnumerable<OrderDto>> GetOrders(int subId)
     {
-        var orders = await _mediator.Send(new GetEntitiesBySubIdQuery<Models.Order, AppDbContext>(subId));
-        if (orders == null)
+        var ordersBySubId = await _mediator.Send(new GetEntitiesBySubIdQuery<Models.Order, AppDbContext>(subId));
+        if (ordersBySubId == null)
         {
             throw new MediatorException("Orders are empty");
         }
         
-        return _mapper.Map<IEnumerable<OrderDto>>(orders.ToList());
+        return _mapper.Map<IEnumerable<OrderDto>>(ordersBySubId.ToList());
         
     }
-    
-    public async Task<OrderDto> DeleteOrder(int id)
+    public async Task DeleteOrder(int subId)
     {
-        var order = await _mediator.Send(new GetEntityByIdQuery<Models.Order, AppDbContext>(id));
-        if (order == null)
+        var ordersBySubId = await _mediator.Send(new GetEntitiesBySubIdQuery<Models.Order, AppDbContext>(subId));
+        if (ordersBySubId == null)
         {
-            throw new MediatorException("Order is empty");
+            throw new MediatorException("Orders are empty");
         }
-
-        await _mediator.Send(new DeleteEntityCommand<Models.Order, AppDbContext>(order));
-
-        return _mapper.Map<OrderDto>(order);
+        await _mediator.Send(new DeleteAllCommand<Models.Order, AppDbContext>(subId));
     }
 }

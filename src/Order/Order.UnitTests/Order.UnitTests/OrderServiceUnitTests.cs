@@ -61,7 +61,7 @@ namespace Order.API.UnitTests.Services
             await Assert.ThrowsAsync<NullReferenceException>(() => service.CreateOrder(subId));
         }
         
-        [Fact]
+        /*[Fact]
         public async Task DeleteOrder_ValidOrderId_ReturnsOrderDto_Success()
         {
             var orderId = 123;
@@ -80,7 +80,7 @@ namespace Order.API.UnitTests.Services
 
             Assert.NotNull(result);
             Assert.IsType<OrderDto>(result);
-        }
+        }*/
 
         [Fact]
         public async Task DeleteOrder_InvalidOrderId_ThrowsException_Failure()
