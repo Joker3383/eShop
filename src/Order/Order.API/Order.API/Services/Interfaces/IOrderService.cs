@@ -1,6 +1,4 @@
-﻿using Order.API.Models.Dto;
-
-namespace Order.API.Services.Interfaces;
+﻿namespace Order.API.Services.Interfaces;
 
 public interface IOrderService
 {

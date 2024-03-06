@@ -1,6 +1,4 @@
-﻿using Catalog.API.Data;
-
-namespace Catalog.API.Repositories.Interfaces;
+﻿namespace Catalog.API.Repositories.Interfaces;
 
 public interface IBaseRepository
 {

@@ -1,18 +1,3 @@
-using Autofac;
-using Autofac.Extensions.DependencyInjection;
-using Catalog.API;
-using Catalog.API.Data;
-using Catalog.API.Mapping;
-using Catalog.API.Repositories;
-using Catalog.API.Repositories.Interfaces;
-using Catalog.API.Services;
-using Catalog.API.Services.Interfaces;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
-using Shared.CrudOperations;
-
 var configuration = GetConfiguration();
 
 var builder = WebApplication.CreateBuilder(args);

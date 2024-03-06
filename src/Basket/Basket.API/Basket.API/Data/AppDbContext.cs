@@ -1,11 +1,4 @@
-﻿// using Basket.API.Data.Configurations;
-
-using System.Text.Json;
-using Basket.API.Models;
-using Basket.API.Models.Dto;
-using Microsoft.EntityFrameworkCore;
-
-
+﻿using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace Basket.API.Data;
 

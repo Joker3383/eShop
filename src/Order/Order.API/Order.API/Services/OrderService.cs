@@ -1,13 +1,4 @@
-﻿using AutoMapper;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
-using Order.API.Data;
-using Order.API.Models.Dto;
-using Order.API.Repositories.Interfaces;
-using Order.API.Services.Interfaces;
-using Shared.CrudOperations;
-
-namespace Order.API.Services;
+﻿namespace Order.API.Services;
 
 public class OrderService : IOrderService
 {

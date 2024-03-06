@@ -1,12 +1,4 @@
-﻿using AutoMapper;
-using Basket.API.Models.Dto;
-using Basket.API.Services.Interfaces;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-
-namespace Basket.API.Controllers;
-
+﻿namespace Basket.API.Controllers;
 
 
 [Authorize(Policy = "AuthenteficatedUser")]
@@ -14,10 +6,10 @@ namespace Basket.API.Controllers;
 [Route("/api/basket")]
 public class BasketController : ControllerBase
 {
-    private ResponseDto _response;
+    private readonly ResponseDto _response;
     private readonly IBasketService _basketService;
 
-    public BasketController(IMapper mapper, IBasketService basketService)
+    public BasketController(IBasketService basketService)
     {
         _basketService = basketService;
         _response = new ResponseDto();
@@ -114,10 +106,10 @@ public class BasketController : ControllerBase
     {
         try
         {
-            var addedProduct = await _basketService.DeleteBasket(subId);
-            if (addedProduct == null)
+            var subIdByDeletedUser = await _basketService.DeleteBasket(subId);
+            if (subIdByDeletedUser == 0)
                 throw new NullReferenceException("Product not deleted into basket");
-            _response.Result = addedProduct;
+            _response.Result = subIdByDeletedUser;
         }
         catch (Exception ex)
         {

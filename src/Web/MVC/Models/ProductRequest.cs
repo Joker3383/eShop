@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace MVC.Controllers;
+﻿namespace MVC.Controllers;
 
 public class ProductRequest
 {

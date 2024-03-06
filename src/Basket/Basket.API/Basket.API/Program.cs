@@ -1,32 +1,15 @@
 
-
-using Autofac;
-using Autofac.Extensions.DependencyInjection;
-using Basket.API;
-using Basket.API.Data;
-using Basket.API.Mapping;
-using Basket.API.Repositories;
-using Basket.API.Repositories.Interfaces;
-using Basket.API.Services;
-using Basket.API.Services.Interfaces;
-using Basket.API.Utilities;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
-using Shared.CrudOperations;
-
 var configuration = GetConfiguration();
+
 
 var builder = WebApplication.CreateBuilder(args);
 
-
+SD.CatalogApiBase = builder.Configuration["Urls:Catalog.API"];
+SD.AuthApiBase = builder.Configuration["Urls:Auth.API"];
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-SD.CatalogApiBase = builder.Configuration["Urls:Catalog.API"];
-SD.AuthApiBase = builder.Configuration["Urls:Auth.API"];
-
 
 builder.Services.AddAuthentication("Bearer")
     .AddJwtBearer("Bearer", options =>
@@ -48,7 +31,6 @@ builder.Services.AddAuthorization(options =>
     });
 });
 builder.Services.AddHttpClient();
-
 builder.Services.AddTransient<IProductRepository, ProductRepository>();
 builder.Services.AddTransient<IBasketService, BasketService>();
 
@@ -97,8 +79,6 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-
-
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(
@@ -109,13 +89,11 @@ builder.Services.AddCors(options =>
             .AllowAnyHeader()
             .AllowCredentials());
 });
-
 builder.Services.AddDbContextFactory<AppDbContext>(opts => opts.UseNpgsql(configuration["ConnectionString"]));
 builder.Services.AddControllers(options =>
 {
     options.Filters.Add<ExceptionFilter>();
 });
-
 
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
     .ConfigureContainer<ContainerBuilder>(containerBuilder => containerBuilder.RegisterModule<MediatorModule>());
@@ -124,10 +102,7 @@ builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
 
 var app = builder.Build();
 
-
-
 app.UseCors("Cors");
-
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
@@ -140,8 +115,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-
-
 
 app.Run();
 

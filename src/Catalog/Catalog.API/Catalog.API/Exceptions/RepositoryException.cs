@@ -1,4 +1,4 @@
-﻿namespace Catalog.API.Repositories;
+﻿namespace Catalog.API.Exceptions;
 
 public class RepositoryException : Exception
 {

@@ -1,11 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Order.API.Models.Dto;
-using Order.API.Repositories;
-using Order.API.Repositories.Interfaces;
-using Order.API.Services.Interfaces;
-
-namespace Order.API.Controllers;
+﻿namespace Order.API.Controllers;
 
 [Authorize(Policy = "AuthenteficatedUser")]
 [ApiController]
@@ -13,7 +6,7 @@ namespace Order.API.Controllers;
 public class OrderController : ControllerBase
 {
     private readonly IOrderService _orderService;
-    private  ResponseDto _response;
+    private  readonly ResponseDto _response;
     
     
     public OrderController(IOrderService orderService)

@@ -1,10 +1,4 @@
-﻿using AutoMapper;
-using Catalog.API.Models.Dto;
-using Catalog.API.Services.Interfaces;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-
-namespace Catalog.API.Controllers;
+﻿namespace Catalog.API.Controllers;
 
 
 [ApiController]

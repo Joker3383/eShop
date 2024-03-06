@@ -1,10 +1,4 @@
-﻿using System.Reflection;
-using Autofac;
-using Catalog.API.Data;
-using MediatR;
-using Shared.CrudOperations;
-
-namespace Catalog.API;
+﻿namespace Catalog.API;
 
 public class MediatorModule : Autofac.Module
 {

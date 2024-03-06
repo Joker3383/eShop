@@ -1,9 +1,4 @@
-﻿using Basket.API.Models.Dto;
-using Basket.API.Repositories.Interfaces;
-using Basket.API.Utilities;
-using IdentityModel.Client;
-using Newtonsoft.Json;
-
+﻿
 namespace Basket.API.Repositories;
 
 public class ProductRepository : IProductRepository

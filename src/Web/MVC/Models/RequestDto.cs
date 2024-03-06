@@ -1,6 +1,4 @@
-﻿using System.Net.Mime;
-
-namespace MVC.Models;
+﻿namespace MVC.Models;
 
 public class RequestDto
 {

@@ -1,7 +1,4 @@
-﻿using MVC.Models;
-using MVC.Models;
-
-namespace MVC.Services.Interfaces;
+﻿namespace MVC.Services.Interfaces;
 
 public interface IBaseService
 {

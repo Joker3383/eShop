@@ -1,7 +1,4 @@
-﻿using MVC.Models;
-using MVC.Services.Interfaces;
-
-namespace MVC.Services;
+﻿namespace MVC.Services;
 
 public class ProductService : IProductService
 {

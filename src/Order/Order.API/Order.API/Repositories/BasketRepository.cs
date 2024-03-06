@@ -1,11 +1,4 @@
-﻿using IdentityModel.Client;
-using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
-using Order.API.Models.Dto;
-using Order.API.Repositories.Interfaces;
-using Order.API.Utilities;
-
-namespace Order.API.Repositories;
+﻿namespace Order.API.Repositories;
 
 public class BasketRepository : IBasketRepository
 {

@@ -1,17 +1,9 @@
-﻿using System.Net;
-using System.Text;
-using IdentityModel.Client;
-using Microsoft.AspNetCore.Authentication;
-using MVC.Models;
-using MVC.Services.Interfaces;
-using Newtonsoft.Json;
-
-public class BaseService : IBaseService
+﻿public class BaseService : IBaseService
 {
     private readonly IHttpClientFactory _clientFactory;
     private readonly IHttpContextAccessor _httpContextAccessor;
     private readonly ILogger<BaseService> _logger;
-
+    
     public BaseService(
         IHttpClientFactory clientFactory,
         IHttpContextAccessor httpContextAccessor,

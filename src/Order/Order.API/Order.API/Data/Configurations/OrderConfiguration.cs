@@ -1,8 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Order.API.Models.Dto;
-
-namespace Order.API.Data.Configurations;
+﻿namespace Order.API.Data.Configurations;
 
 public class OrderConfiguration : IEntityTypeConfiguration<Models.Order>
 {

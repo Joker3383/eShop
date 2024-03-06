@@ -1,12 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using MVC.Models;
-using MVC.Services.Interfaces;
-using Newtonsoft.Json;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace MVC.Controllers
+﻿namespace MVC.Controllers
 {
     public class BasketController : Controller
     {

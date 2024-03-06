@@ -1,10 +1,4 @@
-﻿using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using MVC.Models;
-
-namespace MVC.Controllers;
+﻿namespace MVC.Controllers;
 public class AccountController : Controller
 {
     private readonly ILogger<AccountController> _logger;

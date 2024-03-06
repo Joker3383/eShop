@@ -1,6 +1,4 @@
-﻿using Basket.API.Models;
-using Basket.API.Models.Dto;
-
+﻿
 namespace Basket.API.Services.Interfaces;
 
 public interface IBasketService

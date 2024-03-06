@@ -1,13 +1,4 @@
-﻿using Basket.API.Data;
-using Basket.API.Models;
-
-namespace Basket.API;
-
-using System.Reflection;
-using Autofac;
-using Basket.API;
-using MediatR;
-using Shared.CrudOperations;
+﻿namespace Basket.API;
 
 
 public class MediatorModule : Autofac.Module

@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
+﻿
 namespace Basket.API.Models.Dto;
 
 public class RequestDto

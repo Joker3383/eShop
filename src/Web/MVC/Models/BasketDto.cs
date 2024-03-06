@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace MVC.Models;
+﻿namespace MVC.Models;
 
 public class BasketDto
 {

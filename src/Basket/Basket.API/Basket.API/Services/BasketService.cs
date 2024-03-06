@@ -1,13 +1,4 @@
-﻿using AutoMapper;
-using Basket.API.Data;
-using Basket.API.Models;
-using Basket.API.Models.Dto;
-using Basket.API.Repositories.Interfaces;
-using Basket.API.Services.Interfaces;
-using MediatR;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Shared.CrudOperations;
-
+﻿
 namespace Basket.API.Services;
 
 public class BasketService : IBasketService

@@ -1,8 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Order.API.Models.Dto;
-using Shared;
-
-namespace Order.API.Models
+﻿namespace Order.API.Models
 {
     public class Order : IEntityWithSubId<int>
     {

@@ -1,10 +1,4 @@
-﻿using System.Reflection;
-using Autofac;
-using MediatR;
-using Order.API.Data;
-using Shared.CrudOperations;
-
-namespace Order.API;
+﻿namespace Order.API;
 
 public class MediatorModule : Autofac.Module
 {

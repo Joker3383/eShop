@@ -1,9 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using MVC.Models;
-using MVC.Services.Interfaces;
-using Newtonsoft.Json;
-
-namespace MVC.Controllers;
+﻿namespace MVC.Controllers;
 
 public class OrderController : Controller
 {

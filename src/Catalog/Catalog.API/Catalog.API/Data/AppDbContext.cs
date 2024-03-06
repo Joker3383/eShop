@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace Catalog.API.Data;
+﻿namespace Catalog.API.Data;
 
 public class AppDbContext : DbContext
 {

@@ -1,10 +1,3 @@
-using System.Diagnostics;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using MVC.Models;
-using MVC.Services.Interfaces;
-using Newtonsoft.Json;
-
 namespace MVC.Controllers;
 
 [AllowAnonymous]

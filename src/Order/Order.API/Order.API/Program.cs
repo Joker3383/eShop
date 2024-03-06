@@ -1,18 +1,5 @@
 
-using Autofac;
-using Autofac.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
-using Order.API;
-using Order.API.Data;
-using Order.API.Mapping;
-using Order.API.Repositories;
-using Order.API.Repositories.Interfaces;
-using Order.API.Services;
-using Order.API.Services.Interfaces;
-using Order.API.Utilities;
-using Shared.CrudOperations;
+
 
 var configuration = GetConfiguration();
 

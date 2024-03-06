@@ -1,13 +1,10 @@
-using System.IdentityModel.Tokens.Jwt;
-using MVC.Models;
-using MVC.Services;
-using MVC.Services.Interfaces;
-using Microsoft.AspNetCore.Authentication.OpenIdConnect;
-using MVC.Mapping;
-
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+SD.ProductAPIBase = builder.Configuration["ServiceUrls:ProductAPI"];
+SD.AuthAPIBase = builder.Configuration["ServiceUrls:AuthAPI"];
+SD.OrderAPIBase = builder.Configuration["ServiceUrls:OrderAPI"];
+SD.BasketAPIBase = builder.Configuration["ServiceUrls:BasketAPI"];
+
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddHttpClient();
 builder.Services.AddHttpClient<IProductService, ProductService>();
@@ -15,13 +12,6 @@ builder.Services.AddHttpClient<IBaseService, BaseService>();
 builder.Services.AddHttpClient<IBasketService,BasketService>();
 builder.Services.AddHttpClient<IOrderService,OrderService>();
 builder.Services.AddControllersWithViews();
-
-
-SD.ProductAPIBase = builder.Configuration["ServiceUrls:ProductAPI"];
-SD.AuthAPIBase = builder.Configuration["ServiceUrls:AuthAPI"];
-SD.OrderAPIBase = builder.Configuration["ServiceUrls:OrderAPI"];
-SD.BasketAPIBase = builder.Configuration["ServiceUrls:BasketAPI"];
-
 builder.Services.AddScoped<IBaseService, BaseService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IBasketService,BasketService>();

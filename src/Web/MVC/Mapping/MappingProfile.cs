@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using MVC.Controllers;
-using MVC.Models;
+
 
 namespace MVC.Mapping;
 

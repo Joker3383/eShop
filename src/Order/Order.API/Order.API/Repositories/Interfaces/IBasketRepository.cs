@@ -1,6 +1,4 @@
-﻿using Order.API.Models.Dto;
-
-namespace Order.API.Repositories.Interfaces;
+﻿namespace Order.API.Repositories.Interfaces;
 
 public interface IBasketRepository
 {

@@ -1,0 +1,16 @@
+﻿global using System.IdentityModel.Tokens.Jwt;
+global using MVC.Models;
+global using MVC.Services;
+global using MVC.Services.Interfaces;
+global using MVC.Mapping;
+global using System.Net;
+global using System.Text;
+global using IdentityModel.Client;
+global using Microsoft.AspNetCore.Authentication;
+global using Newtonsoft.Json;
+global using System.ComponentModel.DataAnnotations;
+global using AutoMapper;
+global using MVC.Controllers;
+global using Microsoft.AspNetCore.Authorization;
+global using Microsoft.AspNetCore.Mvc;
+global using System.Diagnostics;

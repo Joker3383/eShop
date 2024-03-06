@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Shared;
-
-namespace Catalog.API.Data;
+﻿namespace Catalog.API.Data;
 
 public class Product : IEntity<int>
 {

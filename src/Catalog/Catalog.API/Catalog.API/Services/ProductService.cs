@@ -1,14 +1,4 @@
-﻿using AutoMapper;
-using Catalog.API.Data;
-using Catalog.API.Models.Dto;
-using Catalog.API.Repositories.Interfaces;
-using Catalog.API.Services.Interfaces;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
-using Shared;
-using Shared.CrudOperations;
-
-namespace Catalog.API.Services;
+﻿namespace Catalog.API.Services;
 
 public class ProductService : IProductService
 {

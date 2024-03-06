@@ -1,7 +1,4 @@
-﻿using Catalog.API.Data;
-using Catalog.API.Models.Dto;
-
-namespace Catalog.API.Services.Interfaces;
+﻿namespace Catalog.API.Services.Interfaces;
 
 public interface IProductService
 {

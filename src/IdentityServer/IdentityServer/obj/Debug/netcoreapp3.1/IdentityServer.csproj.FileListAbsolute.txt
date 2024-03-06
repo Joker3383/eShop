@@ -68,7 +68,7 @@ D:\dev\eShop\src\IdentityServer\IdentityServer\obj\Debug\netcoreapp3.1\staticweb
 D:\dev\eShop\src\IdentityServer\IdentityServer\obj\Debug\netcoreapp3.1\staticwebassets\msbuild.build.IdentityServer.props
 D:\dev\eShop\src\IdentityServer\IdentityServer\obj\Debug\netcoreapp3.1\staticwebassets\msbuild.buildMultiTargeting.IdentityServer.props
 D:\dev\eShop\src\IdentityServer\IdentityServer\obj\Debug\netcoreapp3.1\staticwebassets\msbuild.buildTransitive.IdentityServer.props
-D:\dev\eShop\src\IdentityServer\IdentityServer\obj\Debug\netcoreapp3.1\IdentityServer.csproj.CopyComplete
 D:\dev\eShop\src\IdentityServer\IdentityServer\obj\Debug\netcoreapp3.1\IdentityServer.dll
 D:\dev\eShop\src\IdentityServer\IdentityServer\obj\Debug\netcoreapp3.1\IdentityServer.pdb
 D:\dev\eShop\src\IdentityServer\IdentityServer\obj\Debug\netcoreapp3.1\IdentityServer.genruntimeconfig.cache
+D:\dev\eShop\src\IdentityServer\IdentityServer\obj\Debug\netcoreapp3.1\Identity.FDBE6C83.Up2Date
