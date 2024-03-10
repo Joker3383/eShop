@@ -56,5 +56,19 @@ public class OrderController : Controller
         var orders = JsonConvert.DeserializeObject<List<OrderDto>>(Convert.ToString(response.Result));
         return View(orders.FirstOrDefault(o => o.Id == orderId));
     }
+    
+    public async Task<IActionResult> Delete()
+    {
+        var subId = User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
+        var response = await _orderService.DeleteOrderAsync(subId);
+        
+        if (!response.IsSuccess)
+        {
+            TempData["error"] = response.Message;
+            return RedirectToAction("OrderIndex", "Order"); 
+        }
+        
+        return RedirectToAction("OrderIndex");
+    }
 
 }

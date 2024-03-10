@@ -64,6 +64,7 @@ public class OrderController : ControllerBase
         try
         {
             await _orderService.DeleteOrder(Id);
+            _response.Message = "You've deleted orders!";
         }
         catch (Exception ex)
         {

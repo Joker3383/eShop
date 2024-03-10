@@ -7,27 +7,43 @@
 </head>
 <body>
 <h1>Basket</h1>
-    
+<form  method="post">
+    <div>
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+    </div>
+    @if (Model.Products != null)
+    {
+        <table>
+            <thead>
+            <tr>
+                <th>Product ID</th>
+                <th>Quantity</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            @foreach (var product in Model.Products)
+            {
+                <tr>
+                    <td>@product.Key</td>
+                    <td>@product.Value</td>
+                </tr>
+            }
+
+            </tbody>
+        </table>
+        <input name="productId" class="form-control" placeholder="ProductId"/>
+        <span class="text-danger" id="quantityValidation"></span>
+        
+        <input name="quantity" class="form-control" placeholder="Quantity"/>
+        <span class="text-danger" id="quantityValidation"></span>
+        
+        <button asp-controller="Basket" asp-action="RemoveProductFromBasket" type="submit" class="btn btn-outline-secondary form-control btn-lg" style="height:50px;">Change Quantity</button>
+    }
+</form>
 @if (Model != null && Model.Products != null && Model.Products.Count > 0)
 {
-    <table>
-        <thead>
-        <tr>
-            <th>Product ID</th>
-            <th>Quantity</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach (var product in Model.Products)
-        {
-            <tr>
-                <td>@product.Key</td>
-                <td>@product.Value</td>
-            </tr>
-        }
-        </tbody>
-    </table>
-    
     <a asp-controller="Order" asp-action="CreateOrder" class="btn btn-primary">Create Order</a>
 }
 else

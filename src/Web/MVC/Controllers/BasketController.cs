@@ -16,8 +16,13 @@
 
             if (response == null || !response.IsSuccess)
             {
-                TempData["error"] = response?.Message ?? "Failed to retrieve or create basket.";
-                return RedirectToAction("Error", "Home"); 
+                var result  = await _basketService.CreateBasketAsync(subId);
+                if (result == null || !result.IsSuccess)
+                {
+                    TempData["error"] = "Basket cannot create.";
+                    return RedirectToAction("Error", "Home"); 
+                }
+                
             }
 
             var basket = JsonConvert.DeserializeObject<BasketDto>(Convert.ToString(response.Result));
@@ -61,6 +66,20 @@
                 return RedirectToAction("Error", "Home"); 
             }
 
+            return RedirectToAction("BasketIndex");
+        }
+        
+        public async Task<IActionResult> Delete()
+        {
+            var subId = User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
+            var response = await _basketService.DeleteBasketAsync(subId);
+        
+            if (!response.IsSuccess)
+            {
+                TempData["error"] = response.Message; 
+                return RedirectToAction("OrderIndex", "Order"); 
+            }
+        
             return RedirectToAction("BasketIndex");
         }
     }

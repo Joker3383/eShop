@@ -31,7 +31,7 @@ public class BasketService : IBasketService
         return await _baseService.SendAsync(new RequestDto()
         {
             Sd = SD.ApiType.DELETE,
-            Url = SD.BasketAPIBase + $"/api/basket?{subjectId}&{productId}&{quantity}"
+            Url = SD.BasketAPIBase + $"/api/basket?SubId={subjectId}&ProductId={productId}&Quantity={quantity}"
         });
     }
     public async Task<ResponseDto?> CreateBasketAsync(string subjectId)
@@ -46,7 +46,7 @@ public class BasketService : IBasketService
     {
         return await _baseService.SendAsync(new RequestDto()
         {
-            Sd = SD.ApiType.POST,
+            Sd = SD.ApiType.DELETE,
             Url = SD.BasketAPIBase + $"/{subjectId}"
         });
     }

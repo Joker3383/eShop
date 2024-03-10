@@ -9,6 +9,14 @@
 
 <div class="container mt-5">
     <h2>Order List</h2>
+    <form asp-controller="Order" asp-action="Delete">
+        <div>
+            <button type="submit" class="btn btn-outline-danger"
+                    onclick="return confirm('Are you sure to delete this record ?')">
+                Delete
+            </button>
+        </div>
+    </form>
     <table class="table table-bordered">
         <thead>
             <tr>
